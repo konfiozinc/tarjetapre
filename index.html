@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#000000">
+
+    <!-- ═══ SEO & DESCRIPCIÓN ══════════════════════════ -->
     <title>KONFÍO ZINC | Tarjeta Digital Premium</title>
+    <meta name="description" content="Tarjetas digitales interactivas personalizadas para profesionales y negocios. Comparte tu contacto con un link o QR. Diseñadas en 24–48 horas. — KONFÍO ZINC">
+    <meta name="author" content="Darwin Montalvo — KONFÍO ZINC">
+    <link rel="canonical" href="https://konfiozinc.github.io/tarjetapre/">
+
+    <!-- ═══ OPEN GRAPH (WhatsApp · Facebook · LinkedIn) ═ -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://konfiozinc.github.io/tarjetapre/">
+    <meta property="og:title"       content="KONFÍO ZINC · Tarjeta Digital Premium">
+    <meta property="og:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
+    <meta property="og:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="es_CO">
+    <meta property="og:site_name"   content="KONFÍO ZINC">
+
+    <!-- ═══ TWITTER / X CARD ══════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="KONFÍO ZINC · Tarjeta Digital Premium">
+    <meta name="twitter:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
+    <meta name="twitter:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -774,8 +796,102 @@
 
 
     /* ════════════════════════════════════════════════════
-       22. BADGE ENTREGA 48H
+       26. CONTADOR DE CLIENTES ATENDIDOS
     ════════════════════════════════════════════════════ */
+    .clients-section {
+        padding: 6px 20px 20px;
+    }
+    .clients-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    .client-stat {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 14px 8px;
+        text-align: center;
+        transition: border-color 0.25s;
+    }
+    .client-stat:hover { border-color: rgba(240,180,41,0.22); }
+    .client-stat-num {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 22px; font-weight: 700;
+        line-height: 1;
+        margin-bottom: 5px;
+        background: linear-gradient(135deg, var(--gold), var(--orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .client-stat-label {
+        font-size: 10px;
+        color: #888;
+        font-family: 'Syne', sans-serif;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+    }
+
+    /* ════════════════════════════════════════════════════
+       27. SECCIÓN DE GARANTÍA
+    ════════════════════════════════════════════════════ */
+    .guarantee-section {
+        margin: 0 20px 18px;
+        background: rgba(240,180,41,0.04);
+        border: 1px solid rgba(240,180,41,0.2);
+        border-radius: 18px;
+        padding: 18px 16px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .guarantee-section::before {
+        content: '';
+        position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .guarantee-icon {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        background: rgba(240,180,41,0.1);
+        border: 1.5px solid rgba(240,180,41,0.3);
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 12px;
+        font-size: 22px;
+        animation: shield-pulse 3s ease-in-out infinite;
+    }
+    @keyframes shield-pulse {
+        0%,100%{ box-shadow: 0 0 0 0 rgba(240,180,41,0.2); }
+        50%    { box-shadow: 0 0 0 8px rgba(240,180,41,0); }
+    }
+    .guarantee-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 15px; font-weight: 800;
+        color: var(--white);
+        margin-bottom: 7px;
+        letter-spacing: 0.01em;
+    }
+    .guarantee-text {
+        font-size: 12.5px;
+        color: #aaa;
+        line-height: 1.6;
+        margin-bottom: 12px;
+        max-width: 280px;
+        margin-left: auto; margin-right: auto;
+    }
+    .guarantee-text span { color: var(--gold); font-weight: 600; }
+    .guarantee-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: rgba(74,222,128,0.08);
+        border: 1px solid rgba(74,222,128,0.25);
+        border-radius: 9999px;
+        padding: 4px 12px;
+        font-size: 11px;
+        font-family: 'Syne', sans-serif;
+        font-weight: 600;
+        color: #4ade80;
+    }
     .delivery-badge {
         display: inline-flex; align-items: center; gap: 6px;
         background: rgba(74,222,128,0.07);
@@ -1118,6 +1234,48 @@
             <div class="t-dot"></div>
             <div class="t-dot"></div>
         </div>
+    </div>
+
+    <!-- CONTADOR DE CLIENTES ATENDIDOS -->
+    <div class="divider-gold"></div>
+    <div class="clients-section">
+        <p class="section-label">Profesionales que ya confían en KONFÍO ZINC</p>
+        <div class="clients-grid">
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="58">0</span>+
+                </div>
+                <div class="client-stat-label">Clientes<br>atendidos</div>
+            </div>
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="6">0</span>
+                </div>
+                <div class="client-stat-label">Ciudades<br>en Colombia</div>
+            </div>
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="8">0</span>
+                </div>
+                <div class="client-stat-label">Sectores<br>diferentes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GARANTÍA -->
+    <div class="guarantee-section">
+        <div class="guarantee-icon">
+            <i class="fas fa-shield-halved" style="color:var(--gold);"></i>
+        </div>
+        <h3 class="guarantee-title">Garantía de Satisfacción</h3>
+        <p class="guarantee-text">
+            Si en <span>3 días hábiles</span> no quedas satisfecho con tu tarjeta,
+            la <span>rediseño sin costo adicional</span> hasta que quedes feliz con el resultado.
+        </p>
+        <span class="guarantee-badge">
+            <i class="fas fa-circle-check"></i>
+            Sin riesgo · Sin letra pequeña
+        </span>
     </div>
 
     <!-- FOOTER -->
@@ -1853,6 +2011,39 @@
 
         pos();
         window.addEventListener('resize', pos, { passive: true });
+    })();
+
+    /* ── Contador de clientes — count-up animado ──────── */
+    (function(){
+        const els = document.querySelectorAll('.count-up');
+        if (!els.length) return;
+
+        function animateCount(el) {
+            const target = parseInt(el.dataset.target);
+            const duration = 1400;
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / duration, 1);
+                // Ease out cubic
+                const ease = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.floor(ease * target);
+                if (p < 1) requestAnimationFrame(step);
+                else el.textContent = target;
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Trigger when section enters viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCount(e.target);
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        els.forEach(el => observer.observe(el));
     })();
 
 })();
