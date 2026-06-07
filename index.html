@@ -682,7 +682,122 @@
     }
 
     /* ════════════════════════════════════════════════════
-       19. SCROLLBAR
+       19. TABLA COMPARATIVA (#4)
+    ════════════════════════════════════════════════════ */
+    .compare-wrap { overflow-x: auto; padding-bottom: 4px; }
+    .compare-wrap::-webkit-scrollbar { display:none; }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 300px; }
+    .compare-table th {
+        padding: 10px 8px;
+        font-family: 'Syne', sans-serif;
+        font-size: 12px; font-weight: 700;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .compare-table th.col-feature {
+        text-align: left; color: #555; font-size: 10px;
+        letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .compare-table th.col-basic    { color: #aaa; }
+    .compare-table th.col-pro      { color: var(--gold); }
+    .compare-table th.col-premium  {
+        background: linear-gradient(135deg, var(--gold), var(--orange));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .compare-table td {
+        padding: 9px 8px;
+        font-size: 12px; text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        color: #aaa;
+        vertical-align: middle;
+    }
+    .compare-table td.feat-name {
+        text-align: left; color: #777;
+        font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .yes { color: #4ade80; font-size: 15px; }
+    .compare-table .no  { color: #2a2a2a; font-size: 15px; }
+    .compare-table .price-row td {
+        font-family: 'Syne', sans-serif;
+        font-weight: 700; padding-top: 12px;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        border-bottom: none;
+    }
+    .compare-table .price-row td.col-pro   { color: var(--gold); }
+    .compare-table .price-row td.col-basic { color: #aaa; }
+    .compare-table .price-row td.col-premium { color: var(--orange); }
+    /* Highlight column PRO */
+    .compare-table td:nth-child(3),
+    .compare-table th:nth-child(3) {
+        background: rgba(240,180,41,0.04);
+    }
+    /* WA button in services */
+    .service-wa-btn {
+        display: inline-flex; align-items: center; gap: 5px;
+        margin-top: 7px;
+        padding: 5px 11px;
+        background: rgba(37,211,102,0.1);
+        border: 1px solid rgba(37,211,102,0.28);
+        border-radius: 8px;
+        color: #4ade80;
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .service-wa-btn:hover { background: rgba(37,211,102,0.18); }
+    .service-wa-btn i { font-size: 12px; }
+
+    /* ════════════════════════════════════════════════════
+       20. FAQ ACCORDION (#6)
+    ════════════════════════════════════════════════════ */
+    .faq-item {
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 8px;
+        transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(240,180,41,0.25); }
+    .faq-item:last-child { margin-bottom: 0; }
+    .faq-q {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 13px 15px;
+        cursor: pointer;
+        background: rgba(255,255,255,0.025);
+        transition: background 0.2s;
+        gap: 10px;
+    }
+    .faq-item.open .faq-q { background: rgba(240,180,41,0.06); }
+    .faq-q-text {
+        font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 600;
+        color: #ddd; line-height: 1.3;
+        flex: 1;
+    }
+    .faq-icon {
+        color: var(--gold); font-size: 12px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-icon { transform: rotate(180deg); }
+    .faq-a {
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s ease, padding 0.3s ease;
+        padding: 0 15px;
+        font-size: 13px; color: #777; line-height: 1.6;
+    }
+    .faq-item.open .faq-a {
+        max-height: 200px;
+        padding: 0 15px 13px;
+    }
+    .faq-a span { color: var(--gold); font-weight: 600; }
+
+    /* ════════════════════════════════════════════════════
+       21. SCROLLBAR
     ════════════════════════════════════════════════════ */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #111; }
@@ -824,10 +939,18 @@
             </button>
         </div>
 
-        <div style="text-align:center;">
-            <button id="video-btn" class="video-btn">
+        <div style="text-align:center;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;">
+            <button id="video-btn" class="video-btn" style="margin-top:0;">
                 <i class="fas fa-play"></i>
-                Ver Video Promocional
+                Video
+            </button>
+            <button id="compare-btn" class="video-btn" style="margin-top:0;border-color:rgba(240,180,41,0.3);color:var(--gold);background:rgba(240,180,41,0.07);">
+                <i class="fas fa-table-columns"></i>
+                Comparar planes
+            </button>
+            <button id="faq-btn" class="video-btn" style="margin-top:0;border-color:rgba(0,229,255,0.28);color:var(--cyan);background:rgba(0,229,255,0.06);">
+                <i class="fas fa-circle-question"></i>
+                Preguntas
             </button>
         </div>
     </div>
@@ -963,6 +1086,8 @@
                     <div class="service-name">Tarjeta Básica</div>
                     <div class="service-desc">Datos esenciales y redes sociales.</div>
                     <span class="price-tag">Desde $70.000 COP</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20B%C3%A1sica%20de%20%2470.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
                 </div>
             </div>
             <div class="service-card">
@@ -973,6 +1098,8 @@
                     <div class="service-name">Tarjeta Profesional</div>
                     <div class="service-desc">Galería, WhatsApp, QR, ubicación.</div>
                     <span class="price-tag">Desde $120.000 COP</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20Profesional%20de%20%24120.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
                 </div>
             </div>
             <div class="service-card">
@@ -983,6 +1110,8 @@
                     <div class="service-name">Tarjeta Premium</div>
                     <div class="service-desc">Agendamiento, animaciones avanzadas.</div>
                     <span class="price-tag">Desde $170.000 COP</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20Premium%20de%20%24170.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
                 </div>
             </div>
             <div class="service-card">
@@ -993,6 +1122,8 @@
                     <div class="service-name">Menú Digital</div>
                     <div class="service-desc">Restaurantes: carta interactiva.</div>
                     <span class="price-tag">Desde $150.000 COP</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20el%20Men%C3%BA%20Digital%20de%20%24150.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
                 </div>
             </div>
             <div class="service-card">
@@ -1003,6 +1134,8 @@
                     <div class="service-name">Mini Landing Page</div>
                     <div class="service-desc">Scroll completo, video, testimonios.</div>
                     <span class="price-tag">Desde $350.000 COP</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Mini%20Landing%20Page%20de%20%24350.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
                 </div>
             </div>
         </div>
@@ -1110,6 +1243,111 @@
 </div>
 
 
+<!-- Modal Comparar Planes (#4) -->
+<div id="compare-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
+     style="display:none;background:rgba(0,0,0,0.9);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-gold" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-table-columns" style="color:var(--gold);"></i>
+                <span>Comparar Planes</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <p style="font-size:11px;color:#555;text-align:center;margin-bottom:14px;font-family:'Syne',sans-serif;letter-spacing:0.04em;">¿Cuál es el ideal para ti?</p>
+            <div class="compare-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th class="col-feature">Característica</th>
+                            <th class="col-basic">Básica<br><span style="font-weight:400;font-size:10px;color:#666;">$70K</span></th>
+                            <th class="col-pro">⭐ Pro<br><span style="font-weight:400;font-size:10px;color:#888;">$120K</span></th>
+                            <th class="col-premium">Premium<br><span style="font-weight:400;font-size:10px;color:#888;">$170K</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feat-name">Datos de contacto</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Redes sociales</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Botón WhatsApp</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Código QR</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Galería de fotos</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Ubicación / Maps</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Guardar contacto</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Video promocional</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Agendamiento</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Animaciones premium</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr class="price-row">
+                            <td class="feat-name" style="color:#555;font-size:11px;">Precio desde</td>
+                            <td class="col-basic">$70K</td>
+                            <td class="col-pro">$120K</td>
+                            <td class="col-premium">$170K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20vi%20la%20comparativa%20y%20quiero%20la%20Tarjeta%20Profesional%20%F0%9F%91%8B" target="_blank"
+                   style="display:block;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;text-decoration:none;">
+                    <i class="fas fa-bolt mr-2"></i>Quiero la Profesional — la más popular
+                </a>
+                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20tengo%20dudas%20sobre%20los%20planes%20%F0%9F%91%8B" target="_blank"
+                   style="display:block;padding:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#aaa;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;text-decoration:none;">
+                    Tengo dudas, quiero asesoría
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal FAQ (#6) -->
+<div id="faq-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
+     style="display:none;background:rgba(0,0,0,0.9);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-cyan" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-circle-question" style="color:var(--cyan);"></i>
+                <span>Preguntas Frecuentes</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Necesito instalar alguna app?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">No. Tu tarjeta se abre directamente desde el navegador del celular — <span>sin descargas</span>. Funciona en Android, iPhone y cualquier dispositivo con internet.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cuánto tarda en estar lista?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Entre <span>24 y 48 horas hábiles</span> desde que confirmas el pago y me envías tu información. Revisión incluida antes de la entrega final.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Puedo actualizar el contenido después?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Sí. Puedes solicitar cambios (foto, número, servicios, precios). Las actualizaciones tienen un <span>costo mínimo adicional</span> según la complejidad.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cómo la comparto con mis clientes?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Por <span>link directo</span> (WhatsApp, Instagram, email), por <span>código QR</span> impreso en tu empaque o local, o agregándola a tu bio de redes.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Funciona sin internet?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Necesita conexión para abrirse la primera vez. En el plan Premium puede instalarse como app en el celular y cargar más rápido en usos posteriores.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Qué necesito para empezar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Solo tu <span>foto, nombre, ocupación, teléfono y redes sociales</span>. Yo me encargo del diseño y la publicación. No necesitas saber de tecnología.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cómo realizo el pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Acepto <span>Nequi, Daviplata, transferencia bancaria</span> y efectivo. El pago es anticipado para comenzar el diseño.</div>
+            </div>
+            <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20le%C3%AD%20las%20preguntas%20frecuentes%20y%20a%C3%BAn%20tengo%20una%20duda%20%F0%9F%91%8B" target="_blank"
+               style="display:block;margin-top:16px;padding:11px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);color:var(--cyan);border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;text-decoration:none;">
+                <i class="fab fa-whatsapp mr-2"></i>Tengo otra pregunta
+            </a>
+        </div>
+    </div>
+</div>
+
 <!-- ════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════ -->
@@ -1161,6 +1399,18 @@
     setupModal('qr-badge-btn',  'qr-modal');
     setupModal('install-btn',   'install-modal');
     setupModal('video-btn',     'video-modal');
+    setupModal('compare-btn',   'compare-modal');
+    setupModal('faq-btn',       'faq-modal');
+
+    /* ── FAQ Accordion ────────────────────────────── */
+    document.querySelectorAll('.faq-q').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
 
     /* ── Generador QR ─────────────────────────────── */
     function generarQR() {
