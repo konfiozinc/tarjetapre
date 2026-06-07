@@ -480,30 +480,6 @@
     /* ════════════════════════════════════════════════════
        13. WHATSAPP FLOTANTE
     ════════════════════════════════════════════════════ */
-    .whatsapp-float {
-        position: absolute; bottom: 18px; right: 18px; z-index: 10;
-        width: 50px; height: 50px; border-radius: 50%;
-        background: #25D366; color: white;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 24px; text-decoration: none;
-        box-shadow: 0 6px 22px rgba(37,211,102,0.5);
-        border: 1.5px solid rgba(255,255,255,0.18);
-    }
-    .whatsapp-pulse {
-        position: absolute; bottom: 18px; right: 18px; z-index: 9;
-        width: 50px; height: 50px; border-radius: 50%; pointer-events: none;
-    }
-    .whatsapp-pulse::before {
-        content: ''; position: absolute; top: 50%; left: 50%;
-        transform: translate(-50%,-50%); border-radius: 50%;
-        border: 2px solid #25D366;
-        animation: wa-pulse 2.2s ease-out infinite;
-    }
-    @keyframes wa-pulse {
-        0%  { width: 50px; height: 50px; opacity: 0.8; }
-        100%{ width: 96px; height: 96px; opacity: 0; }
-    }
-
     /* ════════════════════════════════════════════════════
        14. MODALES
     ════════════════════════════════════════════════════ */
@@ -796,6 +772,103 @@
     }
     .faq-a span { color: var(--gold); font-weight: 600; }
 
+
+    /* ════════════════════════════════════════════════════
+       22. BADGE ENTREGA 48H
+    ════════════════════════════════════════════════════ */
+    .delivery-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(74,222,128,0.07);
+        border: 1px solid rgba(74,222,128,0.22);
+        border-radius: 9999px;
+        padding: 4px 12px 4px 8px;
+        margin-bottom: 14px;
+    }
+    .delivery-badge i  { color: #4ade80; font-size: 11px; }
+    .delivery-badge span {
+        font-size: 11px; font-family: 'Syne', sans-serif;
+        font-weight: 600; color: #4ade80; letter-spacing: 0.04em;
+    }
+
+    /* ════════════════════════════════════════════════════
+       23. CÓMO FUNCIONA
+    ════════════════════════════════════════════════════ */
+    .how-section { padding: 4px 20px 18px; }
+    .how-steps { display: flex; flex-direction: column; position: relative; }
+    .how-steps::before {
+        content: ''; position: absolute;
+        left: 19px; top: 28px;
+        width: 2px; height: calc(100% - 56px);
+        background: linear-gradient(to bottom, rgba(240,180,41,0.4), rgba(0,229,255,0.2));
+    }
+    .how-step { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; position: relative; }
+    .how-num {
+        width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700;
+        position: relative; z-index: 1;
+    }
+    .how-num.n1 { background: rgba(240,180,41,0.12); border: 1.5px solid rgba(240,180,41,0.4);  color: var(--gold); }
+    .how-num.n2 { background: rgba(0,229,255,0.09);  border: 1.5px solid rgba(0,229,255,0.35);  color: var(--cyan); }
+    .how-num.n3 { background: rgba(74,222,128,0.09); border: 1.5px solid rgba(74,222,128,0.35); color: #4ade80; }
+    .how-body   { padding-top: 6px; }
+    .how-title  { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #e0e0e0; margin-bottom: 3px; }
+    .how-desc   { font-size: 12px; color: #666; line-height: 1.55; }
+    .how-desc span { color: var(--gold); }
+
+    /* ════════════════════════════════════════════════════
+       24. BOTÓN RECOMIÉNDAME
+    ════════════════════════════════════════════════════ */
+    .recommend-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: calc(100% - 40px); margin: 0 20px 16px;
+        padding: 11px 20px; border-radius: 9999px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #bbb; font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 600;
+        cursor: pointer; text-decoration: none;
+        transition: all 0.25s ease;
+    }
+    .recommend-btn:hover { border-color: rgba(240,180,41,0.3); color: var(--gold); background: rgba(240,180,41,0.05); }
+    .recommend-btn i { font-size: 14px; color: #4ade80; }
+
+    /* ════════════════════════════════════════════════════
+       25. WHATSAPP FLOTANTE FIJO EN PANTALLA
+    ════════════════════════════════════════════════════ */
+    .whatsapp-fixed {
+        position: fixed; bottom: 28px; right: 22px; z-index: 9999;
+        width: 54px; height: 54px; border-radius: 50%;
+        background: #25D366; color: white;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 27px; text-decoration: none;
+        box-shadow: 0 6px 26px rgba(37,211,102,0.55);
+        border: 2px solid rgba(255,255,255,0.18);
+        animation: wa-drift 6s ease-in-out infinite;
+    }
+    .whatsapp-fixed:active { transform: scale(0.91) !important; animation: none; }
+    @keyframes wa-drift {
+        0%,100% { transform: translateY(0px);   }
+        30%     { transform: translateY(-8px);  }
+        60%     { transform: translateY(-4px);  }
+        80%     { transform: translateY(-11px); }
+    }
+    .wa-fixed-ring {
+        position: fixed; bottom: 28px; right: 22px;
+        z-index: 9998; width: 54px; height: 54px;
+        border-radius: 50%; pointer-events: none;
+    }
+    .wa-fixed-ring::before {
+        content: ''; position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%,-50%); border-radius: 50%;
+        border: 2px solid #25D366;
+        animation: wa-ring-pulse 2.4s ease-out infinite;
+    }
+    @keyframes wa-ring-pulse {
+        0%  { width: 54px;  height: 54px;  opacity: 0.8; }
+        100%{ width: 108px; height: 108px; opacity: 0;   }
+    }
+
     /* ════════════════════════════════════════════════════
        21. SCROLLBAR
     ════════════════════════════════════════════════════ */
@@ -861,6 +934,12 @@
             <span><strong id="visitor-num">—</strong> personas vieron esta tarjeta</span>
         </div>
 
+        <!-- Badge entrega 48h -->
+        <div class="delivery-badge">
+            <i class="fas fa-bolt"></i>
+            <span>Entrega en 24–48 h hábiles</span>
+        </div>
+
         <!-- CTA -->
         <div class="solicita-btn-wrapper">
             <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
@@ -888,6 +967,36 @@
                style="background:#0a0a0a;border:1.5px solid rgba(0,229,255,0.3);box-shadow:0 4px 14px rgba(0,229,255,0.12);">
                 <i class="fab fa-tiktok"></i>
             </a>
+        </div>
+    </div>
+
+    <div class="divider-gold"></div>
+
+    <!-- CÓMO FUNCIONA -->
+    <div class="how-section">
+        <p class="section-label">¿Cómo funciona?</p>
+        <div class="how-steps">
+            <div class="how-step">
+                <div class="how-num n1">1</div>
+                <div class="how-body">
+                    <div class="how-title">Escoge tu plan</div>
+                    <div class="how-desc">Revisa las opciones y elige la que se adapta a tu negocio. <span>Sin tecnicismos</span>, yo te asesoro.</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="how-num n2">2</div>
+                <div class="how-body">
+                    <div class="how-title">Envíame tu información</div>
+                    <div class="how-desc">Foto, nombre, teléfono y redes. En <span>24–48 horas</span> tienes tu tarjeta lista y revisada.</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="how-num n3">3</div>
+                <div class="how-body">
+                    <div class="how-title">Comparte y convierte</div>
+                    <div class="how-desc">Un link, un QR. Tus clientes te contactan con <span>un solo toque</span> desde cualquier celular.</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1013,17 +1122,22 @@
 
     <!-- FOOTER -->
     <div class="card-footer">
+        <a href="https://wa.me/573206411340?text=Oye%2C%20te%20recomiendo%20la%20tarjeta%20digital%20de%20Darwin%20Montalvo%20%E2%80%94%20KONF%C3%8DO%20ZINC.%20M%C3%ADrala%20aqu%C3%AD%3A%20"
+           target="_blank" class="recommend-btn">
+            <i class="fas fa-share-nodes"></i>
+            Recomiéndame a un amigo
+        </a>
         <p>© 2026 KONFÍO ZINC · Transformamos contactos en experiencias</p>
     </div>
 
-    <!-- WhatsApp flotante -->
-    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
-       target="_blank" class="whatsapp-float" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <div class="whatsapp-pulse"></div>
-
 </div><!-- /glass-card -->
+
+<!-- WHATSAPP FLOTANTE FIJO (sigue al scroll en toda la pantalla) -->
+<a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
+   target="_blank" class="whatsapp-fixed" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<div class="wa-fixed-ring"></div>
 
 
 <!-- ════════════════════════════════════════════════════
