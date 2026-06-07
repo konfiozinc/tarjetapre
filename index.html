@@ -1095,8 +1095,52 @@
     }
 
     /* ════════════════════════════════════════════════════
-       23. CÓMO FUNCIONA
+       WOW 1 · PARALLAX BANNER
     ════════════════════════════════════════════════════ */
+    .profile-banner img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        filter: brightness(0.82) contrast(1.05);
+        will-change: transform;
+        transform-origin: center center;
+        transition: transform 0.05s linear;
+    }
+
+    /* ════════════════════════════════════════════════════
+       WOW 2 · SPARKLE CANVAS (rastro dorado)
+    ════════════════════════════════════════════════════ */
+    #sparkle-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        border-radius: 28px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       WOW 3 · TYPEWRITER
+    ════════════════════════════════════════════════════ */
+    #typewriter-text {
+        font-size: 13px;
+        color: #999;
+        line-height: 1.6;
+        max-width: 270px;
+        margin: 0 auto 18px;
+        min-height: 42px;
+    }
+    .tw-cursor {
+        display: inline-block;
+        color: var(--gold);
+        font-weight: 300;
+        animation: tw-blink 0.7s step-end infinite;
+        margin-left: 1px;
+    }
+    @keyframes tw-blink {
+        0%,100%{ opacity: 1; }
+        50%    { opacity: 0; }
+    }
     .how-section { padding: 4px 20px 18px; }
     .how-steps { display: flex; flex-direction: column; position: relative; }
     .how-steps::before {
@@ -1193,9 +1237,13 @@
 ════════════════════════════════════════════════════ -->
 <div class="glass-card">
 
+    <!-- SPARKLE CANVAS (rastro dorado al tocar) -->
+    <canvas id="sparkle-canvas"></canvas>
+
     <!-- BANNER -->
     <div class="profile-banner">
-        <img src="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg"
+        <img id="banner-img"
+             src="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg"
              alt="Banner KONFÍO ZINC"
              onerror="this.onerror=null;this.src='https://placehold.co/400x210/000000/F0B429?text=KONF%C3%8DO+ZINC';">
     </div>
@@ -1228,9 +1276,7 @@
 
         <h1 class="profile-name">Darwin Montalvo</h1>
         <span class="profile-brand">KONFÍO ZINC</span>
-        <p class="profile-desc">
-            Tarjetas digitales interactivas que <span>transforman</span> tu presencia profesional
-        </p>
+        <p id="typewriter-text"></p>
 
         <!-- Contador de visitas (Mejora 1) -->
         <div class="visitor-counter">
@@ -2507,6 +2553,161 @@
                 navigator.serviceWorker.register(swUrl).catch(() => {});
             } catch(e) {}
         }
+    })();
+
+    /* ══════════════════════════════════════════════════
+       WOW 1 · PARALLAX BANNER
+    ══════════════════════════════════════════════════ */
+    (function(){
+        const img  = document.getElementById('banner-img');
+        const card = document.querySelector('.glass-card');
+        if (!img || !card) return;
+
+        let ticking = false;
+        function update() {
+            const rect    = card.getBoundingClientRect();
+            const viewH   = window.innerHeight;
+            // Progress: 0 = card top at viewport bottom, 1 = card bottom at viewport top
+            const progress = 1 - (rect.bottom / (viewH + rect.height));
+            const offset   = progress * 36 - 8; // –8px to +28px range
+            img.style.transform = `translateY(${Math.max(-12, Math.min(24, offset))}px) scale(1.06)`;
+            ticking = false;
+        }
+
+        update();
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+    })();
+
+    /* ══════════════════════════════════════════════════
+       WOW 2 · SPARKLE TRAIL (rastro dorado al tocar)
+    ══════════════════════════════════════════════════ */
+    (function(){
+        const canvas = document.getElementById('sparkle-canvas');
+        const card   = document.querySelector('.glass-card');
+        if (!canvas || !card) return;
+        const ctx    = canvas.getContext('2d');
+        const sparks = [];
+
+        function resize() {
+            canvas.width  = card.offsetWidth;
+            canvas.height = card.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+
+        function rand(a, b) { return Math.random() * (b - a) + a; }
+
+        const COLORS = ['240,180,41', '240,180,41', '255,217,125', '249,115,22', '0,229,255'];
+
+        function spawn(x, y, count = 7) {
+            for (let i = 0; i < count; i++) {
+                const angle = rand(0, Math.PI * 2);
+                const speed = rand(1.2, 4.5);
+                sparks.push({
+                    x, y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - rand(0.5, 2),
+                    r:  rand(1.2, 3.2),
+                    alpha: rand(0.7, 1),
+                    decay: rand(0.03, 0.055),
+                    col: COLORS[Math.floor(Math.random() * COLORS.length)],
+                });
+            }
+        }
+
+        let animating = false;
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = sparks.length - 1; i >= 0; i--) {
+                const s = sparks[i];
+                // Glow halo
+                const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3);
+                g.addColorStop(0, `rgba(${s.col},${s.alpha * 0.6})`);
+                g.addColorStop(1, `rgba(${s.col},0)`);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
+                ctx.fillStyle = g;
+                ctx.fill();
+                // Core
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${s.col},${s.alpha})`;
+                ctx.fill();
+
+                s.x     += s.vx;
+                s.y     += s.vy;
+                s.vy    += 0.12;   // gravity
+                s.vx    *= 0.97;   // drag
+                s.alpha -= s.decay;
+                s.r     *= 0.96;
+
+                if (s.alpha <= 0 || s.r < 0.3) sparks.splice(i, 1);
+            }
+            if (sparks.length > 0) requestAnimationFrame(loop);
+            else animating = false;
+        }
+
+        function trigger(x, y, count) {
+            spawn(x, y, count);
+            if (!animating) { animating = true; loop(); }
+        }
+
+        // Touch — spawna en cada punto de contacto
+        card.addEventListener('touchstart', e => {
+            const rect = card.getBoundingClientRect();
+            Array.from(e.changedTouches).forEach(t =>
+                trigger(t.clientX - rect.left, t.clientY - rect.top, 9)
+            );
+        }, { passive: true });
+
+        // Mouse — rastro continuo, throttled
+        let lastMove = 0;
+        card.addEventListener('mousemove', e => {
+            const now = Date.now();
+            if (now - lastMove < 40) return;
+            lastMove = now;
+            const rect = card.getBoundingClientRect();
+            trigger(e.clientX - rect.left, e.clientY - rect.top, 4);
+        }, { passive: true });
+    })();
+
+    /* ══════════════════════════════════════════════════
+       WOW 3 · TYPEWRITER (escritura letra a letra)
+    ══════════════════════════════════════════════════ */
+    (function(){
+        const el = document.getElementById('typewriter-text');
+        if (!el) return;
+
+        const PLAIN = 'Tarjetas digitales interactivas que transforman tu presencia profesional';
+        const HL_START = 'Tarjetas digitales interactivas que '.length;
+        const HL_END   = HL_START + 'transforman'.length;
+
+        let i = 0;
+
+        function buildHTML(upTo) {
+            let out = '';
+            for (let j = 0; j < upTo; j++) {
+                if (j === HL_START)   out += '<span style="color:var(--gold);font-weight:600;">';
+                out += PLAIN[j];
+                if (j === HL_END - 1) out += '</span>';
+            }
+            return out;
+        }
+
+        function type() {
+            if (i > PLAIN.length) return;
+            el.innerHTML = buildHTML(i) + (i < PLAIN.length ? '<span class="tw-cursor">|</span>' : '');
+            i++;
+            // Ligeras variaciones de velocidad para naturalidad
+            const delay = i < 3 ? 120 : i === HL_START || i === HL_END ? 180 : 28 + Math.random() * 22;
+            setTimeout(type, delay);
+        }
+
+        // Esperar a que termine la animación de entrada (650ms) + pausa dramática
+        setTimeout(type, 1100);
     })();
 
 })();
