@@ -979,6 +979,107 @@
     #pwa-install-native.show { display: flex; }
     #pwa-install-native:hover { background: rgba(129,140,248,0.22); }
 
+    /* ════════════════════════════════════════════════════
+       31. VIDEO THUMBNAIL
+    ════════════════════════════════════════════════════ */
+    .video-thumb-section { padding: 0 20px 16px; }
+    .video-thumb {
+        position: relative; border-radius: 16px;
+        overflow: hidden; cursor: pointer;
+        border: 1px solid rgba(239,68,68,0.25);
+        transition: border-color 0.25s, transform 0.25s;
+        background: #111;
+    }
+    .video-thumb:hover { border-color: rgba(239,68,68,0.6); transform: scale(1.01); }
+    .video-thumb img {
+        width: 100%; display: block;
+        aspect-ratio: 16/9; object-fit: cover;
+        filter: brightness(0.72);
+        transition: filter 0.3s;
+    }
+    .video-thumb:hover img { filter: brightness(0.85); }
+    .video-thumb-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; gap: 8px;
+    }
+    .video-play-btn {
+        width: 56px; height: 56px; border-radius: 50%;
+        background: rgba(239,68,68,0.9);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 8px rgba(239,68,68,0.2), 0 8px 24px rgba(0,0,0,0.5);
+        transition: transform 0.25s, box-shadow 0.25s;
+        animation: play-pulse 2.5s ease-in-out infinite;
+    }
+    .video-thumb:hover .video-play-btn {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 12px rgba(239,68,68,0.25), 0 8px 28px rgba(0,0,0,0.6);
+    }
+    @keyframes play-pulse {
+        0%,100%{ box-shadow: 0 0 0 8px rgba(239,68,68,0.2), 0 8px 24px rgba(0,0,0,0.5); }
+        50%    { box-shadow: 0 0 0 14px rgba(239,68,68,0.1), 0 8px 28px rgba(0,0,0,0.5); }
+    }
+    .video-play-btn i { color: #fff; font-size: 20px; margin-left: 3px; }
+    .video-thumb-caption {
+        position: absolute; bottom: 12px; left: 14px; right: 14px;
+    }
+    .video-thumb-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 700; color: #fff;
+        margin-bottom: 3px;
+    }
+    .video-thumb-sub {
+        font-size: 10px; color: rgba(255,255,255,0.6);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        display: flex; align-items: center; gap: 5px;
+    }
+    .yt-badge {
+        background: #ff0000; border-radius: 3px;
+        padding: 1px 5px; font-size: 9px;
+        font-weight: 700; color: #fff;
+        font-family: 'Syne', sans-serif;
+    }
+
+    /* ════════════════════════════════════════════════════
+       32. ANALYTICS PANEL
+    ════════════════════════════════════════════════════ */
+    .analytics-modal-inner {
+        background: #080808;
+        border: 1px solid rgba(240,180,41,0.2);
+    }
+    .stat-row {
+        display: flex; align-items: center;
+        gap: 10px; padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label {
+        font-family: 'Syne', sans-serif;
+        font-size: 12px; color: #ccc;
+        width: 110px; flex-shrink: 0;
+    }
+    .stat-bar-wrap {
+        flex: 1; background: rgba(255,255,255,0.05);
+        border-radius: 4px; height: 6px; overflow: hidden;
+    }
+    .stat-bar {
+        height: 100%; border-radius: 4px;
+        background: linear-gradient(90deg, var(--gold), var(--orange));
+        transition: width 0.6s ease;
+    }
+    .stat-count {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 11px; color: var(--gold);
+        width: 28px; text-align: right; flex-shrink: 0;
+    }
+    .stat-empty {
+        text-align: center; padding: 20px;
+        color: #444; font-size: 13px;
+        font-family: 'Syne', sans-serif;
+    }
+    .footer-tap-hint { cursor: pointer; user-select: none; }
+
     .delivery-badge {
         display: inline-flex; align-items: center; gap: 6px;
         background: rgba(74,222,128,0.07);
@@ -1173,6 +1274,27 @@
         </div>
     </div>
 
+    <!-- VIDEO THUMBNAIL -->
+    <div class="video-thumb-section reveal">
+        <button id="video-thumb-btn" class="video-thumb" style="width:100%;background:none;border:1px solid rgba(239,68,68,0.25);padding:0;">
+            <img src="https://img.youtube.com/vi/ndRhGLFUlLA/hqdefault.jpg"
+                 alt="Video KONFÍO ZINC"
+                 onerror="this.src='https://placehold.co/480x270/111/f87171?text=Ver+Video'">
+            <div class="video-thumb-overlay">
+                <div class="video-play-btn">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="video-thumb-caption">
+                <div class="video-thumb-title">¿Cómo es una tarjeta KONFÍO ZINC?</div>
+                <div class="video-thumb-sub">
+                    <span class="yt-badge">YT</span>
+                    Mira el video completo
+                </div>
+            </div>
+        </button>
+    </div>
+
     <div class="divider-gold"></div>
 
     <!-- CÓMO FUNCIONA -->
@@ -1252,10 +1374,6 @@
         </div>
 
         <div style="text-align:center;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;">
-            <button id="video-btn" class="video-btn" style="margin-top:0;">
-                <i class="fas fa-play"></i>
-                Video
-            </button>
             <button id="compare-btn" class="video-btn" style="margin-top:0;border-color:rgba(240,180,41,0.3);color:var(--gold);background:rgba(240,180,41,0.07);">
                 <i class="fas fa-table-columns"></i>
                 Comparar planes
@@ -1372,7 +1490,7 @@
             <i class="fas fa-share-nodes"></i>
             Recomiéndame a un amigo
         </a>
-        <p>© 2026 KONFÍO ZINC · Transformamos contactos en experiencias</p>
+        <p id="footer-tap" class="footer-tap-hint" title="Triple toque para estadísticas">© 2026 KONFÍO ZINC · Transformamos contactos en experiencias</p>
     </div>
 
 </div><!-- /glass-card -->
@@ -1706,6 +1824,30 @@
     </div>
 </div>
 
+<!-- Modal Analytics (triple-tap footer) -->
+<div id="analytics-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
+     style="display:none;background:rgba(0,0,0,0.92);">
+    <div class="modal-content analytics-modal-inner rounded-2xl w-full max-w-sm max-h-[88vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-gold">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-chart-bar" style="color:var(--gold);"></i>
+                <span>Estadísticas de uso</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <p style="font-size:11px;color:#555;font-family:'Syne',sans-serif;margin-bottom:14px;letter-spacing:0.04em;">Interacciones registradas en este dispositivo</p>
+            <div id="analytics-content">
+                <div class="stat-empty">Aún no hay datos registrados</div>
+            </div>
+            <button id="analytics-clear"
+                    style="width:100%;margin-top:16px;padding:9px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);color:#f87171;border-radius:10px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">
+                <i class="fas fa-trash-alt mr-2"></i>Limpiar estadísticas
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- ════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════ -->
@@ -1756,9 +1898,131 @@
     setupModal('qr-btn',        'qr-modal');
     setupModal('qr-badge-btn',  'qr-modal');
     setupModal('install-btn',   'install-modal');
-    setupModal('video-btn',     'video-modal');
+    setupModal('video-btn',     'video-modal');      // modal video (por si se usa en otro lado)
+    setupModal('video-thumb-btn','video-modal');     // thumbnail visible
     setupModal('compare-btn',   'compare-modal');
     setupModal('faq-btn',       'faq-modal');
+
+    /* ════════════════════════════════════════════════════
+       ANALYTICS ENGINE
+    ════════════════════════════════════════════════════ */
+    const ANALYTICS_KEY = 'kz_analytics';
+
+    function trackEvent(label) {
+        try {
+            const raw   = localStorage.getItem(ANALYTICS_KEY);
+            const stats = raw ? JSON.parse(raw) : {};
+            stats[label] = (stats[label] || 0) + 1;
+            localStorage.setItem(ANALYTICS_KEY, JSON.stringify(stats));
+        } catch(e) {}
+    }
+
+    // Registrar primera visita
+    trackEvent('👁 Vista de tarjeta');
+
+    // Trackear todos los botones de acción
+    const trackMap = {
+        'agenda-btn':       '📅 Agenda',
+        'services-btn':     '📋 Servicios',
+        'portfolio-btn':    '🖼 Portafolio',
+        'qr-btn':           '🔲 QR',
+        'qr-badge-btn':     '🔲 QR (badge)',
+        'save-btn':         '💾 Guardar contacto',
+        'install-btn':      '📲 Instalar',
+        'compare-btn':      '📊 Comparar planes',
+        'faq-btn':          '❓ Preguntas',
+        'video-thumb-btn':  '▶️ Video',
+        'video-btn':        '▶️ Video (btn)',
+    };
+    Object.entries(trackMap).forEach(([id, label]) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', () => trackEvent(label), { passive: true });
+    });
+
+    // Trackear links (llamar, email, whatsapp, redes)
+    document.querySelector('a[href^="tel:"]')
+        ?.addEventListener('click', () => trackEvent('📞 Llamar'), { passive: true });
+    document.querySelector('a[href^="mailto:"]')
+        ?.addEventListener('click', () => trackEvent('✉️ Correo'), { passive: true });
+    document.querySelector('.whatsapp-fixed')
+        ?.addEventListener('click', () => trackEvent('💬 WhatsApp flotante'), { passive: true });
+    document.querySelector('.btn-gold')
+        ?.addEventListener('click', () => trackEvent('⚡ CTA principal'), { passive: true });
+    document.querySelector('.recommend-btn')
+        ?.addEventListener('click', () => trackEvent('🤝 Recomiéndame'), { passive: true });
+
+    // Panel de analytics: triple-tap en el footer
+    (function(){
+        let taps = 0, timer;
+        const footer = document.getElementById('footer-tap');
+        if (!footer) return;
+        footer.addEventListener('click', () => {
+            taps++;
+            clearTimeout(timer);
+            timer = setTimeout(() => { taps = 0; }, 800);
+            if (taps >= 3) {
+                taps = 0;
+                renderAnalytics();
+                const m = document.getElementById('analytics-modal');
+                m.style.display = 'flex';
+                setTimeout(() => m.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // Cerrar modal analytics
+        const modal = document.getElementById('analytics-modal');
+        const closeBtn = modal?.querySelector('.modal-close');
+        if (closeBtn) closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+            document.body.style.overflow = '';
+        });
+        modal?.addEventListener('click', e => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                setTimeout(() => { modal.style.display = 'none'; }, 300);
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Limpiar stats
+        document.getElementById('analytics-clear')?.addEventListener('click', () => {
+            localStorage.removeItem(ANALYTICS_KEY);
+            renderAnalytics();
+        });
+    })();
+
+    function renderAnalytics() {
+        const container = document.getElementById('analytics-content');
+        if (!container) return;
+        try {
+            const raw   = localStorage.getItem(ANALYTICS_KEY);
+            const stats = raw ? JSON.parse(raw) : {};
+            const entries = Object.entries(stats).sort((a,b) => b[1] - a[1]);
+            if (!entries.length) {
+                container.innerHTML = '<div class="stat-empty">Aún no hay datos registrados</div>';
+                return;
+            }
+            const max = entries[0][1];
+            const total = entries.reduce((s,[,v]) => s+v, 0);
+            container.innerHTML = `
+                <div style="font-size:11px;color:var(--gold);font-family:'Syne',sans-serif;margin-bottom:12px;text-align:center;">
+                    <strong style="font-size:18px;font-family:'Orbitron',sans-serif;">${total}</strong> interacciones totales
+                </div>
+                ${entries.map(([label, count]) => `
+                    <div class="stat-row">
+                        <span class="stat-label">${label}</span>
+                        <div class="stat-bar-wrap">
+                            <div class="stat-bar" style="width:${Math.round(count/max*100)}%"></div>
+                        </div>
+                        <span class="stat-count">${count}</span>
+                    </div>`).join('')}
+            `;
+        } catch(e) {
+            container.innerHTML = '<div class="stat-empty">Error al leer estadísticas</div>';
+        }
+    }
 
     /* ── FAQ Accordion ────────────────────────────── */
     document.querySelectorAll('.faq-q').forEach(q => {
