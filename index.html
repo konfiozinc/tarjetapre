@@ -43,13 +43,7 @@
             align-items: center;
             justify-content: center;
             padding: 16px;
-            /* subtle grid noise */
-            background-image:
-                radial-gradient(circle at 20% 20%, rgba(240,180,41,0.06) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0,229,255,0.05) 0%, transparent 50%),
-                linear-gradient(rgba(240,180,41,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(240,180,41,0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            position: relative;
         }
 
         /* ─── MAIN CARD ─────────────────────────────────── */
@@ -463,6 +457,41 @@
             box-shadow: 0 0 6px var(--cyan);
         }
 
+        /* ── 7. CANVAS DE PARTÍCULAS ─────────────────────── */
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        body > *:not(#particles-canvas) { position: relative; z-index: 1; }
+
+        /* ── 6. AVATAR CIRCULAR ──────────────────────────── */
+        .profile-avatar-wrap {
+            text-align: center;
+            margin-top: -52px;
+            position: relative;
+            z-index: 5;
+        }
+        .profile-avatar {
+            width: 96px; height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 3px solid var(--gold);
+            display: inline-block;
+            box-shadow:
+                0 0 0 5px rgba(240,180,41,0.12),
+                0 0 24px rgba(240,180,41,0.35),
+                0 10px 28px rgba(0,0,0,0.7);
+            animation: avatar-glow 3s ease-in-out infinite;
+        }
+        @keyframes avatar-glow {
+            0%,100%{ box-shadow: 0 0 0 5px rgba(240,180,41,0.12), 0 0 22px rgba(240,180,41,0.3),  0 10px 28px rgba(0,0,0,0.7); }
+            50%    { box-shadow: 0 0 0 5px rgba(240,180,41,0.25), 0 0 36px rgba(240,180,41,0.55), 0 10px 28px rgba(0,0,0,0.7); }
+        }
+
         /* ── 5. ANIMACIÓN DE ENTRADA ─────────────────────── */
         @keyframes card-enter {
             from { opacity: 0; transform: translateY(32px) scale(0.97); }
@@ -605,6 +634,9 @@
 </head>
 <body>
 
+    <!-- ═══ PARTÍCULAS FONDO ══════════════════════════════ -->
+    <canvas id="particles-canvas"></canvas>
+
     <div class="glass-card card-wrapper" style="position:relative;">
 
         <!-- ═══ BANNER ═══════════════════════════════════ -->
@@ -620,8 +652,16 @@
              onerror="this.onerror=null;this.src='https://placehold.co/54x54/0A0A0A/F0B429?text=DM';">
         <button class="qr-badge" id="qr-badge-btn" aria-label="Ver código QR"><i class="fas fa-qrcode"></i><div class="qr-badge-text"><span>ESCANEAR</span><span>Ver mi QR</span></div></button>
 
+        <!-- ═══ AVATAR CIRCULAR ═══════════════════════════ -->
+        <div class="profile-avatar-wrap">
+            <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg"
+                 alt="Darwin Montalvo"
+                 class="profile-avatar"
+                 onerror="this.onerror=null;this.src='https://placehold.co/96x96/111111/F0B429?text=DM';">
+        </div>
+
         <!-- ═══ PROFILE INFO ══════════════════════════════ -->
-        <div class="relative -mt-10 pt-2 pb-6 px-5 text-center">
+        <div class="relative pt-3 pb-6 px-5 text-center">
 
             <!-- Live indicator -->
             <div style="display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;">
@@ -1370,6 +1410,90 @@
                     scroll.scrollTo({ left: i * 240, behavior: 'smooth' });
                 });
             });
+        })();
+
+        /* ── 7. MOTOR DE PARTÍCULAS ──────────────────────── */
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx    = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width  = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Paleta: oro, oro-claro, naranja suave, cian escaso
+            const COLORS = [
+                'rgba(240,180,41,',   // gold      — mayoría
+                'rgba(240,180,41,',
+                'rgba(240,180,41,',
+                'rgba(255,217,125,',  // gold light
+                'rgba(249,115,22,',   // orange     — minoría
+                'rgba(0,229,255,',    // cyan        — escaso
+            ];
+
+            const COUNT = 55;
+            const particles = [];
+
+            function rand(min, max) { return Math.random() * (max - min) + min; }
+
+            function createParticle(fromBottom) {
+                const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+                return {
+                    x:       rand(0, canvas.width),
+                    y:       fromBottom ? rand(canvas.height * 0.6, canvas.height + 20) : rand(0, canvas.height),
+                    r:       rand(0.6, 2.2),
+                    speed:   rand(0.18, 0.55),
+                    opacity: rand(0.08, 0.45),
+                    drift:   rand(-0.18, 0.18),   // horizontal drift
+                    pulse:   rand(0, Math.PI * 2), // phase for twinkle
+                    color,
+                };
+            }
+
+            for (let i = 0; i < COUNT; i++) particles.push(createParticle(false));
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const t = performance.now() * 0.001;
+
+                particles.forEach(p => {
+                    // Twinkle opacity
+                    const twinkle = p.opacity * (0.6 + 0.4 * Math.sin(t * 0.9 + p.pulse));
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + twinkle + ')';
+                    ctx.fill();
+
+                    // Subtle glow for larger particles
+                    if (p.r > 1.5) {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color + (twinkle * 0.18) + ')';
+                        ctx.fill();
+                    }
+
+                    // Move up + drift
+                    p.y     -= p.speed;
+                    p.x     += p.drift;
+                    p.pulse += 0.012;
+
+                    // Reset when off-screen top
+                    if (p.y < -6) {
+                        p.y = canvas.height + 6;
+                        p.x = rand(0, canvas.width);
+                    }
+                    if (p.x < -6)              p.x = canvas.width  + 6;
+                    if (p.x > canvas.width + 6) p.x = -6;
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
         })();
 
     })();
