@@ -892,6 +892,93 @@
         font-weight: 600;
         color: #4ade80;
     }
+
+    /* ════════════════════════════════════════════════════
+       28. PORTAFOLIO CON FILTROS
+    ════════════════════════════════════════════════════ */
+    .portfolio-filters {
+        display: flex; gap: 6px;
+        overflow-x: auto; padding-bottom: 10px;
+        scrollbar-width: none;
+    }
+    .portfolio-filters::-webkit-scrollbar { display: none; }
+    .pf-btn {
+        flex-shrink: 0; padding: 5px 13px;
+        border-radius: 9999px;
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 600;
+        cursor: pointer; transition: all 0.22s;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.04);
+        color: #999; white-space: nowrap;
+    }
+    .pf-btn.active, .pf-btn:hover {
+        background: rgba(240,180,41,0.12);
+        border-color: rgba(240,180,41,0.4);
+        color: var(--gold);
+    }
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px; margin-top: 4px;
+    }
+    .pf-card {
+        border-radius: 12px; overflow: hidden;
+        background: #111;
+        border: 1px solid rgba(255,255,255,0.07);
+        cursor: pointer; transition: all 0.25s ease;
+    }
+    .pf-card:hover { border-color: rgba(240,180,41,0.3); transform: scale(1.02); }
+    .pf-card img {
+        width: 100%; aspect-ratio: 3/4;
+        object-fit: cover; display: block;
+    }
+    .pf-card-info { padding: 8px 10px; }
+    .pf-card-name {
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 700; color: #fff;
+        margin-bottom: 2px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pf-card-cat {
+        font-size: 9px; color: var(--gold);
+        font-family: 'Syne', sans-serif;
+        letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .pf-card.pf-hidden { display: none; }
+    @keyframes pf-pop {
+        from { opacity:0; transform: scale(0.9); }
+        to   { opacity:1; transform: scale(1); }
+    }
+    .pf-card:not(.pf-hidden) { animation: pf-pop 0.28s ease both; }
+
+    /* ════════════════════════════════════════════════════
+       29. SCROLL REVEAL
+    ════════════════════════════════════════════════════ */
+    .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════════════════════
+       30. PWA NATIVE INSTALL BUTTON
+    ════════════════════════════════════════════════════ */
+    #pwa-install-native {
+        display: none; width: 100%; padding: 12px;
+        background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(0,229,255,0.08));
+        border: 1px solid rgba(129,140,248,0.35);
+        border-radius: 12px; color: #c7d2fe;
+        font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 700;
+        cursor: pointer; gap: 8px;
+        align-items: center; justify-content: center;
+        margin-bottom: 12px; transition: all 0.25s;
+    }
+    #pwa-install-native.show { display: flex; }
+    #pwa-install-native:hover { background: rgba(129,140,248,0.22); }
+
     .delivery-badge {
         display: inline-flex; align-items: center; gap: 6px;
         background: rgba(74,222,128,0.07);
@@ -1089,7 +1176,7 @@
     <div class="divider-gold"></div>
 
     <!-- CÓMO FUNCIONA -->
-    <div class="how-section">
+    <div class="how-section reveal">
         <p class="section-label">¿Cómo funciona?</p>
         <div class="how-steps">
             <div class="how-step">
@@ -1119,7 +1206,7 @@
     <div class="divider-gold"></div>
 
     <!-- GRID DE ACCIONES -->
-    <div class="action-section">
+    <div class="action-section reveal">
         <p class="action-label">Interactúa · Conecta · Agenda</p>
         <div class="action-grid">
 
@@ -1182,7 +1269,7 @@
 
     <!-- TESTIMONIOS (Mejora 4) -->
     <div class="divider-gold"></div>
-    <div class="testimonials-section">
+    <div class="testimonials-section reveal">
         <p class="section-label">Lo que dicen mis clientes</p>
         <div class="testimonials-scroll" id="testimonials-scroll">
 
@@ -1238,7 +1325,7 @@
 
     <!-- CONTADOR DE CLIENTES ATENDIDOS -->
     <div class="divider-gold"></div>
-    <div class="clients-section">
+    <div class="clients-section reveal">
         <p class="section-label">Profesionales que ya confían en KONFÍO ZINC</p>
         <div class="clients-grid">
             <div class="client-stat">
@@ -1263,7 +1350,7 @@
     </div>
 
     <!-- GARANTÍA -->
-    <div class="guarantee-section">
+    <div class="guarantee-section reveal">
         <div class="guarantee-icon">
             <i class="fas fa-shield-halved" style="color:var(--gold);"></i>
         </div>
@@ -1414,35 +1501,29 @@
     </div>
 </div>
 
-<!-- Modal Portafolio -->
+<!-- Modal Portafolio con Filtros -->
 <div id="portfolio-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
      style="display:none;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-lg max-h-[92vh] overflow-hidden flex flex-col">
         <div class="modal-hdr modal-hdr-purple">
             <div style="display:flex;align-items:center;gap:9px;">
                 <i class="fas fa-images" style="color:#a855f7;"></i>
-                <span>Nuestro Portafolio</span>
+                <span>Portafolio</span>
             </div>
             <button class="modal-close modal-close-btn">&times;</button>
         </div>
         <div class="p-4 overflow-y-auto flex-grow">
-            <p style="font-size:12px;color:#999;text-align:center;margin-bottom:12px;font-family:'Syne',sans-serif;letter-spacing:0.04em;">Toca para ver ampliada</p>
-            <div class="carousel-container">
-                <div class="carousel-track" id="carousel-track"></div>
-                <button id="prev-slide" class="carousel-btn" style="left:6px;">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button id="next-slide" class="carousel-btn" style="right:6px;">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+            <!-- Filtros de categoría -->
+            <div class="portfolio-filters" id="pf-filters">
+                <button class="pf-btn active" data-cat="todos">Todos</button>
+                <button class="pf-btn" data-cat="salud">🩺 Salud</button>
+                <button class="pf-btn" data-cat="gastronomia">🍰 Gastronomía</button>
+                <button class="pf-btn" data-cat="belleza">💅 Belleza</button>
+                <button class="pf-btn" data-cat="eventos">🎉 Eventos</button>
+                <button class="pf-btn" data-cat="diseno">🎨 Diseño</button>
             </div>
-            <div id="carousel-dots" class="flex justify-center gap-2 mt-4"></div>
-            <div style="text-align:center;margin-top:10px;">
-                <button id="view-full-image"
-                        style="font-size:12px;color:var(--gold);background:none;border:none;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:0.04em;">
-                    <i class="fas fa-expand mr-1"></i>Ver imagen completa
-                </button>
-            </div>
+            <!-- Grid de tarjetas -->
+            <div class="portfolio-grid" id="pf-grid"></div>
         </div>
     </div>
 </div>
@@ -1468,6 +1549,11 @@
             <button class="modal-close modal-close-btn">&times;</button>
         </div>
         <div class="p-4" style="display:flex;flex-direction:column;gap:12px;">
+            <!-- Botón instalar nativo (aparece solo si el navegador lo soporta) -->
+            <button id="pwa-install-native">
+                <i class="fas fa-download"></i>
+                Instalar KONFÍO ZINC en este dispositivo
+            </button>
             <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;">
                 <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--cyan);margin-bottom:8px;">
                     <i class="fab fa-apple mr-2"></i>iOS (Safari)
@@ -1706,46 +1792,60 @@
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
     });
 
-    /* ── Carrusel de portafolio ───────────────────── */
-    const track  = document.getElementById('carousel-track');
-    const dotsC  = document.getElementById('carousel-dots');
-    const prevB  = document.getElementById('prev-slide');
-    const nextB  = document.getElementById('next-slide');
-    let cur = 0;
+    /* ── Portafolio con filtros por categoría ────────── */
+    const portfolioData = [
+        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga · Estética Dental',          cat: 'salud'      },
+        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional',              cat: 'salud'      },
+        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional',                cat: 'salud'      },
+        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia',           cat: 'salud'      },
+        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal',                   cat: 'gastronomia'},
+        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy',                        cat: 'belleza'    },
+        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas',                  cat: 'eventos'    },
+        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico',                      cat: 'diseno'     },
+    ];
 
-    function buildCarousel() {
-        track.innerHTML = portfolioImages.map(img => `
-            <div class="carousel-slide">
-                <div style="background:#111;border-radius:12px;overflow:hidden;border:1px solid rgba(240,180,41,0.08);">
-                    <img src="${img.src}" alt="${img.title}"
-                         onerror="this.src='https://placehold.co/600x400/111/F0B429?text=Tarjeta'">
-                    <div style="padding:11px 14px;">
-                        <div style="font-weight:700;font-size:13px;color:#fff;font-family:'Syne',sans-serif;">${img.title}</div>
-                        <div style="font-size:11px;color:#999;margin-top:2px;">${img.sub}</div>
-                    </div>
+    const catLabels = { salud:'Salud', gastronomia:'Gastronomía', belleza:'Belleza', eventos:'Eventos', diseno:'Diseño' };
+
+    function buildPortfolio() {
+        const grid = document.getElementById('pf-grid');
+        if (!grid) return;
+        grid.innerHTML = portfolioData.map((p, i) => `
+            <div class="pf-card" data-cat="${p.cat}" data-index="${i}">
+                <img src="${p.src}" alt="${p.title}"
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/300x400/111/F0B429?text=Tarjeta'">
+                <div class="pf-card-info">
+                    <div class="pf-card-name">${p.title}</div>
+                    <div class="pf-card-cat">${catLabels[p.cat] || p.cat}</div>
                 </div>
             </div>`).join('');
-        dotsC.innerHTML = portfolioImages.map((_, i) =>
-            `<span class="carousel-dot ${i===0?'active':''}" data-index="${i}"></span>`).join('');
-        dotsC.querySelectorAll('.carousel-dot').forEach(d =>
-            d.addEventListener('click', () => { cur = +d.dataset.index; updateCarousel(); }));
-        updateCarousel();
-    }
-    function updateCarousel() {
-        track.style.transform = `translateX(-${cur*100}%)`;
-        dotsC.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
-    }
-    nextB.addEventListener('click', () => { cur = (cur+1) % portfolioImages.length; updateCarousel(); });
-    prevB.addEventListener('click', () => { cur = (cur-1+portfolioImages.length) % portfolioImages.length; updateCarousel(); });
-    buildCarousel();
 
-    // Lightbox
-    document.getElementById('view-full-image').addEventListener('click', () => {
-        const m = document.getElementById('full-image-modal');
-        document.getElementById('full-image').src = portfolioImages[cur].src;
-        m.style.display = 'flex';
-        setTimeout(() => m.classList.add('active'), 10);
+        // Click para lightbox
+        grid.querySelectorAll('.pf-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const idx = +card.dataset.index;
+                const m   = document.getElementById('full-image-modal');
+                document.getElementById('full-image').src = portfolioData[idx].src;
+                m.style.display = 'flex';
+                setTimeout(() => m.classList.add('active'), 10);
+            });
+        });
+    }
+
+    function filterPortfolio(cat) {
+        document.querySelectorAll('.pf-btn').forEach(b =>
+            b.classList.toggle('active', b.dataset.cat === cat));
+        document.querySelectorAll('.pf-card').forEach(card => {
+            const match = cat === 'todos' || card.dataset.cat === cat;
+            card.classList.toggle('pf-hidden', !match);
+        });
+    }
+
+    document.getElementById('pf-filters')?.querySelectorAll('.pf-btn').forEach(btn => {
+        btn.addEventListener('click', () => filterPortfolio(btn.dataset.cat));
     });
+
+    buildPortfolio();
 
     /* ── Native Share ─────────────────────────────── */
     const shareBtn = document.getElementById('native-share-btn');
@@ -2044,6 +2144,105 @@
         }, { threshold: 0.5 });
 
         els.forEach(el => observer.observe(el));
+    })();
+
+    /* ── Scroll Reveal ────────────────────────────── */
+    (function(){
+        const els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        els.forEach(el => obs.observe(el));
+    })();
+
+    /* ── PWA: Manifest inline + beforeinstallprompt ─ */
+    (function(){
+        // Manifest via Blob
+        const manifest = {
+            name: 'KONFÍO ZINC',
+            short_name: 'KONFÍO',
+            description: 'Tarjeta digital de Darwin Montalvo — KONFÍO ZINC',
+            start_url: './',
+            display: 'standalone',
+            orientation: 'portrait',
+            background_color: '#000000',
+            theme_color: '#F0B429',
+            icons: [
+                { src: 'https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg', sizes: '192x192', type: 'image/jpeg', purpose: 'any maskable' },
+                { src: 'https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg', sizes: '512x512', type: 'image/jpeg', purpose: 'any' }
+            ]
+        };
+        try {
+            const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            const link = document.createElement('link');
+            link.rel  = 'manifest';
+            link.href = URL.createObjectURL(blob);
+            document.head.appendChild(link);
+        } catch(e) {}
+
+        // Capturar prompt de instalación nativa (Android Chrome)
+        let installPrompt = null;
+        const nativeBtn   = document.getElementById('pwa-install-native');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            installPrompt = e;
+            if (nativeBtn) nativeBtn.classList.add('show');
+        });
+
+        if (nativeBtn) {
+            nativeBtn.addEventListener('click', async () => {
+                if (!installPrompt) return;
+                installPrompt.prompt();
+                const { outcome } = await installPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    nativeBtn.classList.remove('show');
+                    installPrompt = null;
+                }
+            });
+        }
+
+        // Service Worker para caché offline
+        if ('serviceWorker' in navigator) {
+            const sw = `
+                const C='kz-cache-v1';
+                self.addEventListener('install', e => {
+                    e.waitUntil(caches.open(C).then(c =>
+                        c.add(new Request(self.location.origin + self.location.pathname.replace(/[^/]*$/,'')))
+                        .catch(()=>{})
+                    ));
+                    self.skipWaiting();
+                });
+                self.addEventListener('activate', e => {
+                    e.waitUntil(caches.keys().then(keys =>
+                        Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))
+                    ));
+                    self.clients.claim();
+                });
+                self.addEventListener('fetch', e => {
+                    if (e.request.method !== 'GET') return;
+                    e.respondWith(
+                        caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+                            if (res.ok) {
+                                const clone = res.clone();
+                                caches.open(C).then(c => c.put(e.request, clone));
+                            }
+                            return res;
+                        }).catch(() => caches.match(e.request)))
+                    );
+                });`;
+            try {
+                const swBlob = new Blob([sw], { type: 'application/javascript' });
+                const swUrl  = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl).catch(() => {});
+            } catch(e) {}
+        }
     })();
 
 })();
