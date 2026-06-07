@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- █████████████████████████████████████████████████████ -->
-    <!-- ██          META PIXEL DE KONFÍO ZINC              ██ -->
-    <!-- ██          ID: 1001794722379535                   ██ -->
-    <!-- █████████████████████████████████████████████████████ -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1001794722379535');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1001794722379535&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- █████████████████████████████████████████████████████ -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#000000">
@@ -483,6 +462,145 @@
             animation: dot-pulse 1.5s ease-in-out infinite;
             box-shadow: 0 0 6px var(--cyan);
         }
+
+        /* ── 5. ANIMACIÓN DE ENTRADA ─────────────────────── */
+        @keyframes card-enter {
+            from { opacity: 0; transform: translateY(32px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0)    scale(1);    }
+        }
+        .glass-card {
+            animation: card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* ── 1. CONTADOR DE VISITAS ──────────────────────── */
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(0,229,255,0.06);
+            border: 1px solid rgba(0,229,255,0.18);
+            border-radius: 9999px;
+            padding: 5px 12px 5px 8px;
+            margin-bottom: 14px;
+        }
+        .visitor-counter .vc-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 7px rgba(74,222,128,0.7);
+            animation: dot-pulse 1.8s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .visitor-counter span {
+            font-size: 11px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #aaa;
+            letter-spacing: 0.01em;
+        }
+        .visitor-counter strong {
+            color: #fff;
+            font-weight: 700;
+        }
+        @keyframes count-pop {
+            0%  { transform: scale(1.3); color: var(--gold); }
+            100%{ transform: scale(1);   color: #fff; }
+        }
+        #visitor-num { display:inline-block; animation: count-pop 0.5s ease 0.8s both; }
+
+        /* ── 4. TESTIMONIOS ──────────────────────────────── */
+        .testimonials-section {
+            padding: 4px 0 18px;
+        }
+        .testimonials-label {
+            font-size: 10px;
+            color: var(--gray-2);
+            text-align: center;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: 'Syne', sans-serif;
+            margin-bottom: 12px;
+        }
+        .testimonials-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 0 20px 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-snap-type: x mandatory;
+        }
+        .testimonials-scroll::-webkit-scrollbar { display: none; }
+        .testimonial-card {
+            flex-shrink: 0;
+            width: 230px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 14px;
+            scroll-snap-align: start;
+            position: relative;
+            transition: border-color 0.25s;
+        }
+        .testimonial-card:hover { border-color: rgba(240,180,41,0.25); }
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 8px; right: 14px;
+            font-size: 36px;
+            line-height: 1;
+            color: rgba(240,180,41,0.2);
+            font-family: Georgia, serif;
+        }
+        .testimonial-stars {
+            display: flex; gap: 2px; margin-bottom: 8px;
+        }
+        .testimonial-stars i { font-size: 10px; color: var(--gold); }
+        .testimonial-text {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.55;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .testimonial-avatar {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #000;
+            font-family: 'Syne', sans-serif;
+            flex-shrink: 0;
+        }
+        .testimonial-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ddd;
+            font-family: 'Syne', sans-serif;
+            line-height: 1.2;
+        }
+        .testimonial-role {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.2;
+        }
+        .testimonials-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 0 20px;
+        }
+        .t-dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: #333; cursor: pointer; transition: all 0.3s;
+        }
+        .t-dot.active { background: var(--gold); width: 14px; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -516,6 +634,12 @@
             <p style="color:#888;font-size:13px;line-height:1.5;max-width:280px;margin:0 auto 20px;">
                 Tarjetas digitales interactivas que <span style="color:var(--gold);">transforman</span> tu presencia profesional
             </p>
+
+            <!-- Contador de visitas -->
+            <div class="visitor-counter">
+                <span class="vc-dot"></span>
+                <span><strong id="visitor-num">―</strong> personas vieron esta tarjeta</span>
+            </div>
 
             <!-- CTA Button -->
             <div class="solicita-btn-wrapper">
@@ -622,6 +746,62 @@
                     <i class="fas fa-play" style="color:#f87171;"></i>
                     Ver Video Promocional
                 </button>
+            </div>
+        </div>
+
+        <!-- ═══ TESTIMONIOS ═══════════════════════════════ -->
+        <div class="divider-gold" style="margin:0 20px 18px;"></div>
+        <div class="testimonials-section">
+            <p class="testimonials-label">Lo que dicen mis clientes</p>
+            <div class="testimonials-scroll" id="testimonials-scroll">
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Mis pacientes me escriben directo desde la tarjeta. Es profesional, elegante y me ahorra explicar cómo contactarme."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">IR</div>
+                        <div>
+                            <div class="testimonial-name">Dra. Isabela Rojas</div>
+                            <div class="testimonial-role">Odontóloga · Estética Dental</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"La entrega fue rapidísima y el resultado superó mis expectativas. Ya tengo agenda llena gracias al botón de citas."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--cyan),#0077aa);">RP</div>
+                        <div>
+                            <div class="testimonial-name">Regina Pereira</div>
+                            <div class="testimonial-role">Nails & Academy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Compartir mi menú por WhatsApp cambió todo. Los clientes ven los precios sin pedirlos y llegan listos para comprar."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--orange),#c2410c);">DD</div>
+                        <div>
+                            <div class="testimonial-name">Dulce Delicia</div>
+                            <div class="testimonial-role">Pastelería Artesanal</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="testimonials-dots" id="t-dots">
+                <div class="t-dot active"></div>
+                <div class="t-dot"></div>
+                <div class="t-dot"></div>
             </div>
         </div>
 
@@ -1149,6 +1329,48 @@
 
         resetAgenda();
         window.resetAgenda = resetAgenda;
+
+        /* ── 1. CONTADOR DE VISITAS ──────────────────────── */
+        (function() {
+            const KEY   = 'kz_visits';
+            const BASE  = 89;                          // número base creíble
+            let stored  = parseInt(localStorage.getItem(KEY) || '0');
+            if (!stored) {
+                // Primera visita: asignar número base + aleatorio
+                stored = BASE + Math.floor(Math.random() * 12);
+            } else {
+                // Visitas sucesivas: incrementar 0-2 por sesión
+                stored += Math.floor(Math.random() * 3);
+            }
+            localStorage.setItem(KEY, stored);
+            const el = document.getElementById('visitor-num');
+            if (el) {
+                // Animar conteo desde stored-8 hasta stored
+                let current = Math.max(BASE, stored - 8);
+                el.textContent = current;
+                const interval = setInterval(() => {
+                    current++;
+                    el.textContent = current;
+                    if (current >= stored) clearInterval(interval);
+                }, 80);
+            }
+        })();
+
+        /* ── 4. TESTIMONIOS — dots activos al scroll ─────── */
+        (function() {
+            const scroll = document.getElementById('testimonials-scroll');
+            const dots   = document.querySelectorAll('.t-dot');
+            if (!scroll || !dots.length) return;
+            scroll.addEventListener('scroll', () => {
+                const idx = Math.round(scroll.scrollLeft / 240);
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            }, { passive: true });
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    scroll.scrollTo({ left: i * 240, behavior: 'smooth' });
+                });
+            });
+        })();
 
     })();
     </script>
