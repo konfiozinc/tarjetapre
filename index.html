@@ -952,6 +952,67 @@
     }
     .pf-card:not(.pf-hidden) { animation: pf-pop 0.28s ease both; }
 
+    /* Botón "Ver Proyecto" dentro de pf-card */
+    .pf-card-link {
+        display: flex; align-items: center; justify-content: center; gap: 5px;
+        margin-top: 6px;
+        padding: 5px 0;
+        border-radius: 7px;
+        background: rgba(0,229,255,0.08);
+        border: 1px solid rgba(0,229,255,0.25);
+        color: var(--cyan);
+        font-family: 'Syne', sans-serif;
+        font-size: 10px; font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .pf-card-link:hover { background: rgba(0,229,255,0.16); }
+    .pf-card-link i { font-size: 9px; }
+
+    /* Sección "Próximamente" */
+    .upcoming-section {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .upcoming-wrap {
+        display: flex; gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+    .upcoming-wrap::-webkit-scrollbar { display: none; }
+    .upcoming-chip {
+        flex-shrink: 0;
+        min-width: 92px;
+        background: rgba(255,255,255,0.025);
+        border: 1px dashed rgba(255,255,255,0.12);
+        border-radius: 12px;
+        padding: 12px 8px;
+        text-align: center;
+        opacity: 0.65;
+    }
+    .upcoming-chip i {
+        font-size: 16px; color: #555;
+        margin-bottom: 6px; display: block;
+    }
+    .upcoming-chip-name {
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 700;
+        color: #aaa; margin-bottom: 4px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .upcoming-badge {
+        display: inline-block;
+        font-size: 8px; font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--gold);
+        border: 1px solid rgba(240,180,41,0.3);
+        border-radius: 5px;
+        padding: 1px 6px;
+        font-family: 'Syne', sans-serif;
+    }
+
     /* ════════════════════════════════════════════════════
        29. SCROLL REVEAL
     ════════════════════════════════════════════════════ */
@@ -1606,59 +1667,47 @@
                     <i class="fas fa-id-card" style="color:var(--cyan);"></i>
                 </div>
                 <div>
-                    <div class="service-name">Tarjeta Básica</div>
-                    <div class="service-desc">Datos esenciales y redes sociales.</div>
-                    <span class="price-tag">Desde $70.000 COP</span>
+                    <div class="service-name">Tarjetas Digitales Profesionales</div>
+                    <div class="service-desc">Tu presentación interactiva: contacto, redes, QR, galería y agenda en un solo link.</div>
+                    <span class="price-tag">Entrega 24–48 h</span>
                     <br>
-                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20B%C3%A1sica%20de%20%2470.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20una%20Tarjeta%20Digital%20Profesional%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
                 </div>
             </div>
             <div class="service-card">
                 <div class="service-icon" style="background:rgba(240,180,41,0.1);">
-                    <i class="fas fa-briefcase" style="color:var(--gold);"></i>
+                    <i class="fas fa-rocket" style="color:var(--gold);"></i>
                 </div>
                 <div>
-                    <div class="service-name">Tarjeta Profesional</div>
-                    <div class="service-desc">Galería, WhatsApp, QR, ubicación.</div>
-                    <span class="price-tag">Desde $120.000 COP</span>
+                    <div class="service-name">Landing Pages de Conversión</div>
+                    <div class="service-desc">Páginas con scroll completo, secciones de venta, video y testimonios para convertir visitantes en clientes.</div>
+                    <span class="price-tag">A medida</span>
                     <br>
-                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20Profesional%20de%20%24120.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20una%20Landing%20Page%20de%20Conversi%C3%B3n%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(74,222,128,0.1);">
+                    <i class="fas fa-table-cells-large" style="color:#4ade80;"></i>
+                </div>
+                <div>
+                    <div class="service-name">Catálogos Digitales para WhatsApp</div>
+                    <div class="service-desc">Carta o catálogo interactivo con fotos, precios y pedido directo por WhatsApp.</div>
+                    <span class="price-tag">Ideal para negocios</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20un%20Cat%C3%A1logo%20Digital%20para%20WhatsApp%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
                 </div>
             </div>
             <div class="service-card">
                 <div class="service-icon" style="background:rgba(168,85,247,0.1);">
-                    <i class="fas fa-gem" style="color:#a855f7;"></i>
+                    <i class="fas fa-wand-magic-sparkles" style="color:#a855f7;"></i>
                 </div>
                 <div>
-                    <div class="service-name">Tarjeta Premium</div>
-                    <div class="service-desc">Agendamiento, animaciones avanzadas.</div>
-                    <span class="price-tag">Desde $170.000 COP</span>
+                    <div class="service-name">Soluciones Digitales Personalizadas</div>
+                    <div class="service-desc">¿Tienes una idea distinta? Desarrollo a la medida según las necesidades de tu negocio.</div>
+                    <span class="price-tag">Cotización personalizada</span>
                     <br>
-                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Tarjeta%20Premium%20de%20%24170.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon" style="background:rgba(249,115,22,0.1);">
-                    <i class="fas fa-utensils" style="color:var(--orange);"></i>
-                </div>
-                <div>
-                    <div class="service-name">Menú Digital</div>
-                    <div class="service-desc">Restaurantes: carta interactiva.</div>
-                    <span class="price-tag">Desde $150.000 COP</span>
-                    <br>
-                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20el%20Men%C3%BA%20Digital%20de%20%24150.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon" style="background:rgba(244,63,94,0.1);">
-                    <i class="fas fa-rocket" style="color:#f43f5e;"></i>
-                </div>
-                <div>
-                    <div class="service-name">Mini Landing Page</div>
-                    <div class="service-desc">Scroll completo, video, testimonios.</div>
-                    <span class="price-tag">Desde $350.000 COP</span>
-                    <br>
-                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20la%20Mini%20Landing%20Page%20de%20%24350.000%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Lo quiero</a>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20tengo%20un%20proyecto%20personalizado%20que%20quiero%20cotizar%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
                 </div>
             </div>
         </div>
@@ -1680,6 +1729,7 @@
             <!-- Filtros de categoría -->
             <div class="portfolio-filters" id="pf-filters">
                 <button class="pf-btn active" data-cat="todos">Todos</button>
+                <button class="pf-btn" data-cat="proyectos">🚀 Proyectos</button>
                 <button class="pf-btn" data-cat="salud">🩺 Salud</button>
                 <button class="pf-btn" data-cat="gastronomia">🍰 Gastronomía</button>
                 <button class="pf-btn" data-cat="belleza">💅 Belleza</button>
@@ -1688,6 +1738,33 @@
             </div>
             <!-- Grid de tarjetas -->
             <div class="portfolio-grid" id="pf-grid"></div>
+
+            <!-- PRÓXIMAMENTE -->
+            <div class="upcoming-section">
+                <p class="section-label" style="margin-bottom:8px;">Próximos proyectos</p>
+                <div class="upcoming-wrap">
+                    <div class="upcoming-chip">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="upcoming-chip-name">Profitron</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="upcoming-chip">
+                        <i class="fas fa-scale-balanced"></i>
+                        <div class="upcoming-chip-name">LEX360</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="upcoming-chip">
+                        <i class="fas fa-dumbbell"></i>
+                        <div class="upcoming-chip-name">KONFÍO SPORT</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="upcoming-chip">
+                        <i class="fas fa-plus"></i>
+                        <div class="upcoming-chip-name">Tu proyecto aquí</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -2104,22 +2181,46 @@
 
     /* ── Portafolio con filtros por categoría ────────── */
     const portfolioData = [
-        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga · Estética Dental',          cat: 'salud'      },
-        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional',              cat: 'salud'      },
-        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional',                cat: 'salud'      },
-        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia',           cat: 'salud'      },
-        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal',                   cat: 'gastronomia'},
-        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy',                        cat: 'belleza'    },
-        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas',                  cat: 'eventos'    },
-        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico',                      cat: 'diseno'     },
+        // ── Proyectos reales KONFÍO ZINC ──
+        { title: 'Abogados DTA',     sub: 'Sitio Web · Bufete Legal',          cat: 'proyectos', type: 'project', icon: 'fa-scale-balanced',  color: '0,229,255', url: 'https://konfiozinc.github.io/abogados-dta/' },
+        { title: 'Quiromasajes GAP',  sub: 'Tarjeta Digital · Bienestar',       cat: 'proyectos', type: 'project', icon: 'fa-spa',             color: '74,222,128', url: 'https://konfiozinc.github.io/quiromasajes-gap/' },
+        { title: 'Tarjeta PRE',       sub: 'Tarjeta Digital · KONFÍO ZINC',     cat: 'proyectos', type: 'project', icon: 'fa-id-card',         color: '240,180,41', url: 'https://konfiozinc.github.io/tarjetapre/' },
+        { title: 'KONFÍO TV',         sub: 'Plataforma · Streaming',           cat: 'proyectos', type: 'project', icon: 'fa-tv',              color: '249,115,22', url: 'https://konfiozinc.github.io/kofio-tv/' },
+        { title: 'EL TITI',           sub: 'Catálogo Digital · Comida Rápida', cat: 'proyectos', type: 'project', icon: 'fa-utensils',        color: '249,115,22', url: 'https://konfiozinc.github.io/eltiti/' },
+        { title: 'Ali Binary Options',sub: 'Plataforma Web · Trading',         cat: 'proyectos', type: 'project', icon: 'fa-chart-line',      color: '168,85,247', url: 'https://konfiozinc.github.io/ali-binary-opcion/sala.html' },
+        // ── Clientes por sector ──
+        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga · Estética Dental',          cat: 'salud',      type: 'client' },
+        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional',              cat: 'salud',      type: 'client' },
+        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional',                cat: 'salud',      type: 'client' },
+        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia',           cat: 'salud',      type: 'client' },
+        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal',                   cat: 'gastronomia',type: 'client' },
+        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy',                        cat: 'belleza',    type: 'client' },
+        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas',                  cat: 'eventos',    type: 'client' },
+        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico',                      cat: 'diseno',     type: 'client' },
     ];
 
-    const catLabels = { salud:'Salud', gastronomia:'Gastronomía', belleza:'Belleza', eventos:'Eventos', diseno:'Diseño' };
+    const catLabels = { proyectos:'Proyecto', salud:'Salud', gastronomia:'Gastronomía', belleza:'Belleza', eventos:'Eventos', diseno:'Diseño' };
 
     function buildPortfolio() {
         const grid = document.getElementById('pf-grid');
         if (!grid) return;
-        grid.innerHTML = portfolioData.map((p, i) => `
+        grid.innerHTML = portfolioData.map((p, i) => {
+            if (p.type === 'project') {
+                return `
+            <div class="pf-card" data-cat="${p.cat}" data-index="${i}">
+                <div style="aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg, rgba(${p.color},0.14), rgba(0,0,0,0.4));">
+                    <i class="fas ${p.icon}" style="font-size:34px;color:rgb(${p.color});"></i>
+                </div>
+                <div class="pf-card-info">
+                    <div class="pf-card-name">${p.title}</div>
+                    <div class="pf-card-cat">${p.sub}</div>
+                    <a href="${p.url}" target="_blank" rel="noopener" class="pf-card-link">
+                        <i class="fas fa-arrow-up-right-from-square"></i> Ver Proyecto
+                    </a>
+                </div>
+            </div>`;
+            }
+            return `
             <div class="pf-card" data-cat="${p.cat}" data-index="${i}">
                 <img src="${p.src}" alt="${p.title}"
                      loading="lazy"
@@ -2128,13 +2229,15 @@
                     <div class="pf-card-name">${p.title}</div>
                     <div class="pf-card-cat">${catLabels[p.cat] || p.cat}</div>
                 </div>
-            </div>`).join('');
+            </div>`;
+        }).join('');
 
-        // Click para lightbox
+        // Click para lightbox (solo clientes con imagen)
         grid.querySelectorAll('.pf-card').forEach(card => {
+            const idx = +card.dataset.index;
+            if (portfolioData[idx].type === 'project') return;
             card.addEventListener('click', () => {
-                const idx = +card.dataset.index;
-                const m   = document.getElementById('full-image-modal');
+                const m = document.getElementById('full-image-modal');
                 document.getElementById('full-image').src = portfolioData[idx].src;
                 m.style.display = 'flex';
                 setTimeout(() => m.classList.add('active'), 10);
