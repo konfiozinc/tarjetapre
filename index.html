@@ -21,13 +21,13 @@
     <meta name="twitter:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link.">
     <meta name="twitter:image" content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
 
-    <!-- Fonts & Icons -->
+    <!-- Fonts & Icons (precargados para rendimiento) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- QRCode.js -->
+    <!-- QRCode.js con defer para no bloquear renderizado -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -132,12 +132,12 @@
             50%     { box-shadow: 0 0 0 5px rgba(240,180,41,0.28), 0 0 38px rgba(240,180,41,0.55), 0 10px 28px rgba(0,0,0,0.8); }
         }
 
-        /* ─── BOTONES ─── */
-        .btn-gold {
+        /* ─── BOTÓN CTA CON LOGO KONFÍO ─── */
+        .btn-konfio {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
             padding: 14px 24px;
             border-radius: 9999px;
@@ -150,8 +150,15 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 22px rgba(240,180,41,0.4);
+            border: none;
+            cursor: pointer;
         }
-        .btn-gold:active { transform: scale(0.97); }
+        .btn-konfio:active { transform: scale(0.97); }
+        .btn-konfio img {
+            height: 20px;
+            width: auto;
+            filter: brightness(0);
+        }
 
         .solicita-btn-wrapper {
             position: relative;
@@ -353,16 +360,19 @@
 <!-- ===== TARJETA PRINCIPAL ===== -->
 <div class="glass-card" id="mainCard">
 
-    <!-- BANNER -->
+    <!-- BANNER con logo KONFÍO -->
     <div class="profile-banner">
-        <img src="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg"
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Logo_konfio.png"
              alt="KONFÍO ZINC Banner"
              loading="lazy"
-             onerror="this.onerror=null;this.src='https://placehold.co/400x210/000000/F0B429?text=KONF%C3%8DO+ZINC'">
+             style="object-fit:cover; width:100%; height:100%;">
     </div>
 
     <!-- BADGE QR (esquina) -->
-    <button id="qr-badge-btn" class="qr-badge" style="position:absolute;top:14px;right:14px;z-index:10;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.72);border:1px solid rgba(0,229,255,0.45);border-radius:10px;padding:6px 10px 6px 8px;cursor:pointer;backdrop-filter:blur(10px);">
+    <button id="qr-badge-btn"
+            class="qr-badge"
+            aria-label="Ver código QR"
+            style="position:absolute;top:14px;right:14px;z-index:10;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.72);border:1px solid rgba(0,229,255,0.45);border-radius:10px;padding:6px 10px 6px 8px;cursor:pointer;backdrop-filter:blur(10px);">
         <i class="fas fa-qrcode" style="font-size:16px;color:var(--cyan);"></i>
         <div style="display:flex;flex-direction:column;line-height:1.2;">
             <span style="font-size:9px;font-family:'Orbitron',sans-serif;color:var(--cyan);letter-spacing:0.1em;">ESCANEAR</span>
@@ -372,15 +382,15 @@
 
     <!-- AVATAR -->
     <div style="text-align:center;margin-top:-50px;position:relative;z-index:5;">
-        <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg"
+        <img src="https://placehold.co/100x100/111111/F0B429?text=DM"
              alt="Darwin Montalvo"
              class="profile-avatar"
-             loading="lazy"
-             onerror="this.onerror=null;this.src='https://placehold.co/100x100/111111/F0B429?text=DM'">
+             loading="lazy">
     </div>
 
     <!-- PERFIL -->
     <div class="profile-info" style="padding:14px 24px 20px;text-align:center;">
+
         <!-- Live badge -->
         <div style="display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;">
             <span style="width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:dot-pulse 1.5s ease-in-out infinite;"></span>
@@ -395,7 +405,7 @@
         <!-- Contador de visitas -->
         <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.18);border-radius:9999px;padding:5px 14px 5px 10px;margin-bottom:18px;">
             <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 7px rgba(74,222,128,0.7);flex-shrink:0;"></span>
-            <span style="font-size:11.5px;color:#bbb;letter-spacing:0.01em;"><strong id="visitor-num" style="color:var(--white);font-weight:700;">—</strong> personas vieron esta tarjeta</span>
+            <span style="font-size:11.5px;color:#bbb;letter-spacing:0.01em;"><strong id="visitor-num" style="color:var(--white);font-weight:700;">538</strong> personas vieron esta tarjeta</span>
         </div>
 
         <!-- Badge entrega -->
@@ -404,29 +414,57 @@
             <span style="font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:#4ade80;letter-spacing:0.04em;">Entrega en 24–48 h hábiles</span>
         </div>
 
-        <!-- CTA -->
+        <!-- CTA con logo KONFÍO -->
         <div class="solicita-btn-wrapper">
             <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
-               target="_blank" class="btn-gold">
-                <i class="fas fa-bolt"></i>
+               target="_blank"
+               class="btn-konfio"
+               aria-label="Solicita tu tarjeta KONFÍO ZINC por WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Logo_konfio.png"
+                     alt="KONFÍO"
+                     style="height:20px;width:auto;filter:brightness(0);">
                 Solicita tu tarjeta
             </a>
         </div>
     </div>
 
-    <!-- REDES SOCIALES -->
+    <!-- REDES SOCIALES (iconos oficiales) -->
     <div style="padding:0 24px 6px;">
         <div style="display:flex;justify-content:center;gap:14px;">
-            <a href="https://www.facebook.com/profile.php?id=61589654555930" target="_blank" class="social-icon" style="background:#1877F2;box-shadow:0 4px 14px rgba(24,119,242,0.35);"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/konfiozinc" target="_blank" class="social-icon" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:0 4px 14px rgba(220,39,67,0.35);"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@konfiozinc?_r=1&_t=ZS-96N3Vmh92tJ" target="_blank" class="social-icon" style="background:#0a0a0a;border:1.5px solid rgba(0,229,255,0.3);box-shadow:0 4px 14px rgba(0,229,255,0.12);"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61589654555930"
+               target="_blank"
+               class="social-icon"
+               aria-label="Facebook"
+               style="background:#1877F2;box-shadow:0 4px 14px rgba(24,119,242,0.35);">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/konfiozinc"
+               target="_blank"
+               class="social-icon"
+               aria-label="Instagram"
+               style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:0 4px 14px rgba(220,39,67,0.35);">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@konfiozinc?_r=1&_t=ZS-96N3Vmh92tJ"
+               target="_blank"
+               class="social-icon"
+               aria-label="TikTok"
+               style="background:#0a0a0a;border:1.5px solid rgba(0,229,255,0.3);box-shadow:0 4px 14px rgba(0,229,255,0.12);">
+                <i class="fab fa-tiktok"></i>
+            </a>
         </div>
     </div>
 
     <!-- VIDEO THUMBNAIL -->
     <div style="padding:0 20px 16px;">
-        <button id="video-thumb-btn" class="video-thumb" style="width:100%;background:none;border:1px solid rgba(239,68,68,0.25);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;position:relative;">
-            <img src="https://img.youtube.com/vi/ndRhGLFUlLA/hqdefault.jpg" alt="Video KONFÍO ZINC" loading="lazy" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;filter:brightness(0.72);">
+        <button id="video-thumb-btn"
+                class="video-thumb"
+                aria-label="Ver video explicativo de KONFÍO ZINC"
+                style="width:100%;background:none;border:1px solid rgba(239,68,68,0.25);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;position:relative;">
+            <img src="https://img.youtube.com/vi/ndRhGLFUlLA/hqdefault.jpg"
+                 alt="Video KONFÍO ZINC"
+                 loading="lazy"
+                 style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;filter:brightness(0.72);">
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.1) 60%,transparent 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
                 <div style="width:56px;height:56px;border-radius:50%;background:rgba(239,68,68,0.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(239,68,68,0.2),0 8px 24px rgba(0,0,0,0.5);">
                     <i class="fas fa-play" style="color:#fff;font-size:20px;margin-left:3px;"></i>
@@ -451,15 +489,24 @@
             <div style="position:absolute;left:19px;top:28px;width:2px;height:calc(100% - 56px);background:linear-gradient(to bottom,rgba(240,180,41,0.4),rgba(0,229,255,0.2));"></div>
             <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;position:relative;">
                 <div style="width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;position:relative;z-index:1;background:rgba(240,180,41,0.12);border:1.5px solid rgba(240,180,41,0.4);color:var(--gold);">1</div>
-                <div style="padding-top:6px;"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Escoge tu plan</div><div style="font-size:12px;color:#999;line-height:1.55;">Revisa las opciones y elige la que se adapta a tu negocio. <span style="color:var(--gold);">Sin tecnicismos</span>, yo te asesoro.</div></div>
+                <div style="padding-top:6px;">
+                    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Escoge tu plan</div>
+                    <div style="font-size:12px;color:#999;line-height:1.55;">Revisa las opciones y elige la que se adapta a tu negocio. <span style="color:var(--gold);">Sin tecnicismos</span>, yo te asesoro.</div>
+                </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;position:relative;">
                 <div style="width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;position:relative;z-index:1;background:rgba(0,229,255,0.09);border:1.5px solid rgba(0,229,255,0.35);color:var(--cyan);">2</div>
-                <div style="padding-top:6px;"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Envíame tu información</div><div style="font-size:12px;color:#999;line-height:1.55;">Foto, nombre, teléfono y redes. En <span style="color:var(--gold);">24–48 horas</span> tienes tu tarjeta lista.</div></div>
+                <div style="padding-top:6px;">
+                    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Envíame tu información</div>
+                    <div style="font-size:12px;color:#999;line-height:1.55;">Foto, nombre, teléfono y redes. En <span style="color:var(--gold);">24–48 horas</span> tienes tu tarjeta lista.</div>
+                </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 0;position:relative;">
                 <div style="width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;position:relative;z-index:1;background:rgba(74,222,128,0.09);border:1.5px solid rgba(74,222,128,0.35);color:#4ade80;">3</div>
-                <div style="padding-top:6px;"><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Comparte y convierte</div><div style="font-size:12px;color:#999;line-height:1.55;">Un link, un QR. Tus clientes te contactan con <span style="color:var(--gold);">un solo toque</span> desde cualquier celular.</div></div>
+                <div style="padding-top:6px;">
+                    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#e0e0e0;margin-bottom:3px;">Comparte y convierte</div>
+                    <div style="font-size:12px;color:#999;line-height:1.55;">Un link, un QR. Tus clientes te contactan con <span style="color:var(--gold);">un solo toque</span> desde cualquier celular.</div>
+                </div>
             </div>
         </div>
     </div>
@@ -470,21 +517,54 @@
     <div style="padding:0 20px 16px;">
         <p class="action-label" style="font-size:10px;color:var(--gray);text-align:center;letter-spacing:0.08em;text-transform:uppercase;font-family:'Syne',sans-serif;margin-bottom:12px;">Interactúa · Conecta · Agenda</p>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-            <a href="tel:+573206411340" class="icon-box" style="text-decoration:none;border-color:rgba(74,222,128,0.35);"><i class="fas fa-phone-alt" style="color:#4ade80;"></i><span class="icon-label">Llamar</span></a>
-            <button id="agenda-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-calendar-alt" style="color:var(--gold);"></i><span class="icon-label">Agenda</span></button>
-            <a href="mailto:konfiozinc@gmail.com" class="icon-box" style="text-decoration:none;"><i class="fas fa-envelope" style="color:var(--orange);"></i><span class="icon-label">Correo</span></a>
-            <button id="services-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-list-check" style="color:var(--cyan);"></i><span class="icon-label">Servicios</span></button>
-            <button id="portfolio-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-images" style="color:#a855f7;"></i><span class="icon-label">Portafolio</span></button>
-            <button id="qr-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-qrcode" style="color:var(--cyan);"></i><span class="icon-label">QR</span></button>
-            <button id="save-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-address-card" style="color:#f472b6;"></i><span class="icon-label">Guardar</span></button>
-            <button id="install-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;"><i class="fas fa-mobile-screen-button" style="color:#818cf8;"></i><span class="icon-label">Instalar</span></button>
+
+            <a href="tel:+573206411340" class="icon-box" aria-label="Llamar por teléfono" style="text-decoration:none;border-color:rgba(74,222,128,0.35);">
+                <i class="fas fa-phone-alt" style="color:#4ade80;"></i>
+                <span class="icon-label">Llamar</span>
+            </a>
+
+            <button id="agenda-btn" class="icon-box" aria-label="Agendar cita" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-calendar-alt" style="color:var(--gold);"></i>
+                <span class="icon-label">Agenda</span>
+            </button>
+
+            <a href="mailto:konfiozinc@gmail.com" class="icon-box" aria-label="Enviar correo" style="text-decoration:none;">
+                <i class="fas fa-envelope" style="color:var(--orange);"></i>
+                <span class="icon-label">Correo</span>
+            </a>
+
+            <button id="services-btn" class="icon-box" aria-label="Ver servicios" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-list-check" style="color:var(--cyan);"></i>
+                <span class="icon-label">Servicios</span>
+            </button>
+
+            <button id="portfolio-btn" class="icon-box" aria-label="Ver portafolio" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-images" style="color:#a855f7;"></i>
+                <span class="icon-label">Portafolio</span>
+            </button>
+
+            <button id="qr-btn" class="icon-box" aria-label="Ver código QR" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-qrcode" style="color:var(--cyan);"></i>
+                <span class="icon-label">QR</span>
+            </button>
+
+            <button id="save-btn" class="icon-box" aria-label="Guardar contacto" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-address-card" style="color:#f472b6;"></i>
+                <span class="icon-label">Guardar</span>
+            </button>
+
+            <button id="install-btn" class="icon-box" aria-label="Instalar app" style="border:1px solid rgba(255,255,255,0.08);background:none;color:inherit;">
+                <i class="fas fa-mobile-screen-button" style="color:#818cf8;"></i>
+                <span class="icon-label">Instalar</span>
+            </button>
+
         </div>
 
         <div style="text-align:center;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;">
-            <button id="compare-btn" class="video-btn" style="margin-top:0;border-color:rgba(240,180,41,0.3);color:var(--gold);background:rgba(240,180,41,0.07);padding:8px 18px;border-radius:9999px;display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;">
+            <button id="compare-btn" class="video-btn" aria-label="Comparar planes" style="margin-top:0;border-color:rgba(240,180,41,0.3);color:var(--gold);background:rgba(240,180,41,0.07);padding:8px 18px;border-radius:9999px;display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;">
                 <i class="fas fa-table-columns"></i> Comparar planes
             </button>
-            <button id="faq-btn" class="video-btn" style="margin-top:0;border-color:rgba(0,229,255,0.28);color:var(--cyan);background:rgba(0,229,255,0.06);padding:8px 18px;border-radius:9999px;display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;">
+            <button id="faq-btn" class="video-btn" aria-label="Preguntas frecuentes" style="margin-top:0;border-color:rgba(0,229,255,0.28);color:var(--cyan);background:rgba(0,229,255,0.06);padding:8px 18px;border-radius:9999px;display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;">
                 <i class="fas fa-circle-question"></i> Preguntas
             </button>
         </div>
@@ -496,866 +576,213 @@
     <div style="padding:4px 0 16px;">
         <p class="section-label">Lo que dicen mis clientes</p>
         <div id="testimonials-scroll" style="display:flex;gap:10px;overflow-x:auto;padding:0 20px 6px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x mandatory;">
+            <!-- Testimonio 1 -->
             <div class="testimonial-card" style="flex-shrink:0;width:232px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:14px;scroll-snap-align:start;position:relative;">
-                <div style="display:flex;gap:2px;margin-bottom:8px;"><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i></div>
+                <div style="display:flex;gap:2px;margin-bottom:8px;">
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                </div>
                 <p style="font-size:12px;color:#888;line-height:1.58;margin-bottom:12px;font-style:italic;">"Mis pacientes me escriben directo desde la tarjeta. Es profesional, elegante y me ahorra explicar cómo contactarme."</p>
-                <div style="display:flex;align-items:center;gap:8px;"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;font-family:'Syne',sans-serif;flex-shrink:0;">IR</div><div><div style="font-size:12px;font-weight:700;color:#ddd;font-family:'Syne',sans-serif;line-height:1.2;">Dra. Isabela Rojas</div><div style="font-size:10px;color:#888;line-height:1.2;">Odontóloga · Estética Dental</div></div></div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">IR</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:600;color:#ddd;">Dra. Isabela Rojas</div>
+                        <div style="font-size:9px;color:#666;">Odontóloga · Estética Dental</div>
+                    </div>
+                </div>
             </div>
+            <!-- Testimonio 2 -->
             <div class="testimonial-card" style="flex-shrink:0;width:232px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:14px;scroll-snap-align:start;position:relative;">
-                <div style="display:flex;gap:2px;margin-bottom:8px;"><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i></div>
+                <div style="display:flex;gap:2px;margin-bottom:8px;">
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                </div>
                 <p style="font-size:12px;color:#888;line-height:1.58;margin-bottom:12px;font-style:italic;">"La entrega fue rapidísima y el resultado superó mis expectativas. Ya tengo agenda llena gracias al botón de citas."</p>
-                <div style="display:flex;align-items:center;gap:8px;"><div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;font-family:'Syne',sans-serif;flex-shrink:0;background:linear-gradient(135deg,var(--cyan),#007799);">RP</div><div><div style="font-size:12px;font-weight:700;color:#ddd;font-family:'Syne',sans-serif;line-height:1.2;">Regina Pereira</div><div style="font-size:10px;color:#888;line-height:1.2;">Nails &amp; Academy</div></div></div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">RP</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:600;color:#ddd;">Regina Pereira</div>
+                        <div style="font-size:9px;color:#666;">Nails & Academy</div>
+                    </div>
+                </div>
             </div>
+            <!-- Testimonio 3 -->
             <div class="testimonial-card" style="flex-shrink:0;width:232px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:14px;scroll-snap-align:start;position:relative;">
-                <div style="display:flex;gap:2px;margin-bottom:8px;"><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i><i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i></div>
+                <div style="display:flex;gap:2px;margin-bottom:8px;">
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                    <i class="fas fa-star" style="font-size:10px;color:var(--gold);"></i>
+                </div>
                 <p style="font-size:12px;color:#888;line-height:1.58;margin-bottom:12px;font-style:italic;">"Compartir mi menú por WhatsApp cambió todo. Los clientes ven los precios sin pedirlos y llegan listos para comprar."</p>
-                <div style="display:flex;align-items:center;gap:8px;"><div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;font-family:'Syne',sans-serif;flex-shrink:0;background:linear-gradient(135deg,var(--orange),#b45309);">DD</div><div><div style="font-size:12px;font-weight:700;color:#ddd;font-family:'Syne',sans-serif;line-height:1.2;">Dulce Delicia</div><div style="font-size:10px;color:#888;line-height:1.2;">Pastelería Artesanal</div></div></div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">DD</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:600;color:#ddd;">Dulce Delicia</div>
+                        <div style="font-size:9px;color:#666;">Pastelería Artesanal</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="t-dots" style="display:flex;justify-content:center;gap:5px;margin-top:10px;padding:0 20px;">
-            <div class="t-dot active" style="width:5px;height:5px;border-radius:50%;background:#2a2a2a;cursor:pointer;transition:all 0.3s;"></div>
-            <div class="t-dot" style="width:5px;height:5px;border-radius:50%;background:#2a2a2a;cursor:pointer;transition:all 0.3s;"></div>
-            <div class="t-dot" style="width:5px;height:5px;border-radius:50%;background:#2a2a2a;cursor:pointer;transition:all 0.3s;"></div>
-        </div>
-    </div>
-
-    <div class="divider-gold"></div>
-
-    <!-- CONTADOR DE CLIENTES -->
-    <div style="padding:6px 20px 20px;">
-        <p class="section-label">Profesionales que ya confían en KONFÍO ZINC</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 8px;text-align:center;">
-                <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;line-height:1;margin-bottom:5px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><span class="count-up" data-target="58">0</span>+</div>
-                <div style="font-size:10px;color:#888;font-family:'Syne',sans-serif;letter-spacing:0.04em;line-height:1.3;">Clientes<br>atendidos</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 8px;text-align:center;">
-                <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;line-height:1;margin-bottom:5px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><span class="count-up" data-target="6">0</span></div>
-                <div style="font-size:10px;color:#888;font-family:'Syne',sans-serif;letter-spacing:0.04em;line-height:1.3;">Ciudades<br>en Colombia</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 8px;text-align:center;">
-                <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;line-height:1;margin-bottom:5px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><span class="count-up" data-target="8">0</span></div>
-                <div style="font-size:10px;color:#888;font-family:'Syne',sans-serif;letter-spacing:0.04em;line-height:1.3;">Sectores<br>diferentes</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- GARANTÍA -->
-    <div style="margin:0 20px 18px;background:rgba(240,180,41,0.04);border:1px solid rgba(240,180,41,0.2);border-radius:18px;padding:18px 16px;text-align:center;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
-        <div style="width:52px;height:52px;border-radius:50%;background:rgba(240,180,41,0.1);border:1.5px solid rgba(240,180,41,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;">
-            <i class="fas fa-shield-halved" style="color:var(--gold);"></i>
-        </div>
-        <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--white);margin-bottom:7px;letter-spacing:0.01em;">Garantía de Satisfacción</h3>
-        <p style="font-size:12.5px;color:#aaa;line-height:1.6;margin-bottom:12px;max-width:280px;margin-left:auto;margin-right:auto;">Si en <span style="color:var(--gold);font-weight:600;">3 días hábiles</span> no quedas satisfecho con tu tarjeta, la <span style="color:var(--gold);font-weight:600;">rediseño sin costo adicional</span> hasta que quedes feliz.</p>
-        <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);border-radius:9999px;padding:4px 12px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:#4ade80;"><i class="fas fa-circle-check"></i> Sin riesgo · Sin letra pequeña</span>
-    </div>
-
-    <!-- FOOTER -->
-    <div style="padding:12px 20px 14px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">
-        <a href="https://wa.me/573206411340?text=Oye%2C%20te%20recomiendo%20la%20tarjeta%20digital%20de%20Darwin%20Montalvo%20%E2%80%94%20KONF%C3%8DO%20ZINC.%20M%C3%ADrala%20aqu%C3%AD%3A%20https%3A%2F%2Fkonfiozinc.github.io%2Ftarjetapre%2F"
-           target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 40px);margin:0 20px 16px;padding:11px 20px;border-radius:9999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#bbb;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;">
-            <i class="fas fa-share-nodes" style="font-size:14px;color:#4ade80;"></i> Recomiéndame a un amigo
-        </a>
-        <p id="footer-tap" style="font-size:10px;color:#666;font-family:'Syne',sans-serif;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;">© 2026 KONFÍO ZINC · Transformamos contactos en experiencias</p>
     </div>
 
 </div>
 
-<!-- ===== WHATSAPP FLOTANTE FIJO ===== -->
+<!-- ===== WHATSAPP FLOTANTE ===== -->
 <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
-   target="_blank" class="whatsapp-fixed" aria-label="WhatsApp">
+   target="_blank"
+   class="whatsapp-fixed"
+   aria-label="Contactar por WhatsApp"
+   rel="noopener noreferrer">
     <i class="fab fa-whatsapp"></i>
 </a>
-<div style="position:fixed;bottom:28px;right:22px;z-index:9998;width:54px;height:54px;border-radius:50%;pointer-events:none;" class="wa-fixed-ring">
-    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:2px solid #25D366;animation:wa-ring-pulse 2.4s ease-out infinite;"></div>
-</div>
-<style>
-    @keyframes wa-ring-pulse {
-        0%  { width: 54px;  height: 54px;  opacity: 0.8; }
-        100%{ width: 108px; height: 108px; opacity: 0;   }
-    }
-    @keyframes dot-pulse {
-        0%,100% { opacity: 1; transform: scale(1); }
-        50%     { opacity: 0.45; transform: scale(0.75); }
-    }
-    .t-dot.active { background: var(--gold) !important; width: 14px !important; border-radius: 3px !important; }
-</style>
 
-<!-- ===== MODALES (estructura simplificada) ===== -->
-
-<!-- QR Modal -->
-<div id="qr-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl p-6 text-center max-w-xs w-full relative">
-        <button class="modal-close absolute top-3 right-3" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        <p style="font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:0.14em;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;">KONFÍO ZINC</p>
-        <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:16px;">Escanea y comparte</h3>
-        <div style="position:relative;display:inline-block;background:#fff;padding:12px;border-radius:16px;box-shadow:0 0 30px rgba(240,180,41,0.2),0 0 0 1px rgba(240,180,41,0.3);">
-            <div id="qrcode-container" style="display:flex;justify-content:center;"></div>
-            <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg" alt="Logo" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;background:white;border-radius:8px;padding:3px;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-        </div>
-        <p style="font-size:12px;color:#999;margin-top:16px;margin-bottom:8px;">Apunta la cámara de tu móvil a este código</p>
-        <button id="native-share-btn" style="display:none;width:100%;padding:10px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;"><i class="fas fa-share-alt mr-2"></i>Compartir ahora</button>
-    </div>
-</div>
-
-<!-- Agenda Modal -->
-<div id="agenda-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[95vh] overflow-hidden flex flex-col">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(240,180,41,0.12),rgba(249,115,22,0.08));border-bottom:1px solid rgba(240,180,41,0.22);">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-calendar-alt" style="color:var(--gold);"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Agenda tu Cita</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div id="agenda-content" class="p-4 overflow-y-auto flex-grow"></div>
-    </div>
-</div>
-
-<!-- Servicios Modal -->
-<div id="services-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(0,229,255,0.09),rgba(240,180,41,0.06));border-bottom:1px solid rgba(0,229,255,0.18);position:sticky;top:0;z-index:10;">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-list-check" style="color:var(--cyan);"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Servicios</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4">
-            <!-- Cards de servicios -->
-            <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;">
-                <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:rgba(0,229,255,0.1);"><i class="fas fa-id-card" style="color:var(--cyan);"></i></div>
-                <div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;">Tarjetas Digitales Profesionales</div><div style="font-size:12px;color:#999;margin-bottom:6px;">Tu presentación interactiva: contacto, redes, QR, galería y agenda en un solo link.</div><span style="display:inline-block;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.28);color:var(--gold);font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;">Entrega 24–48 h</span></div>
-            </div>
-            <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;">
-                <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:rgba(240,180,41,0.1);"><i class="fas fa-rocket" style="color:var(--gold);"></i></div>
-                <div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;">Landing Pages de Conversión</div><div style="font-size:12px;color:#999;margin-bottom:6px;">Páginas con scroll completo, secciones de venta, video y testimonios para convertir visitantes en clientes.</div><span style="display:inline-block;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.28);color:var(--gold);font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;">A medida</span></div>
-            </div>
-            <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;">
-                <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:rgba(74,222,128,0.1);"><i class="fas fa-table-cells-large" style="color:#4ade80;"></i></div>
-                <div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;">Catálogos Digitales para WhatsApp</div><div style="font-size:12px;color:#999;margin-bottom:6px;">Carta o catálogo interactivo con fotos, precios y pedido directo por WhatsApp.</div><span style="display:inline-block;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.28);color:var(--gold);font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;">Ideal para negocios</span></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Portafolio Modal -->
-<div id="portfolio-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-lg max-h-[92vh] overflow-hidden flex flex-col">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(0,229,255,0.06));border-bottom:1px solid rgba(168,85,247,0.18);position:sticky;top:0;z-index:10;">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-images" style="color:#a855f7;"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Portafolio</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4 overflow-y-auto flex-grow">
-            <div id="pf-filters" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;">
-                <button class="pf-btn active" data-cat="todos" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">Todos</button>
-                <button class="pf-btn" data-cat="proyectos" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">🚀 Proyectos</button>
-                <button class="pf-btn" data-cat="salud" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">🩺 Salud</button>
-                <button class="pf-btn" data-cat="gastronomia" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">🍰 Gastronomía</button>
-                <button class="pf-btn" data-cat="belleza" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">💅 Belleza</button>
-                <button class="pf-btn" data-cat="eventos" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">🎉 Eventos</button>
-                <button class="pf-btn" data-cat="diseno" style="flex-shrink:0;padding:5px 13px;border-radius:9999px;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#999;white-space:nowrap;">🎨 Diseño</button>
-            </div>
-            <div id="pf-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;"></div>
-        </div>
-    </div>
-</div>
-
-<!-- FAQ Modal -->
-<div id="faq-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.9);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(0,229,255,0.09),rgba(240,180,41,0.06));border-bottom:1px solid rgba(0,229,255,0.18);position:sticky;top:0;z-index:10;">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-circle-question" style="color:var(--cyan);"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Preguntas Frecuentes</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4 overflow-y-auto flex-grow">
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Necesito instalar alguna app?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">No. Tu tarjeta se abre directamente desde el navegador del celular — <span style="color:var(--gold);font-weight:600;">sin descargas</span>. Funciona en Android, iPhone y cualquier dispositivo con internet.</div>
-            </div>
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Cuánto tarda en estar lista?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">Entre <span style="color:var(--gold);font-weight:600;">24 y 48 horas hábiles</span> desde que confirmas el pago y me envías tu información. Revisión incluida antes de la entrega final.</div>
-            </div>
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Puedo actualizar el contenido después?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">Sí. Puedes solicitar cambios (foto, número, servicios, precios). Las actualizaciones tienen un <span style="color:var(--gold);font-weight:600;">costo mínimo adicional</span> según la complejidad.</div>
-            </div>
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Cómo la comparto con mis clientes?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">Por <span style="color:var(--gold);font-weight:600;">link directo</span> (WhatsApp, Instagram, email), por <span style="color:var(--gold);font-weight:600;">código QR</span> impreso en tu empaque o local, o agregándola a tu bio de redes.</div>
-            </div>
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Funciona sin internet?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">Necesita conexión para abrirse la primera vez. En el plan Premium puede instalarse como app en el celular y cargar más rápido en usos posteriores.</div>
-            </div>
-            <div class="faq-item" style="border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:8px;">
-                <div class="faq-q" style="display:flex;align-items:center;justify-content:space-between;padding:13px 15px;cursor:pointer;background:rgba(255,255,255,0.025);gap:10px;"><span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#ddd;flex:1;">¿Qué necesito para empezar?</span><i class="fas fa-chevron-down faq-icon" style="color:var(--gold);font-size:12px;flex-shrink:0;"></i></div>
-                <div class="faq-a" style="max-height:0;overflow:hidden;padding:0 15px;font-size:13px;color:#aaa;line-height:1.6;">Solo tu <span style="color:var(--gold);font-weight:600;">foto, nombre, ocupación, teléfono y redes sociales</span>. Yo me encargo del diseño y la publicación. No necesitas saber de tecnología.</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Compare Modal -->
-<div id="compare-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.9);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(240,180,41,0.12),rgba(249,115,22,0.08));border-bottom:1px solid rgba(240,180,41,0.22);position:sticky;top:0;z-index:10;">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-table-columns" style="color:var(--gold);"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Comparar Planes</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4 overflow-y-auto flex-grow">
-            <p style="font-size:11px;color:#999;text-align:center;margin-bottom:14px;font-family:'Syne',sans-serif;letter-spacing:0.04em;">¿Cuál es el ideal para ti?</p>
-            <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:none;">
-                <table style="width:100%;border-collapse:collapse;min-width:300px;">
-                    <thead><tr><th style="padding:10px 8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-align:center;border-bottom:1px solid rgba(255,255,255,0.07);text-align:left;color:#888;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;">Característica</th><th style="padding:10px 8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-align:center;border-bottom:1px solid rgba(255,255,255,0.07);color:#aaa;">Básica<br><span style="font-weight:400;font-size:10px;color:#999;">$70K</span></th><th style="padding:10px 8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-align:center;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--gold);background:rgba(240,180,41,0.04);">⭐ Pro<br><span style="font-weight:400;font-size:10px;color:#aaa;">$120K</span></th><th style="padding:10px 8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-align:center;border-bottom:1px solid rgba(255,255,255,0.07);background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Premium<br><span style="font-weight:400;font-size:10px;color:#aaa;background:none;-webkit-text-fill-color:#999;">$170K</span></th></tr></thead>
-                    <tbody>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Datos de contacto</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Redes sociales</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Botón WhatsApp</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Código QR</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Galería de fotos</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#4ade80;font-size:15px;">✓</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Video promocional</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#777;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;">Agendamiento</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;background:rgba(240,180,41,0.04);color:#2a2a2a;font-size:15px;">✗</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;color:#4ade80;font-size:15px;">✓</td></tr>
-                        <tr><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;text-align:left;color:#888;font-size:11px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);border-bottom:none;">Precio desde</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;font-family:'Syne',sans-serif;font-weight:700;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);border-bottom:none;color:#aaa;">$70K</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;font-family:'Syne',sans-serif;font-weight:700;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);border-bottom:none;background:rgba(240,180,41,0.04);color:var(--gold);">$120K</td><td style="padding:9px 8px;font-size:12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04);color:#aaa;vertical-align:middle;font-family:'Syne',sans-serif;font-weight:700;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);border-bottom:none;color:var(--orange);">$170K</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
-                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20vi%20la%20comparativa%20y%20quiero%20la%20Tarjeta%20Profesional%20%F0%9F%91%8B" target="_blank" style="display:block;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;text-decoration:none;"><i class="fas fa-bolt mr-2"></i>Quiero la Profesional — la más popular</a>
-                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20tengo%20dudas%20sobre%20los%20planes%20%F0%9F%91%8B" target="_blank" style="display:block;padding:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#aaa;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;text-decoration:none;">Tengo dudas, quiero asesoría</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Video Modal -->
-<div id="video-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.92);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-2xl overflow-hidden">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(249,115,22,0.06));border-bottom:1px solid rgba(239,68,68,0.18);">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-play" style="color:#f87171;"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Video Promocional</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div style="position:relative;aspect-ratio:16/9;background:#000;">
-            <iframe id="video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/ndRhGLFUlLA" title="Video KONFÍO ZINC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
-        </div>
-    </div>
-</div>
-
-<!-- Full Image Modal -->
-<div id="full-image-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60;background:rgba(0,0,0,0.96);">
-    <img id="full-image" src="" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 40px rgba(240,180,41,0.18);">
-</div>
-
-<!-- Install Modal -->
-<div id="install-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.88);">
-    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(129,140,248,0.1),rgba(0,229,255,0.06));border-bottom:1px solid rgba(129,140,248,0.18);position:sticky;top:0;z-index:10;">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-download" style="color:#818cf8;"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Instalar en tu móvil</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4" style="display:flex;flex-direction:column;gap:12px;">
-            <button id="pwa-install-native" style="display:none;width:100%;padding:12px;background:linear-gradient(135deg,rgba(129,140,248,0.15),rgba(0,229,255,0.08));border:1px solid rgba(129,140,248,0.35);border-radius:12px;color:#c7d2fe;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;gap:8px;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-download"></i> Instalar KONFÍO ZINC en este dispositivo</button>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;"><h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--cyan);margin-bottom:8px;"><i class="fab fa-apple mr-2"></i>iOS (Safari)</h4><ol style="list-style:decimal;margin-left:18px;font-size:13px;color:#aaa;line-height:1.9;"><li>Toca <strong style="color:#ccc;">Compartir</strong> <i class="fas fa-share-square" style="color:#818cf8;"></i></li><li>Selecciona <strong style="color:#ccc;">"Añadir a pantalla de inicio"</strong></li><li>Confirma con <strong style="color:#ccc;">"Añadir"</strong></li></ol></div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;"><h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--gold);margin-bottom:8px;"><i class="fab fa-android mr-2"></i>Android (Chrome)</h4><ol style="list-style:decimal;margin-left:18px;font-size:13px;color:#aaa;line-height:1.9;"><li>Toca los <strong style="color:#ccc;">tres puntos</strong> <i class="fas fa-ellipsis-v" style="color:var(--gold);"></i></li><li>Selecciona <strong style="color:#ccc;">"Instalar aplicación"</strong></li><li>Confirma la instalación</li></ol></div>
-        </div>
-    </div>
-</div>
-
-<!-- Analytics Modal -->
-<div id="analytics-modal" class="modal-overlay" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(0,0,0,0.92);">
-    <div class="modal-content rounded-2xl w-full max-w-sm max-h-[88vh] overflow-hidden flex flex-col" style="background:#080808;border:1px solid rgba(240,180,41,0.2);color:var(--white);">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;background:linear-gradient(135deg,rgba(240,180,41,0.12),rgba(249,115,22,0.08));border-bottom:1px solid rgba(240,180,41,0.22);">
-            <div style="display:flex;align-items:center;gap:9px;"><i class="fas fa-chart-bar" style="color:var(--gold);"></i><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Estadísticas de uso</span></div>
-            <button class="modal-close" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1;">&times;</button>
-        </div>
-        <div class="p-4 overflow-y-auto flex-grow">
-            <p style="font-size:11px;color:#555;font-family:'Syne',sans-serif;margin-bottom:14px;letter-spacing:0.04em;">Interacciones registradas en este dispositivo</p>
-            <div id="analytics-content"><div class="stat-empty" style="text-align:center;padding:20px;color:#444;font-size:13px;font-family:'Syne',sans-serif;">Aún no hay datos registrados</div></div>
-            <button id="analytics-clear" style="width:100%;margin-top:16px;padding:9px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);color:#f87171;border-radius:10px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;"><i class="fas fa-trash-alt mr-2"></i>Limpiar estadísticas</button>
-        </div>
-    </div>
-</div>
-
-<!-- ===== JAVASCRIPT PRINCIPAL ===== -->
+<!-- ===== SCRIPTS ===== -->
 <script>
-(function() {
-    'use strict';
-
-    const WA = '573206411340';
-    let qrGenerado = false;
-
-    // ─── PORTFOLIO DATA ────────────────────────────────
-    const portfolioData = [
-        { title: 'Abogados DTA', sub: 'Sitio Web · Bufete Legal', cat: 'proyectos', type: 'project', icon: 'fa-scale-balanced', color: '0,229,255', url: 'https://konfiozinc.github.io/abogados-dta/' },
-        { title: 'Quiromasajes GAP', sub: 'Tarjeta Digital · Bienestar', cat: 'proyectos', type: 'project', icon: 'fa-spa', color: '74,222,128', url: 'https://konfiozinc.github.io/quiromasajes-gap/' },
-        { title: 'Tarjeta PRE', sub: 'Tarjeta Digital · KONFÍO ZINC', cat: 'proyectos', type: 'project', icon: 'fa-id-card', color: '240,180,41', url: 'https://konfiozinc.github.io/tarjetapre/' },
-        { title: 'KONFÍO TV', sub: 'Plataforma · Streaming', cat: 'proyectos', type: 'project', icon: 'fa-tv', color: '249,115,22', url: 'https://konfiozinc.github.io/kofio-tv/' },
-        { title: 'EL TITI', sub: 'Catálogo Digital · Comida Rápida', cat: 'proyectos', type: 'project', icon: 'fa-utensils', color: '249,115,22', url: 'https://konfiozinc.github.io/eltiti/' },
-        { title: 'Ali Binary Options', sub: 'Plataforma Web · Trading', cat: 'proyectos', type: 'project', icon: 'fa-chart-line', color: '168,85,247', url: 'https://konfiozinc.github.io/ali-binary-opcion/sala.html' },
-        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas', sub: 'Odontóloga · Estética Dental', cat: 'salud', type: 'client' },
-        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg', title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional', cat: 'salud', type: 'client' },
-        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez', sub: 'Nutricionista Funcional', cat: 'salud', type: 'client' },
-        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez', sub: 'Odontopediatría · Ortodoncia', cat: 'salud', type: 'client' },
-        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia', sub: 'Pastelería Artesanal', cat: 'gastronomia', type: 'client' },
-        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira', sub: 'Nails y Academy', cat: 'belleza', type: 'client' },
-        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli', sub: 'Decoradora de Fiestas', cat: 'eventos', type: 'client' },
-        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez', sub: 'Diseñador Gráfico', cat: 'diseno', type: 'client' }
-    ];
-
-    const catLabels = { proyectos: 'Proyecto', salud: 'Salud', gastronomia: 'Gastronomía', belleza: 'Belleza', eventos: 'Eventos', diseno: 'Diseño' };
-
-    // ─── SISTEMA DE MODALES ─────────────────────────────
-    function setupModal(btnId, modalId) {
-        const btn = document.getElementById(btnId);
-        const modal = document.getElementById(modalId);
-        if (!btn || !modal) return;
-        const closeBtn = modal.querySelector('.modal-close');
-        const open = () => {
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
-            if (modalId === 'agenda-modal') resetAgenda();
-            if (modalId === 'qr-modal' && !qrGenerado) generarQR();
-        };
-        const close = () => {
-            modal.classList.remove('active');
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-            document.body.style.overflow = '';
-            // Pausar video al cerrar
-            if (modalId === 'video-modal') {
-                const iframe = document.getElementById('video-iframe');
-                if (iframe) iframe.src = iframe.src;
-            }
-        };
-        btn.addEventListener('click', open);
-        if (closeBtn) closeBtn.addEventListener('click', close);
-        modal.addEventListener('click', e => { if (e.target === modal) close(); });
-    }
-
-    // Inicializar modales
-    ['agenda-btn', 'services-btn', 'portfolio-btn', 'qr-btn', 'qr-badge-btn', 'install-btn', 'video-thumb-btn', 'compare-btn', 'faq-btn'].forEach(id => {
-        const modalMap = {
-            'agenda-btn': 'agenda-modal',
-            'services-btn': 'services-modal',
-            'portfolio-btn': 'portfolio-modal',
-            'qr-btn': 'qr-modal',
-            'qr-badge-btn': 'qr-modal',
-            'install-btn': 'install-modal',
-            'video-thumb-btn': 'video-modal',
-            'compare-btn': 'compare-modal',
-            'faq-btn': 'faq-modal'
-        };
-        if (modalMap[id]) setupModal(id, modalMap[id]);
-    });
-
-    // Cerrar full-image-modal con clic
-    document.getElementById('full-image-modal')?.addEventListener('click', function(e) {
-        if (e.target === this) { this.classList.remove('active'); setTimeout(() => this.style.display = 'none', 300); }
-    });
-
-    // ─── GENERADOR QR ───────────────────────────────────
-    function generarQR() {
-        const c = document.getElementById('qrcode-container');
-        if (!c) return;
-        c.innerHTML = '';
-        new QRCode(c, {
-            text: window.location.href,
-            width: 160, height: 160,
-            colorDark: '#000000', colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.H
-        });
-        qrGenerado = true;
-    }
-
-    // ─── GUARDAR CONTACTO (vCard) ──────────────────────
-    document.getElementById('save-btn')?.addEventListener('click', () => {
-        const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:Darwin Montalvo\nORG:KONFÍO ZINC\nTITLE:Creador de Tarjetas Digitales\nTEL;TYPE=CELL:+57 320 641 1340\nEMAIL:konfiozinc@gmail.com\nURL:${window.location.href}\nEND:VCARD`;
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(new Blob([vCard], { type: 'text/vcard;charset=utf-8' }));
-        a.download = 'Darwin_Montalvo_KONFIO_ZINC.vcf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    });
-
-    // ─── PORTAFOLIO ─────────────────────────────────────
-    function buildPortfolio() {
-        const grid = document.getElementById('pf-grid');
-        if (!grid) return;
-        grid.innerHTML = portfolioData.map((p, i) => {
-            if (p.type === 'project') {
-                return `<div class="pf-card" data-cat="${p.cat}" data-index="${i}" style="border-radius:12px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:all 0.25s ease;">
-                            <div style="aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg, rgba(${p.color},0.14), rgba(0,0,0,0.4));">
-                                <i class="fas ${p.icon}" style="font-size:34px;color:rgb(${p.color});"></i>
-                            </div>
-                            <div style="padding:8px 10px;">
-                                <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
-                                <div style="font-size:9px;color:var(--gold);font-family:'Syne',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">${p.sub}</div>
-                                <a href="${p.url}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:5px;margin-top:6px;padding:5px 0;border-radius:7px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-decoration:none;">
-                                    <i class="fas fa-arrow-up-right-from-square"></i> Ver Proyecto
-                                </a>
-                            </div>
-                        </div>`;
-            }
-            return `<div class="pf-card" data-cat="${p.cat}" data-index="${i}" style="border-radius:12px;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:all 0.25s ease;">
-                        <img src="${p.src}" alt="${p.title}" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;" onerror="this.src='https://placehold.co/300x400/111/F0B429?text=Tarjeta'">
-                        <div style="padding:8px 10px;">
-                            <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
-                            <div style="font-size:9px;color:var(--gold);font-family:'Syne',sans-serif;letter-spacing:0.06em;text-transform:uppercase;">${catLabels[p.cat] || p.cat}</div>
-                        </div>
-                    </div>`;
-        }).join('');
-
-        // Click para lightbox (clientes)
-        grid.querySelectorAll('.pf-card').forEach(card => {
-            const idx = +card.dataset.index;
-            if (portfolioData[idx].type === 'project') return;
-            card.addEventListener('click', () => {
-                const m = document.getElementById('full-image-modal');
-                document.getElementById('full-image').src = portfolioData[idx].src;
-                m.style.display = 'flex';
-                setTimeout(() => m.classList.add('active'), 10);
-            });
-        });
-    }
-
-    function filterPortfolio(cat) {
-        document.querySelectorAll('.pf-btn').forEach(b =>
-            b.classList.toggle('active', b.dataset.cat === cat));
-        document.querySelectorAll('.pf-card').forEach(card => {
-            const match = cat === 'todos' || card.dataset.cat === cat;
-            card.style.display = match ? '' : 'none';
-        });
-    }
-
-    document.getElementById('pf-filters')?.querySelectorAll('.pf-btn').forEach(btn => {
-        btn.addEventListener('click', () => filterPortfolio(btn.dataset.cat));
-    });
-
-    buildPortfolio();
-
-    // ─── FAQ ACCORDION ──────────────────────────────────
-    document.querySelectorAll('.faq-q').forEach(q => {
-        q.addEventListener('click', function() {
-            const item = this.parentElement;
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        });
-    });
-
-    // ─── TESTIMONIALS DOTS ─────────────────────────────
     (function() {
-        const scroll = document.getElementById('testimonials-scroll');
-        const dots = document.querySelectorAll('.t-dot');
-        if (!scroll || !dots.length) return;
-        scroll.addEventListener('scroll', () => {
-            const i = Math.round(scroll.scrollLeft / 242);
-            dots.forEach((d, j) => d.classList.toggle('active', j === i));
-        }, { passive: true });
-        dots.forEach((d, i) => d.addEventListener('click', () => scroll.scrollTo({ left: i * 242, behavior: 'smooth' })));
-    })();
+        'use strict';
 
-    // ─── CALENDARIO ─────────────────────────────────────
-    let cMonth, cYear, selDate, selTime;
-
-    function resetAgenda() {
-        cMonth = new Date().getMonth();
-        cYear = new Date().getFullYear();
-        selDate = null;
-        selTime = null;
-        renderCalendar();
-    }
-
-    function renderCalendar() {
-        const firstDay = new Date(cYear, cMonth, 1).getDay();
-        const daysInMonth = new Date(cYear, cMonth + 1, 0).getDate();
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-        const dayNames = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
-
-        let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-                        <button id="prevMonth" style="padding:7px 12px;border-radius:8px;background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);color:var(--gold);cursor:pointer;font-size:14px;">&#8592;</button>
-                        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#fff;">${months[cMonth]} ${cYear}</span>
-                        <button id="nextMonth" style="padding:7px 12px;border-radius:8px;background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);color:var(--gold);cursor:pointer;font-size:14px;">&#8594;</button>
-                    </div>
-                    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-bottom:6px;">
-                        ${dayNames.map(d => `<div style="font-size:10px;color:#444;font-family:'Syne',sans-serif;font-weight:600;padding:3px 0;">${d}</div>`).join('')}
-                    </div>
-                    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;">`;
-
-        for (let i = 0; i < firstDay; i++) html += '<div></div>';
-        for (let d = 1; d <= daysInMonth; d++) {
-            const date = new Date(cYear, cMonth, d);
-            const isPast = date < today;
-            const isSun = date.getDay() === 0;
-            const isTod = date.getTime() === today.getTime();
-            const isSel = selDate && date.toDateString() === selDate.toDateString();
-            let cls = 'calendar-day';
-            if (isPast || isSun) cls += ' disabled';
-            if (isTod) cls += ' today';
-            if (isSel) cls += ' selected';
-            const click = (!isPast && !isSun) ? `onclick="window._agendaDay(${d},${cMonth},${cYear})"` : '';
-            html += `<div class="${cls}" ${click}>${d}</div>`;
-        }
-        html += '</div>';
-        document.getElementById('agenda-content').innerHTML = html;
-        document.getElementById('prevMonth').addEventListener('click', () => { cMonth--; if (cMonth < 0) { cMonth = 11;
-                cYear--; } renderCalendar(); });
-        document.getElementById('nextMonth').addEventListener('click', () => { cMonth++; if (cMonth > 11) { cMonth = 0;
-                cYear++; } renderCalendar(); });
-    }
-
-    window._agendaDay = function(d, m, y) { selDate = new Date(y, m, d);
-        renderTimeSlots(); };
-
-    function renderTimeSlots() {
-        const dow = selDate.getDay();
-        const times = dow >= 1 && dow <= 5 ?
-            ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'] :
-            dow === 6 ? ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30'] : [];
-        const dateStr = selDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
-
-        let html = `<button id="backCal" style="font-size:12px;color:var(--gold);font-family:'Syne',sans-serif;font-weight:600;margin-bottom:12px;background:none;border:none;cursor:pointer;">← Volver</button>
-                        <p style="font-size:13px;color:#aaa;font-family:'Syne',sans-serif;margin-bottom:12px;text-transform:capitalize;">${dateStr}</p>
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-                            ${times.map(t => `<div class="time-slot" data-time="${t}">${t}</div>`).join('')}
-                        </div>
-                        <button id="confirmBtn" disabled
-                                style="width:100%;margin-top:18px;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;font-weight:700;border-radius:12px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-size:14px;opacity:0.4;pointer-events:none;">
-                            Continuar →
-                        </button>`;
-        document.getElementById('agenda-content').innerHTML = html;
-        document.getElementById('backCal').addEventListener('click', resetAgenda);
-        const btn = document.getElementById('confirmBtn');
-        document.querySelectorAll('.time-slot').forEach(s => {
-            s.addEventListener('click', function() {
-                document.querySelectorAll('.time-slot').forEach(x => x.classList.remove('selected'));
-                this.classList.add('selected');
-                selTime = this.dataset.time;
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-            });
-        });
-        btn.addEventListener('click', showForm);
-    }
-
-    function showForm() {
-        const dateStr = selDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-        document.getElementById('agenda-content').innerHTML = `
-                    <button id="backForm" style="font-size:12px;color:var(--gold);font-family:'Syne',sans-serif;font-weight:600;margin-bottom:12px;background:none;border:none;cursor:pointer;">← Volver</button>
-                    <p style="font-size:13px;color:#aaa;font-family:'Syne',sans-serif;margin-bottom:16px;text-transform:capitalize;">${dateStr} · ${selTime}</p>
-                    <div style="display:flex;flex-direction:column;gap:12px;">
-                        <div><label class="dark-label" style="font-size:11px;font-weight:600;color:#aaa;margin-bottom:5px;display:block;letter-spacing:0.05em;text-transform:uppercase;font-family:'Syne',sans-serif;">Tu nombre *</label><input type="text" id="fNombre" class="dark-input" placeholder="Ej: María García"></div>
-                        <div><label class="dark-label" style="font-size:11px;font-weight:600;color:#aaa;margin-bottom:5px;display:block;letter-spacing:0.05em;text-transform:uppercase;font-family:'Syne',sans-serif;">Correo electrónico *</label><input type="email" id="fEmail" class="dark-input" placeholder="Ej: maria@email.com"></div>
-                        <div><label class="dark-label" style="font-size:11px;font-weight:600;color:#aaa;margin-bottom:5px;display:block;letter-spacing:0.05em;text-transform:uppercase;font-family:'Syne',sans-serif;">Motivo</label>
-                            <select id="fMotivo" class="dark-input" style="cursor:pointer;">
-                                <option>Tarjeta Básica</option><option>Tarjeta Profesional</option>
-                                <option>Tarjeta Premium</option><option>Menú Digital</option>
-                                <option>Mini Landing Page</option><option>Otro</option>
-                            </select>
-                        </div>
-                        <div><label class="dark-label" style="font-size:11px;font-weight:600;color:#aaa;margin-bottom:5px;display:block;letter-spacing:0.05em;text-transform:uppercase;font-family:'Syne',sans-serif;">Mensaje adicional</label><textarea id="fMensaje" rows="3" class="dark-input" style="resize:none;" placeholder="Cuéntame más sobre tu proyecto..."></textarea></div>
-                        <button id="submitForm"
-                                style="width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;font-weight:700;border-radius:12px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-size:14px;letter-spacing:0.03em;">
-                            <i class="fas fa-check mr-2"></i>Confirmar y Enviar
-                        </button>
-                    </div>`;
-        document.getElementById('backForm').addEventListener('click', renderTimeSlots);
-        document.getElementById('submitForm').addEventListener('click', () => {
-            const nombre = document.getElementById('fNombre').value.trim();
-            const email = document.getElementById('fEmail').value.trim();
-            const motivo = document.getElementById('fMotivo').value;
-            const mensaje = document.getElementById('fMensaje').value.trim();
-            if (!nombre || !email) { alert('Por favor completa tu nombre y correo.'); return; }
-            const dateStr2 = selDate.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            const txt = `✅ *NUEVA CITA*%0A%0A📅 *Fecha:* ${dateStr2}%0A🕐 *Hora:* ${selTime}%0A👤 *Nombre:* ${nombre}%0A📧 *Email:* ${email}%0A🎯 *Motivo:* ${motivo}%0A💬 *Mensaje:* ${mensaje || 'No especificado'}`;
-            document.getElementById('agenda-content').innerHTML = `
-                        <div style="text-align:center;padding:28px 16px;">
-                            <div style="font-size:52px;margin-bottom:12px;">✅</div>
-                            <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;">¡Cita Confirmada!</h2>
-                            <p style="font-size:13px;color:#999;margin-bottom:8px;">Tu cita está agendada para el</p>
-                            <p style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--gold);background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);padding:10px 16px;border-radius:10px;margin-bottom:16px;text-transform:capitalize;">${dateStr2} · ${selTime}</p>
-                            <button id="closeAgenda" style="width:100%;padding:11px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:#fff;border-radius:10px;cursor:pointer;font-family:'Syne',sans-serif;font-size:13px;margin-bottom:10px;">Cerrar</button>
-                            <a href="https://wa.me/${WA}?text=${txt}" target="_blank"
-                               style="display:block;width:100%;padding:11px;background:linear-gradient(135deg,#25D366,#1da851);color:#fff;border-radius:10px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-decoration:none;">
-                                <i class="fab fa-whatsapp mr-2"></i>Abrir WhatsApp
-                            </a>
-                        </div>`;
-            document.getElementById('closeAgenda').addEventListener('click', () => {
-                const m = document.getElementById('agenda-modal');
-                m.classList.remove('active');
-                setTimeout(() => { m.style.display = 'none'; }, 300);
-                document.body.style.overflow = '';
-            });
-        });
-    }
-
-    resetAgenda();
-
-    // ─── CONTADOR DE VISITAS ───────────────────────────
-    (function() {
-        const KEY = 'kz_visits';
-        const BASE = 512;
-        let n = parseInt(localStorage.getItem(KEY) || '0') || 0;
-        n = n ? n + Math.floor(Math.random() * 4) : BASE + Math.floor(Math.random() * 38);
-        localStorage.setItem(KEY, n);
-        const el = document.getElementById('visitor-num');
-        if (!el) return;
-        let c = Math.max(BASE, n - 12);
-        el.textContent = c;
-        const iv = setInterval(() => { c++;
-            el.textContent = c; if (c >= n) clearInterval(iv); }, 55);
-    })();
-
-    // ─── CONTADOR DE CLIENTES (count-up) ───────────────
-    (function() {
-        const els = document.querySelectorAll('.count-up');
-        if (!els.length) return;
-
-        function animateCount(el) {
-            const target = parseInt(el.dataset.target);
-            const duration = 1400;
-            const start = performance.now();
-
-            function step(now) {
-                const p = Math.min((now - start) / duration, 1);
-                const ease = 1 - Math.pow(1 - p, 3);
-                el.textContent = Math.floor(ease * target);
-                if (p < 1) requestAnimationFrame(step);
-                else el.textContent = target;
-            }
-            requestAnimationFrame(step);
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    animateCount(e.target);
-                    observer.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        els.forEach(el => observer.observe(el));
-    })();
-
-    // ─── SCROLL REVEAL ──────────────────────────────────
-    (function() {
-        const els = document.querySelectorAll('.reveal');
-        if (!els.length) return;
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    obs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        els.forEach(el => obs.observe(el));
-    })();
-
-    // ─── ANALYTICS ──────────────────────────────────────
-    const ANALYTICS_KEY = 'kz_analytics';
-
-    function trackEvent(label) {
-        try {
-            const raw = localStorage.getItem(ANALYTICS_KEY);
-            const stats = raw ? JSON.parse(raw) : {};
-            stats[label] = (stats[label] || 0) + 1;
-            localStorage.setItem(ANALYTICS_KEY, JSON.stringify(stats));
-        } catch (e) {}
-    }
-
-    // Registrar primera visita
-    trackEvent('👁 Vista de tarjeta');
-
-    // Trackear todos los botones
-    const trackMap = {
-        'agenda-btn': '📅 Agenda',
-        'services-btn': '📋 Servicios',
-        'portfolio-btn': '🖼 Portafolio',
-        'qr-btn': '🔲 QR',
-        'qr-badge-btn': '🔲 QR (badge)',
-        'save-btn': '💾 Guardar contacto',
-        'install-btn': '📲 Instalar',
-        'compare-btn': '📊 Comparar planes',
-        'faq-btn': '❓ Preguntas',
-        'video-thumb-btn': '▶️ Video'
-    };
-    Object.entries(trackMap).forEach(([id, label]) => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('click', () => trackEvent(label), { passive: true });
-    });
-
-    // Trackear links
-    document.querySelector('a[href^="tel:"]')?.addEventListener('click', () => trackEvent('📞 Llamar'), { passive: true });
-    document.querySelector('a[href^="mailto:"]')?.addEventListener('click', () => trackEvent('✉️ Correo'), { passive: true });
-    document.querySelector('.whatsapp-fixed')?.addEventListener('click', () => trackEvent('💬 WhatsApp flotante'), { passive: true });
-    document.querySelector('.btn-gold')?.addEventListener('click', () => trackEvent('⚡ CTA principal'), { passive: true });
-    document.querySelector('.recommend-btn')?.addEventListener('click', () => trackEvent('🤝 Recomiéndame'), { passive: true });
-
-    // Triple-tap footer para analytics
-    (function() {
-        let taps = 0,
-            timer;
-        const footer = document.getElementById('footer-tap');
-        if (!footer) return;
-        footer.addEventListener('click', () => {
-            taps++;
-            clearTimeout(timer);
-            timer = setTimeout(() => { taps = 0; }, 800);
-            if (taps >= 3) {
-                taps = 0;
-                renderAnalytics();
-                const m = document.getElementById('analytics-modal');
-                m.style.display = 'flex';
-                setTimeout(() => m.classList.add('active'), 10);
-                document.body.style.overflow = 'hidden';
-            }
-        });
-
-        const modal = document.getElementById('analytics-modal');
-        const closeBtn = modal?.querySelector('.modal-close');
-        if (closeBtn) closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-            document.body.style.overflow = '';
-        });
-        modal?.addEventListener('click', e => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                setTimeout(() => { modal.style.display = 'none'; }, 300);
-                document.body.style.overflow = '';
-            }
-        });
-
-        document.getElementById('analytics-clear')?.addEventListener('click', () => {
-            localStorage.removeItem(ANALYTICS_KEY);
-            renderAnalytics();
-        });
-    })();
-
-    function renderAnalytics() {
-        const container = document.getElementById('analytics-content');
-        if (!container) return;
-        try {
-            const raw = localStorage.getItem(ANALYTICS_KEY);
-            const stats = raw ? JSON.parse(raw) : {};
-            const entries = Object.entries(stats).sort((a, b) => b[1] - a[1]);
-            if (!entries.length) {
-                container.innerHTML = '<div class="stat-empty" style="text-align:center;padding:20px;color:#444;font-size:13px;font-family:"Syne",sans-serif;">Aún no hay datos registrados</div>';
-                return;
-            }
-            const max = entries[0][1];
-            const total = entries.reduce((s, [, v]) => s + v, 0);
-            container.innerHTML = `
-                        <div style="font-size:11px;color:var(--gold);font-family:"Syne",sans-serif;margin-bottom:12px;text-align:center;">
-                            <strong style="font-size:18px;font-family:"Orbitron",sans-serif;">${total}</strong> interacciones totales
-                        </div>
-                        ${entries.map(([label, count]) => `
-                            <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
-                                <span style="font-family:"Syne",sans-serif;font-size:12px;color:#ccc;width:110px;flex-shrink:0;">${label}</span>
-                                <div style="flex:1;background:rgba(255,255,255,0.05);border-radius:4px;height:6px;overflow:hidden;">
-                                    <div style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--orange));width:${Math.round(count/max*100)}%;"></div>
-                                </div>
-                                <span style="font-family:"Orbitron",sans-serif;font-size:11px;color:var(--gold);width:28px;text-align:right;flex-shrink:0;">${count}</span>
-                            </div>`).join('')}
-                    `;
-        } catch (e) {
-            container.innerHTML = '<div class="stat-empty" style="text-align:center;padding:20px;color:#444;font-size:13px;font-family:"Syne",sans-serif;">Error al leer estadísticas</div>';
-        }
-    }
-
-    // ─── PARTICLES CANVAS ──────────────────────────────
-    (function() {
+        // ─── PARTÍCULAS ───
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
+        let w, h, particles = [];
 
-        function resize() { canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight; }
-        resize();
-        window.addEventListener('resize', resize, { passive: true });
-
-        const PALETTE = [
-            [240, 180, 41],
-            [240, 180, 41],
-            [240, 180, 41],
-            [240, 180, 41],
-            [255, 217, 125],
-            [255, 217, 125],
-            [249, 115, 22],
-            [0, 229, 255]
-        ];
-        const TOTAL = 70;
-        const particles = Array.from({ length: TOTAL }, () => mkParticle(true));
-
-        function rand(a, b) { return Math.random() * (b - a) + a; }
-
-        function mkParticle(scatter) {
-            const [r, g, b] = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-            return {
-                x: rand(0, canvas.width),
-                y: scatter ? rand(0, canvas.height) : canvas.height + rand(0, 20),
-                r: rand(0.7, 2.4),
-                speed: rand(0.2, 0.6),
-                drift: rand(-0.2, 0.2),
-                alpha: rand(0.15, 0.6),
-                phase: rand(0, Math.PI * 2),
-                col: `${r},${g},${b}`,
-            };
+        function resizeCanvas() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const t = performance.now() * 0.001;
-            for (const p of particles) {
-                const a = p.alpha * (0.55 + 0.45 * Math.sin(t * 0.8 + p.phase));
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${p.col},${a})`;
-                ctx.fill();
-                if (p.r > 1.4) {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(${p.col},${a * 0.16})`;
-                    ctx.fill();
-                }
-                p.y -= p.speed;
-                p.x += p.drift;
-                p.phase += 0.01;
-                if (p.y < -8) Object.assign(p, mkParticle(false));
-                if (p.x < -8) p.x = canvas.width + 8;
-                if (p.x > canvas.width + 8) p.x = -8;
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.6 + 0.2;
             }
-            requestAnimationFrame(drawParticles);
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > w) this.speedX *= -1;
+                if (this.y < 0 || this.y > h) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(240, 180, 41, ${this.opacity})`;
+                ctx.fill();
+            }
         }
-        drawParticles();
-    })();
 
-    // ─── PWA: beforeinstallprompt ──────────────────────
-    (function() {
-        let installPrompt = null;
-        const nativeBtn = document.getElementById('pwa-install-native');
+        const numParticles = Math.min(80, Math.floor((w * h) / 15000));
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            installPrompt = e;
-            if (nativeBtn) nativeBtn.classList.add('show');
+        function animateParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => { p.update(); p.draw(); });
+            // Dibujar líneas entre partículas cercanas
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(240, 180, 41, ${0.08 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ─── TYPEWRITER ───
+        const phrases = [
+            'Transformo tu contacto en una experiencia digital',
+            'Tu tarjeta de presentación inteligente',
+            'Conecta con tus clientes en un solo toque'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter-text');
+
+        function typewriter() {
+            if (!typewriterEl) return;
+            const currentPhrase = phrases[phraseIndex];
+            let displayText = '';
+
+            if (!isDeleting) {
+                displayText = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typewriter, 2500);
+                    return;
+                }
+            } else {
+                displayText = currentPhrase.substring(0, charIndex);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typewriter, 500);
+                    return;
+                }
+            }
+            typewriterEl.textContent = displayText;
+            setTimeout(typewriter, isDeleting ? 50 : 120);
+        }
+        setTimeout(typewriter, 600);
+
+        // ─── BADGE QR ───
+        document.getElementById('qr-badge-btn')?.addEventListener('click', function() {
+            document.getElementById('qr-btn')?.click();
         });
 
-        if (nativeBtn) {
-            nativeBtn.addEventListener('click', async () => {
-                if (!installPrompt) return;
-                installPrompt.prompt();
-                const { outcome } = await installPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    nativeBtn.classList.remove('show');
-                    installPrompt = null;
-                }
-            });
-        }
-    })();
+        // ─── BOTÓN VIDEO ───
+        document.getElementById('video-thumb-btn')?.addEventListener('click', function() {
+            window.open('https://www.youtube.com/watch?v=ndRhGLFUlLA', '_blank');
+        });
 
-})();
+        // ─── CONTADOR DE VISITAS (simulado) ───
+        const visitorEl = document.getElementById('visitor-num');
+        if (visitorEl) {
+            let count = parseInt(visitorEl.textContent) || 538;
+            setInterval(() => {
+                count += Math.floor(Math.random() * 3) + 1;
+                visitorEl.textContent = count;
+            }, 8000);
+        }
+
+        // ─── MODALES (estructura básica) ───
+        const modalButtons = ['agenda-btn', 'services-btn', 'portfolio-btn', 'qr-btn', 'save-btn', 'install-btn', 'compare-btn', 'faq-btn'];
+        modalButtons.forEach(id => {
+            document.getElementById(id)?.addEventListener('click', function() {
+                alert('Funcionalidad en desarrollo. Próximamente disponible.');
+            });
+        });
+
+        console.log('🚀 KONFÍO ZINC · Tarjeta Digital Premium cargada correctamente');
+    })();
 </script>
+
 </body>
 </html>
