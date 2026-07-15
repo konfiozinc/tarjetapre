@@ -54,7 +54,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* ════════════════════════════════════════════════════
-       2. BODY Y CANVAS DE PARTÍCULAS (Mejora 7)
+       2. BODY Y CANVAS DE PARTÍCULAS
     ════════════════════════════════════════════════════ */
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -90,10 +90,8 @@
             0 0 0 1px rgba(240,180,41,0.08),
             0 40px 80px rgba(0,0,0,0.9),
             0 0 60px rgba(240,180,41,0.07);
-        /* Mejora 5: animación de entrada */
         animation: card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    /* Línea superior decorativa */
     .glass-card::before {
         content: '';
         position: absolute;
@@ -107,7 +105,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       4. BANNER Y AVATAR (Mejora 6)
+       4. BANNER Y AVATAR
     ════════════════════════════════════════════════════ */
     .profile-banner {
         position: relative;
@@ -120,21 +118,21 @@
         object-fit: cover;
         object-position: center 25%;
         filter: brightness(0.82) contrast(1.05);
+        will-change: transform;
+        transform-origin: center center;
+        transition: transform 0.05s linear;
     }
-    /* Degradado inferior del banner */
     .profile-banner::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0; height: 110px;
         background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.6) 60%, transparent 100%);
     }
-    /* Tinte de color sobre el banner */
     .profile-banner::before {
         content: '';
         position: absolute; inset: 0;
         background: linear-gradient(135deg, rgba(240,180,41,0.07), rgba(0,229,255,0.04));
         z-index: 1;
     }
-    /* Badge QR en esquina superior derecha */
     .qr-badge {
         position: absolute;
         top: 14px; right: 14px;
@@ -167,7 +165,6 @@
         0%,100% { box-shadow: 0 0 8px rgba(0,229,255,0.15); }
         50%     { box-shadow: 0 0 18px rgba(0,229,255,0.4); }
     }
-    /* Avatar circular centrado */
     .profile-avatar-wrap {
         text-align: center;
         margin-top: -50px;
@@ -229,18 +226,6 @@
         margin-bottom: 10px;
         display: block;
     }
-    .profile-desc {
-        font-size: 13px;
-        color: #999;
-        line-height: 1.6;
-        max-width: 270px;
-        margin: 0 auto 18px;
-    }
-    .profile-desc span { color: var(--gold); font-weight: 600; }
-
-    /* ════════════════════════════════════════════════════
-       6. CONTADOR DE VISITAS (Mejora 1)
-    ════════════════════════════════════════════════════ */
     .visitor-counter {
         display: inline-flex;
         align-items: center;
@@ -268,9 +253,22 @@
         font-weight: 700;
     }
     #visitor-num { display: inline-block; }
+    .delivery-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(74,222,128,0.07);
+        border: 1px solid rgba(74,222,128,0.22);
+        border-radius: 9999px;
+        padding: 4px 12px 4px 8px;
+        margin-bottom: 14px;
+    }
+    .delivery-badge i  { color: #4ade80; font-size: 11px; }
+    .delivery-badge span {
+        font-size: 11px; font-family: 'Syne', sans-serif;
+        font-weight: 600; color: #4ade80; letter-spacing: 0.04em;
+    }
 
     /* ════════════════════════════════════════════════════
-       7. BOTÓN CTA PRINCIPAL
+       6. BOTÓN CTA PRINCIPAL CON LOGO KONFÍO
     ════════════════════════════════════════════════════ */
     .solicita-btn-wrapper { position: relative; display: block; }
     .solicita-btn-wrapper::before {
@@ -286,9 +284,9 @@
         0%  { width: calc(100% + 8px);  height: calc(100% + 8px);  opacity: 0.8; }
         100%{ width: calc(100% + 56px); height: calc(100% + 56px); opacity: 0; }
     }
-    .btn-gold {
+    .btn-konfio {
         position: relative; z-index: 1;
-        display: flex; align-items: center; justify-content: center; gap: 8px;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
         width: 100%; padding: 14px 24px;
         border-radius: 9999px;
         background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
@@ -299,11 +297,18 @@
         text-decoration: none;
         transition: all 0.3s ease;
         box-shadow: 0 4px 22px rgba(240,180,41,0.4);
+        border: none;
+        cursor: pointer;
     }
-    .btn-gold:active { transform: scale(0.97); }
+    .btn-konfio:active { transform: scale(0.97); }
+    .btn-konfio img {
+        height: 20px;
+        width: auto;
+        filter: brightness(0);
+    }
 
     /* ════════════════════════════════════════════════════
-       8. REDES SOCIALES
+       7. REDES SOCIALES
     ════════════════════════════════════════════════════ */
     .social-section {
         padding: 0 24px 6px;
@@ -323,22 +328,9 @@
         transition: transform 0.2s;
     }
     .social-icon:active { transform: scale(0.92); }
-    .social-icon::before {
-        content: '';
-        position: absolute; inset: 0;
-        border-radius: 50%;
-        background: currentColor;
-        opacity: 0.12;
-        animation: social-ripple 2s ease-out infinite;
-        pointer-events: none;
-    }
-    @keyframes social-ripple {
-        0%  { transform: scale(0.9); opacity: 0.15; }
-        100%{ transform: scale(1.8); opacity: 0; }
-    }
 
     /* ════════════════════════════════════════════════════
-       9. DIVISOR
+       8. DIVISOR
     ════════════════════════════════════════════════════ */
     .divider-gold {
         height: 1px;
@@ -347,7 +339,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       10. GRID DE ACCIONES
+       9. GRID DE ACCIONES
     ════════════════════════════════════════════════════ */
     .action-section { padding: 0 20px 16px; }
     .action-label {
@@ -398,7 +390,6 @@
         0%,100%{ box-shadow: 0 0 8px rgba(74,222,128,0.35); }
         50%    { box-shadow: 0 0 18px rgba(74,222,128,0.65); }
     }
-    /* Video button */
     .video-btn {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 8px 18px;
@@ -415,7 +406,7 @@
     .video-btn:hover { background: rgba(239,68,68,0.13); }
 
     /* ════════════════════════════════════════════════════
-       11. TESTIMONIOS (Mejora 4)
+       10. TESTIMONIOS
     ════════════════════════════════════════════════════ */
     .testimonials-section { padding: 4px 0 16px; }
     .section-label {
@@ -486,6 +477,32 @@
     .t-dot.active { background: var(--gold); width: 14px; border-radius: 3px; }
 
     /* ════════════════════════════════════════════════════
+       11. CÓMO FUNCIONA
+    ════════════════════════════════════════════════════ */
+    .how-section { padding: 4px 20px 18px; }
+    .how-steps { display: flex; flex-direction: column; position: relative; }
+    .how-steps::before {
+        content: ''; position: absolute;
+        left: 19px; top: 28px;
+        width: 2px; height: calc(100% - 56px);
+        background: linear-gradient(to bottom, rgba(240,180,41,0.4), rgba(0,229,255,0.2));
+    }
+    .how-step { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; position: relative; }
+    .how-num {
+        width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700;
+        position: relative; z-index: 1;
+    }
+    .how-num.n1 { background: rgba(240,180,41,0.12); border: 1.5px solid rgba(240,180,41,0.4);  color: var(--gold); }
+    .how-num.n2 { background: rgba(0,229,255,0.09);  border: 1.5px solid rgba(0,229,255,0.35);  color: var(--cyan); }
+    .how-num.n3 { background: rgba(74,222,128,0.09); border: 1.5px solid rgba(74,222,128,0.35); color: #4ade80; }
+    .how-body   { padding-top: 6px; }
+    .how-title  { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #e0e0e0; margin-bottom: 3px; }
+    .how-desc   { font-size: 12px; color: #999; line-height: 1.55; }
+    .how-desc span { color: var(--gold); }
+
+    /* ════════════════════════════════════════════════════
        12. FOOTER
     ════════════════════════════════════════════════════ */
     .card-footer {
@@ -498,10 +515,56 @@
         font-family: 'Syne', sans-serif;
         letter-spacing: 0.08em; text-transform: uppercase;
     }
+    .recommend-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: calc(100% - 40px); margin: 0 20px 16px;
+        padding: 11px 20px; border-radius: 9999px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #bbb; font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 600;
+        cursor: pointer; text-decoration: none;
+        transition: all 0.25s ease;
+    }
+    .recommend-btn:hover { border-color: rgba(240,180,41,0.3); color: var(--gold); background: rgba(240,180,41,0.05); }
+    .recommend-btn i { font-size: 14px; color: #4ade80; }
 
     /* ════════════════════════════════════════════════════
        13. WHATSAPP FLOTANTE
     ════════════════════════════════════════════════════ */
+    .whatsapp-fixed {
+        position: fixed; bottom: 28px; right: 22px; z-index: 9999;
+        width: 54px; height: 54px; border-radius: 50%;
+        background: #25D366; color: white;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 27px; text-decoration: none;
+        box-shadow: 0 6px 26px rgba(37,211,102,0.55);
+        border: 2px solid rgba(255,255,255,0.18);
+        animation: wa-drift 6s ease-in-out infinite;
+    }
+    .whatsapp-fixed:active { transform: scale(0.91) !important; animation: none; }
+    @keyframes wa-drift {
+        0%,100% { transform: translateY(0px);   }
+        30%     { transform: translateY(-8px);  }
+        60%     { transform: translateY(-4px);  }
+        80%     { transform: translateY(-11px); }
+    }
+    .wa-fixed-ring {
+        position: fixed; bottom: 28px; right: 22px;
+        z-index: 9998; width: 54px; height: 54px;
+        border-radius: 50%; pointer-events: none;
+    }
+    .wa-fixed-ring::before {
+        content: ''; position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%,-50%); border-radius: 50%;
+        border: 2px solid #25D366;
+        animation: wa-ring-pulse 2.4s ease-out infinite;
+    }
+    @keyframes wa-ring-pulse {
+        0%  { width: 54px;  height: 54px;  opacity: 0.8; }
+        100%{ width: 108px; height: 108px; opacity: 0;   }
+    }
+
     /* ════════════════════════════════════════════════════
        14. MODALES
     ════════════════════════════════════════════════════ */
@@ -594,35 +657,127 @@
     }
 
     /* ════════════════════════════════════════════════════
-       16. CARRUSEL DE PORTAFOLIO
+       16. PORTAFOLIO CON FILTROS
     ════════════════════════════════════════════════════ */
-    .carousel-container { position: relative; overflow: hidden; border-radius: 12px; }
-    .carousel-track { display: flex; transition: transform 0.4s ease; }
-    .carousel-slide { min-width: 100%; padding: 0 4px; }
-    .carousel-slide img {
-        width: 100%; height: auto; max-height: 300px;
-        object-fit: contain; background: #111; border-radius: 12px;
+    .portfolio-filters {
+        display: flex; gap: 6px;
+        overflow-x: auto; padding-bottom: 10px;
+        scrollbar-width: none;
     }
-    .carousel-btn {
-        position: absolute; top: 50%; transform: translateY(-50%);
-        background: rgba(0,0,0,0.72);
-        border: 1px solid rgba(240,180,41,0.3);
-        border-radius: 50%;
-        width: 34px; height: 34px;
-        display: flex; align-items: center; justify-content: center;
-        cursor: pointer; z-index: 10;
-        transition: border-color 0.2s;
+    .portfolio-filters::-webkit-scrollbar { display: none; }
+    .pf-btn {
+        flex-shrink: 0; padding: 5px 13px;
+        border-radius: 9999px;
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 600;
+        cursor: pointer; transition: all 0.22s;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.04);
+        color: #999; white-space: nowrap;
     }
-    .carousel-btn:hover { border-color: var(--gold); }
-    .carousel-btn i { color: var(--gold); font-size: 12px; }
-    .carousel-dot {
-        width: 7px; height: 7px; border-radius: 50%;
-        background: #2a2a2a; cursor: pointer; transition: all 0.3s;
+    .pf-btn.active, .pf-btn:hover {
+        background: rgba(240,180,41,0.12);
+        border-color: rgba(240,180,41,0.4);
+        color: var(--gold);
     }
-    .carousel-dot.active { background: var(--gold); width: 18px; border-radius: 4px; }
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px; margin-top: 4px;
+    }
+    .pf-card {
+        border-radius: 12px; overflow: hidden;
+        background: #111;
+        border: 1px solid rgba(255,255,255,0.07);
+        cursor: pointer; transition: all 0.25s ease;
+    }
+    .pf-card:hover { border-color: rgba(240,180,41,0.3); transform: scale(1.02); }
+    .pf-card img {
+        width: 100%; aspect-ratio: 3/4;
+        object-fit: cover; display: block;
+    }
+    .pf-card-info { padding: 8px 10px; }
+    .pf-card-name {
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 700; color: #fff;
+        margin-bottom: 2px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pf-card-cat {
+        font-size: 9px; color: var(--gold);
+        font-family: 'Syne', sans-serif;
+        letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .pf-card.pf-hidden { display: none; }
+    @keyframes pf-pop {
+        from { opacity:0; transform: scale(0.9); }
+        to   { opacity:1; transform: scale(1); }
+    }
+    .pf-card:not(.pf-hidden) { animation: pf-pop 0.28s ease both; }
+    .pf-card-link {
+        display: flex; align-items: center; justify-content: center; gap: 5px;
+        margin-top: 6px;
+        padding: 5px 0;
+        border-radius: 7px;
+        background: rgba(0,229,255,0.08);
+        border: 1px solid rgba(0,229,255,0.25);
+        color: var(--cyan);
+        font-family: 'Syne', sans-serif;
+        font-size: 10px; font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .pf-card-link:hover { background: rgba(0,229,255,0.16); }
+    .pf-card-link i { font-size: 9px; }
 
     /* ════════════════════════════════════════════════════
-       17. CALENDARIO Y FORMULARIO
+       17. FUTUROS PROYECTOS
+    ════════════════════════════════════════════════════ */
+    .upcoming-section {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .upcoming-wrap {
+        display: flex; gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+    .upcoming-wrap::-webkit-scrollbar { display: none; }
+    .upcoming-chip {
+        flex-shrink: 0;
+        min-width: 92px;
+        background: rgba(255,255,255,0.025);
+        border: 1px dashed rgba(255,255,255,0.12);
+        border-radius: 12px;
+        padding: 12px 8px;
+        text-align: center;
+        opacity: 0.65;
+    }
+    .upcoming-chip i {
+        font-size: 16px; color: #555;
+        margin-bottom: 6px; display: block;
+    }
+    .upcoming-chip-name {
+        font-family: 'Syne', sans-serif;
+        font-size: 11px; font-weight: 700;
+        color: #aaa; margin-bottom: 4px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .upcoming-badge {
+        display: inline-block;
+        font-size: 8px; font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--gold);
+        border: 1px solid rgba(240,180,41,0.3);
+        border-radius: 5px;
+        padding: 1px 6px;
+        font-family: 'Syne', sans-serif;
+    }
+
+    /* ════════════════════════════════════════════════════
+       18. CALENDARIO Y FORMULARIO
     ════════════════════════════════════════════════════ */
     .calendar-day {
         transition: all 0.2s; padding: 8px 0;
@@ -663,7 +818,7 @@
     .dark-input::placeholder { color: #444; }
 
     /* ════════════════════════════════════════════════════
-       18. QR MODAL
+       19. QR MODAL
     ════════════════════════════════════════════════════ */
     .qr-wrapper {
         position: relative; display: inline-block;
@@ -680,7 +835,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       19. TABLA COMPARATIVA (#4)
+       20. TABLA COMPARATIVA
     ════════════════════════════════════════════════════ */
     .compare-wrap { overflow-x: auto; padding-bottom: 4px; }
     .compare-wrap::-webkit-scrollbar { display:none; }
@@ -726,12 +881,10 @@
     .compare-table .price-row td.col-pro   { color: var(--gold); }
     .compare-table .price-row td.col-basic { color: #aaa; }
     .compare-table .price-row td.col-premium { color: var(--orange); }
-    /* Highlight column PRO */
     .compare-table td:nth-child(3),
     .compare-table th:nth-child(3) {
         background: rgba(240,180,41,0.04);
     }
-    /* WA button in services */
     .service-wa-btn {
         display: inline-flex; align-items: center; gap: 5px;
         margin-top: 7px;
@@ -750,7 +903,7 @@
     .service-wa-btn i { font-size: 12px; }
 
     /* ════════════════════════════════════════════════════
-       20. FAQ ACCORDION (#6)
+       21. FAQ ACCORDION
     ════════════════════════════════════════════════════ */
     .faq-item {
         border: 1px solid rgba(255,255,255,0.07);
@@ -794,9 +947,8 @@
     }
     .faq-a span { color: var(--gold); font-weight: 600; }
 
-
     /* ════════════════════════════════════════════════════
-       26. CONTADOR DE CLIENTES ATENDIDOS
+       22. CONTADOR DE CLIENTES
     ════════════════════════════════════════════════════ */
     .clients-section {
         padding: 6px 20px 20px;
@@ -834,7 +986,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       27. SECCIÓN DE GARANTÍA
+       23. GARANTÍA
     ════════════════════════════════════════════════════ */
     .guarantee-section {
         margin: 0 20px 18px;
@@ -894,154 +1046,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       28. PORTAFOLIO CON FILTROS
-    ════════════════════════════════════════════════════ */
-    .portfolio-filters {
-        display: flex; gap: 6px;
-        overflow-x: auto; padding-bottom: 10px;
-        scrollbar-width: none;
-    }
-    .portfolio-filters::-webkit-scrollbar { display: none; }
-    .pf-btn {
-        flex-shrink: 0; padding: 5px 13px;
-        border-radius: 9999px;
-        font-family: 'Syne', sans-serif;
-        font-size: 11px; font-weight: 600;
-        cursor: pointer; transition: all 0.22s;
-        border: 1px solid rgba(255,255,255,0.1);
-        background: rgba(255,255,255,0.04);
-        color: #999; white-space: nowrap;
-    }
-    .pf-btn.active, .pf-btn:hover {
-        background: rgba(240,180,41,0.12);
-        border-color: rgba(240,180,41,0.4);
-        color: var(--gold);
-    }
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px; margin-top: 4px;
-    }
-    .pf-card {
-        border-radius: 12px; overflow: hidden;
-        background: #111;
-        border: 1px solid rgba(255,255,255,0.07);
-        cursor: pointer; transition: all 0.25s ease;
-    }
-    .pf-card:hover { border-color: rgba(240,180,41,0.3); transform: scale(1.02); }
-    .pf-card img {
-        width: 100%; aspect-ratio: 3/4;
-        object-fit: cover; display: block;
-    }
-    .pf-card-info { padding: 8px 10px; }
-    .pf-card-name {
-        font-family: 'Syne', sans-serif;
-        font-size: 11px; font-weight: 700; color: #fff;
-        margin-bottom: 2px;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .pf-card-cat {
-        font-size: 9px; color: var(--gold);
-        font-family: 'Syne', sans-serif;
-        letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .pf-card.pf-hidden { display: none; }
-    @keyframes pf-pop {
-        from { opacity:0; transform: scale(0.9); }
-        to   { opacity:1; transform: scale(1); }
-    }
-    .pf-card:not(.pf-hidden) { animation: pf-pop 0.28s ease both; }
-
-    /* Botón "Ver Proyecto" dentro de pf-card */
-    .pf-card-link {
-        display: flex; align-items: center; justify-content: center; gap: 5px;
-        margin-top: 6px;
-        padding: 5px 0;
-        border-radius: 7px;
-        background: rgba(0,229,255,0.08);
-        border: 1px solid rgba(0,229,255,0.25);
-        color: var(--cyan);
-        font-family: 'Syne', sans-serif;
-        font-size: 10px; font-weight: 700;
-        text-decoration: none;
-        transition: background 0.2s;
-    }
-    .pf-card-link:hover { background: rgba(0,229,255,0.16); }
-    .pf-card-link i { font-size: 9px; }
-
-    /* Sección "Próximamente" */
-    .upcoming-section {
-        margin-top: 16px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .upcoming-wrap {
-        display: flex; gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        scrollbar-width: none;
-    }
-    .upcoming-wrap::-webkit-scrollbar { display: none; }
-    .upcoming-chip {
-        flex-shrink: 0;
-        min-width: 92px;
-        background: rgba(255,255,255,0.025);
-        border: 1px dashed rgba(255,255,255,0.12);
-        border-radius: 12px;
-        padding: 12px 8px;
-        text-align: center;
-        opacity: 0.65;
-    }
-    .upcoming-chip i {
-        font-size: 16px; color: #555;
-        margin-bottom: 6px; display: block;
-    }
-    .upcoming-chip-name {
-        font-family: 'Syne', sans-serif;
-        font-size: 11px; font-weight: 700;
-        color: #aaa; margin-bottom: 4px;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .upcoming-badge {
-        display: inline-block;
-        font-size: 8px; font-weight: 700;
-        letter-spacing: 0.08em;
-        color: var(--gold);
-        border: 1px solid rgba(240,180,41,0.3);
-        border-radius: 5px;
-        padding: 1px 6px;
-        font-family: 'Syne', sans-serif;
-    }
-
-    /* ════════════════════════════════════════════════════
-       29. SCROLL REVEAL
-    ════════════════════════════════════════════════════ */
-    .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .reveal.revealed { opacity: 1; transform: translateY(0); }
-
-    /* ════════════════════════════════════════════════════
-       30. PWA NATIVE INSTALL BUTTON
-    ════════════════════════════════════════════════════ */
-    #pwa-install-native {
-        display: none; width: 100%; padding: 12px;
-        background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(0,229,255,0.08));
-        border: 1px solid rgba(129,140,248,0.35);
-        border-radius: 12px; color: #c7d2fe;
-        font-family: 'Syne', sans-serif;
-        font-size: 13px; font-weight: 700;
-        cursor: pointer; gap: 8px;
-        align-items: center; justify-content: center;
-        margin-bottom: 12px; transition: all 0.25s;
-    }
-    #pwa-install-native.show { display: flex; }
-    #pwa-install-native:hover { background: rgba(129,140,248,0.22); }
-
-    /* ════════════════════════════════════════════════════
-       31. VIDEO THUMBNAIL
+       24. VIDEO THUMBNAIL
     ════════════════════════════════════════════════════ */
     .video-thumb-section { padding: 0 20px 16px; }
     .video-thumb {
@@ -1103,7 +1108,7 @@
     }
 
     /* ════════════════════════════════════════════════════
-       32. ANALYTICS PANEL
+       25. ANALYTICS
     ════════════════════════════════════════════════════ */
     .analytics-modal-inner {
         background: #080808;
@@ -1141,47 +1146,18 @@
     }
     .footer-tap-hint { cursor: pointer; user-select: none; }
 
-    .delivery-badge {
-        display: inline-flex; align-items: center; gap: 6px;
-        background: rgba(74,222,128,0.07);
-        border: 1px solid rgba(74,222,128,0.22);
-        border-radius: 9999px;
-        padding: 4px 12px 4px 8px;
-        margin-bottom: 14px;
-    }
-    .delivery-badge i  { color: #4ade80; font-size: 11px; }
-    .delivery-badge span {
-        font-size: 11px; font-family: 'Syne', sans-serif;
-        font-weight: 600; color: #4ade80; letter-spacing: 0.04em;
-    }
-
     /* ════════════════════════════════════════════════════
-       WOW 1 · PARALLAX BANNER
+       26. SCROLL REVEAL
     ════════════════════════════════════════════════════ */
-    .profile-banner img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: center 25%;
-        filter: brightness(0.82) contrast(1.05);
-        will-change: transform;
-        transform-origin: center center;
-        transition: transform 0.05s linear;
+    .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
 
     /* ════════════════════════════════════════════════════
-       WOW 2 · SPARKLE CANVAS (rastro dorado)
-    ════════════════════════════════════════════════════ */
-    #sparkle-canvas {
-        position: absolute;
-        inset: 0;
-        width: 100%; height: 100%;
-        pointer-events: none;
-        z-index: 50;
-        border-radius: 28px;
-    }
-
-    /* ════════════════════════════════════════════════════
-       WOW 3 · TYPEWRITER
+       27. TYPEWRITER
     ════════════════════════════════════════════════════ */
     #typewriter-text {
         font-size: 13px;
@@ -1202,84 +1178,38 @@
         0%,100%{ opacity: 1; }
         50%    { opacity: 0; }
     }
-    .how-section { padding: 4px 20px 18px; }
-    .how-steps { display: flex; flex-direction: column; position: relative; }
-    .how-steps::before {
-        content: ''; position: absolute;
-        left: 19px; top: 28px;
-        width: 2px; height: calc(100% - 56px);
-        background: linear-gradient(to bottom, rgba(240,180,41,0.4), rgba(0,229,255,0.2));
-    }
-    .how-step { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; position: relative; }
-    .how-num {
-        width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700;
-        position: relative; z-index: 1;
-    }
-    .how-num.n1 { background: rgba(240,180,41,0.12); border: 1.5px solid rgba(240,180,41,0.4);  color: var(--gold); }
-    .how-num.n2 { background: rgba(0,229,255,0.09);  border: 1.5px solid rgba(0,229,255,0.35);  color: var(--cyan); }
-    .how-num.n3 { background: rgba(74,222,128,0.09); border: 1.5px solid rgba(74,222,128,0.35); color: #4ade80; }
-    .how-body   { padding-top: 6px; }
-    .how-title  { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #e0e0e0; margin-bottom: 3px; }
-    .how-desc   { font-size: 12px; color: #999; line-height: 1.55; }
-    .how-desc span { color: var(--gold); }
 
     /* ════════════════════════════════════════════════════
-       24. BOTÓN RECOMIÉNDAME
+       28. PWA NATIVE INSTALL
     ════════════════════════════════════════════════════ */
-    .recommend-btn {
-        display: flex; align-items: center; justify-content: center; gap: 8px;
-        width: calc(100% - 40px); margin: 0 20px 16px;
-        padding: 11px 20px; border-radius: 9999px;
-        background: rgba(255,255,255,0.03);
-        border: 1px solid rgba(255,255,255,0.1);
-        color: #bbb; font-family: 'Syne', sans-serif;
-        font-size: 13px; font-weight: 600;
-        cursor: pointer; text-decoration: none;
-        transition: all 0.25s ease;
+    #pwa-install-native {
+        display: none; width: 100%; padding: 12px;
+        background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(0,229,255,0.08));
+        border: 1px solid rgba(129,140,248,0.35);
+        border-radius: 12px; color: #c7d2fe;
+        font-family: 'Syne', sans-serif;
+        font-size: 13px; font-weight: 700;
+        cursor: pointer; gap: 8px;
+        align-items: center; justify-content: center;
+        margin-bottom: 12px; transition: all 0.25s;
     }
-    .recommend-btn:hover { border-color: rgba(240,180,41,0.3); color: var(--gold); background: rgba(240,180,41,0.05); }
-    .recommend-btn i { font-size: 14px; color: #4ade80; }
+    #pwa-install-native.show { display: flex; }
+    #pwa-install-native:hover { background: rgba(129,140,248,0.22); }
 
     /* ════════════════════════════════════════════════════
-       25. WHATSAPP FLOTANTE FIJO EN PANTALLA
+       29. SPARKLE CANVAS
     ════════════════════════════════════════════════════ */
-    .whatsapp-fixed {
-        position: fixed; bottom: 28px; right: 22px; z-index: 9999;
-        width: 54px; height: 54px; border-radius: 50%;
-        background: #25D366; color: white;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 27px; text-decoration: none;
-        box-shadow: 0 6px 26px rgba(37,211,102,0.55);
-        border: 2px solid rgba(255,255,255,0.18);
-        animation: wa-drift 6s ease-in-out infinite;
-    }
-    .whatsapp-fixed:active { transform: scale(0.91) !important; animation: none; }
-    @keyframes wa-drift {
-        0%,100% { transform: translateY(0px);   }
-        30%     { transform: translateY(-8px);  }
-        60%     { transform: translateY(-4px);  }
-        80%     { transform: translateY(-11px); }
-    }
-    .wa-fixed-ring {
-        position: fixed; bottom: 28px; right: 22px;
-        z-index: 9998; width: 54px; height: 54px;
-        border-radius: 50%; pointer-events: none;
-    }
-    .wa-fixed-ring::before {
-        content: ''; position: absolute; top: 50%; left: 50%;
-        transform: translate(-50%,-50%); border-radius: 50%;
-        border: 2px solid #25D366;
-        animation: wa-ring-pulse 2.4s ease-out infinite;
-    }
-    @keyframes wa-ring-pulse {
-        0%  { width: 54px;  height: 54px;  opacity: 0.8; }
-        100%{ width: 108px; height: 108px; opacity: 0;   }
+    #sparkle-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        border-radius: 28px;
     }
 
     /* ════════════════════════════════════════════════════
-       21. SCROLLBAR
+       30. SCROLLBAR
     ════════════════════════════════════════════════════ */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #111; }
@@ -1289,7 +1219,7 @@
 <body>
 
 <!-- ════════════════════════════════════════════════════
-     CANVAS DE PARTÍCULAS (Mejora 7)
+     CANVAS DE PARTÍCULAS
 ════════════════════════════════════════════════════ -->
 <canvas id="particles-canvas"></canvas>
 
@@ -1318,7 +1248,7 @@
         </div>
     </button>
 
-    <!-- AVATAR CIRCULAR (Mejora 6) -->
+    <!-- AVATAR CIRCULAR -->
     <div class="profile-avatar-wrap">
         <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg"
              alt="Darwin Montalvo"
@@ -1339,7 +1269,7 @@
         <span class="profile-brand">KONFÍO ZINC</span>
         <p id="typewriter-text"></p>
 
-        <!-- Contador de visitas (Mejora 1) -->
+        <!-- Contador de visitas -->
         <div class="visitor-counter">
             <span class="vc-dot"></span>
             <span><strong id="visitor-num">—</strong> personas vieron esta tarjeta</span>
@@ -1351,11 +1281,13 @@
             <span>Entrega en 24–48 h hábiles</span>
         </div>
 
-        <!-- CTA -->
+        <!-- CTA con logo KONFÍO -->
         <div class="solicita-btn-wrapper">
             <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
-               target="_blank" class="btn-gold">
-                <i class="fas fa-bolt"></i>
+               target="_blank" class="btn-konfio">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Logo_konfio.png"
+                     alt="KONFÍO"
+                     style="height:20px;width:auto;filter:brightness(0);">
                 Solicita tu tarjeta
             </a>
         </div>
@@ -1521,7 +1453,7 @@
         </div>
     </div>
 
-    <!-- TESTIMONIOS (Mejora 4) -->
+    <!-- TESTIMONIOS -->
     <div class="divider-gold"></div>
     <div class="testimonials-section reveal">
         <p class="section-label">Lo que dicen mis clientes</p>
@@ -1577,7 +1509,7 @@
         </div>
     </div>
 
-    <!-- CONTADOR DE CLIENTES ATENDIDOS -->
+    <!-- CONTADOR DE CLIENTES -->
     <div class="divider-gold"></div>
     <div class="clients-section reveal">
         <p class="section-label">Profesionales que ya confían en KONFÍO ZINC</p>
@@ -1631,13 +1563,12 @@
 
 </div><!-- /glass-card -->
 
-<!-- WHATSAPP FLOTANTE FIJO (sigue al scroll en toda la pantalla) -->
+<!-- WHATSAPP FLOTANTE -->
 <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
    target="_blank" class="whatsapp-fixed" aria-label="WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 <div class="wa-fixed-ring"></div>
-
 
 <!-- ════════════════════════════════════════════════════
      MODALES
@@ -1755,11 +1686,10 @@
             <button class="modal-close modal-close-btn">&times;</button>
         </div>
         <div class="p-4 overflow-y-auto flex-grow">
-            <!-- Label sección principal -->
             <p class="section-label" style="margin-bottom:8px;color:var(--gold);letter-spacing:0.1em;">
                 ★ PROYECTOS REALIZADOS
             </p>
-            <!-- Filtros de categoría -->
+            <!-- Filtros -->
             <div class="portfolio-filters" id="pf-filters">
                 <button class="pf-btn active" data-cat="todos">Todos</button>
                 <button class="pf-btn" data-cat="proyectos">🚀 Proyectos</button>
@@ -1769,7 +1699,7 @@
                 <button class="pf-btn" data-cat="eventos">🎉 Eventos</button>
                 <button class="pf-btn" data-cat="diseno">🎨 Diseño</button>
             </div>
-            <!-- Grid de tarjetas -->
+            <!-- Grid -->
             <div class="portfolio-grid" id="pf-grid"></div>
 
             <!-- FUTUROS PROYECTOS -->
@@ -1823,7 +1753,6 @@
             <button class="modal-close modal-close-btn">&times;</button>
         </div>
         <div class="p-4" style="display:flex;flex-direction:column;gap:12px;">
-            <!-- Botón instalar nativo (aparece solo si el navegador lo soporta) -->
             <button id="pwa-install-native">
                 <i class="fas fa-download"></i>
                 Instalar KONFÍO ZINC en este dispositivo
@@ -1874,8 +1803,7 @@
     </div>
 </div>
 
-
-<!-- Modal Comparar Planes (#4) -->
+<!-- Modal Comparar Planes -->
 <div id="compare-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
      style="display:none;background:rgba(0,0,0,0.9);">
     <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
@@ -1932,7 +1860,7 @@
     </div>
 </div>
 
-<!-- Modal FAQ (#6) -->
+<!-- Modal FAQ -->
 <div id="faq-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
      style="display:none;background:rgba(0,0,0,0.9);">
     <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
@@ -1980,7 +1908,7 @@
     </div>
 </div>
 
-<!-- Modal Analytics (triple-tap footer) -->
+<!-- Modal Analytics -->
 <div id="analytics-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible"
      style="display:none;background:rgba(0,0,0,0.92);">
     <div class="modal-content analytics-modal-inner rounded-2xl w-full max-w-sm max-h-[88vh] overflow-hidden flex flex-col">
@@ -2012,17 +1940,214 @@
     const WA = '573206411340';
     let qrGenerado = false;
 
-    /* ── Datos del portafolio ─────────────────────── */
-    const portfolioImages = [
-        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga General y Estética Dental' },
-        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional' },
-        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional' },
-        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas' },
-        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy' },
-        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico' },
-        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal' },
-        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia · Estética Dental' }
+    /* ── PORTFOLIO DATA ACTUALIZADO (16 proyectos) ── */
+    const portfolioData = [
+        // ══ PROYECTOS REALIZADOS ══
+        {
+            title: 'Tarjeta PRE',
+            sub: 'Tarjeta Digital · KONFÍO ZINC',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/tarjetapre/',
+            color: '240,180,41',
+            url: 'https://konfiozinc.github.io/tarjetapre/',
+            tag: 'Tarjeta Digital'
+        },
+        {
+            title: 'Abogados DTA',
+            sub: 'Sitio Web · Bufete Legal',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/abogados-dta/',
+            color: '0,229,255',
+            url: 'https://konfiozinc.github.io/abogados-dta/',
+            tag: 'Sitio Web Legal'
+        },
+        {
+            title: 'Ali Binary Options',
+            sub: 'Plataforma · Trading Digital',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/ali-binary-opcion/',
+            color: '168,85,247',
+            url: 'https://konfiozinc.github.io/ali-binary-opcion/',
+            tag: 'Plataforma Trading'
+        },
+        {
+            title: 'Ca-ada Style',
+            sub: 'Sitio Web · Estilismo',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/ca-ada_style/',
+            color: '236,72,153',
+            url: 'https://konfiozinc.github.io/ca-ada_style/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'Demo',
+            sub: 'Sitio Web · Demostración',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/demo/',
+            color: '99,102,241',
+            url: 'https://konfiozinc.github.io/demo/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'EL TITI',
+            sub: 'Catálogo Digital · Comida Rápida',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/eltiti/',
+            color: '249,115,22',
+            url: 'https://konfiozinc.github.io/eltiti/',
+            tag: 'Menú Digital'
+        },
+        {
+            title: 'Fumigaciones Monterrey',
+            sub: 'Sitio Web · Servicios',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/fumigaciones-monterrey/',
+            color: '34,197,94',
+            url: 'https://konfiozinc.github.io/fumigaciones-monterrey/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'KONFÍO Sports',
+            sub: 'Hub Deportivo · Resultados en vivo',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/konfio-sports/',
+            color: '0,229,255',
+            url: 'https://konfiozinc.github.io/konfio-sports/',
+            tag: 'Plataforma Web'
+        },
+        {
+            title: 'Mega Express',
+            sub: 'Sitio Web · Logística',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/mega-express/',
+            color: '59,130,246',
+            url: 'https://konfiozinc.github.io/mega-express/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'Nandy Nails',
+            sub: 'Sitio Web · Uñas',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/nandy_nails/',
+            color: '244,114,182',
+            url: 'https://konfiozinc.github.io/nandy_nails/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'NP Style',
+            sub: 'Sitio Web · Moda',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/np-style/',
+            color: '168,85,247',
+            url: 'https://konfiozinc.github.io/np-style/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'Quiromasajes GAP',
+            sub: 'Tarjeta Digital · Bienestar',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/quiromasajes-gap/',
+            color: '74,222,128',
+            url: 'https://konfiozinc.github.io/quiromasajes-gap/',
+            tag: 'Tarjeta Digital'
+        },
+        {
+            title: 'The Big Bang Carranga',
+            sub: 'Sitio Web · Música',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/the-big-bang-carranga/',
+            color: '239,68,68',
+            url: 'https://konfiozinc.github.io/the-big-bang-carranga/',
+            tag: 'Sitio Web'
+        },
+        {
+            title: 'Visajismo Nico',
+            sub: 'Sitio Web · Visajismo',
+            cat: 'proyectos', type: 'project',
+            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/visajismo-nico/',
+            color: '245,158,11',
+            url: 'https://konfiozinc.github.io/visajismo-nico/',
+            tag: 'Sitio Web'
+        },
+        // ══ CLIENTES POR SECTOR ══
+        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga · Estética Dental',    cat: 'salud',       type: 'client' },
+        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional',       cat: 'salud',       type: 'client' },
+        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional',         cat: 'salud',       type: 'client' },
+        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia',    cat: 'salud',       type: 'client' },
+        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal',            cat: 'gastronomia', type: 'client' },
+        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy',                 cat: 'belleza',     type: 'client' },
+        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas',           cat: 'eventos',     type: 'client' },
+        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico',               cat: 'diseno',      type: 'client' },
     ];
+
+    const catLabels = { proyectos:'Proyecto', salud:'Salud', gastronomia:'Gastronomía', belleza:'Belleza', eventos:'Eventos', diseno:'Diseño' };
+
+    function buildPortfolio() {
+        const grid = document.getElementById('pf-grid');
+        if (!grid) return;
+        grid.innerHTML = portfolioData.map((p, i) => {
+            if (p.type === 'project') {
+                return `
+            <div class="pf-card" data-cat="${p.cat}" data-index="${i}" style="cursor:default;">
+                <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(145deg,rgba(${p.color},0.1),#0a0a0a);">
+                    <img src="${p.thumb}"
+                         alt="${p.title}"
+                         loading="lazy"
+                         style="width:100%;height:100%;object-fit:cover;object-position:top;"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                    <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(${p.color},0.15),rgba(0,0,0,0.5));">
+                        <i class="fas fa-globe" style="font-size:32px;color:rgb(${p.color});opacity:0.7;"></i>
+                    </div>
+                    <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.75);border:1px solid rgba(${p.color},0.4);color:rgb(${p.color});font-family:'Syne',sans-serif;font-size:8px;font-weight:700;padding:2px 7px;border-radius:6px;letter-spacing:0.06em;backdrop-filter:blur(4px);">${p.tag}</span>
+                </div>
+                <div class="pf-card-info">
+                    <div class="pf-card-name">${p.title}</div>
+                    <div class="pf-card-cat">${p.sub}</div>
+                    <a href="${p.url}" target="_blank" rel="noopener" class="pf-card-link">
+                        <i class="fas fa-arrow-up-right-from-square"></i> Ver Proyecto
+                    </a>
+                </div>
+            </div>`;
+            }
+            return `
+            <div class="pf-card" data-cat="${p.cat}" data-index="${i}">
+                <img src="${p.src}" alt="${p.title}"
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/300x400/111/F0B429?text=Tarjeta'">
+                <div class="pf-card-info">
+                    <div class="pf-card-name">${p.title}</div>
+                    <div class="pf-card-cat">${catLabels[p.cat] || p.cat}</div>
+                </div>
+            </div>`;
+        }).join('');
+
+        // Lightbox solo en tarjetas de clientes
+        grid.querySelectorAll('.pf-card').forEach(card => {
+            const idx = +card.dataset.index;
+            if (portfolioData[idx].type === 'project') return;
+            card.addEventListener('click', () => {
+                const m = document.getElementById('full-image-modal');
+                document.getElementById('full-image').src = portfolioData[idx].src;
+                m.style.display = 'flex';
+                setTimeout(() => m.classList.add('active'), 10);
+            });
+        });
+    }
+
+    function filterPortfolio(cat) {
+        document.querySelectorAll('.pf-btn').forEach(b =>
+            b.classList.toggle('active', b.dataset.cat === cat));
+        document.querySelectorAll('.pf-card').forEach(card => {
+            const match = cat === 'todos' || card.dataset.cat === cat;
+            card.classList.toggle('pf-hidden', !match);
+        });
+    }
+
+    document.getElementById('pf-filters')?.querySelectorAll('.pf-btn').forEach(btn => {
+        btn.addEventListener('click', () => filterPortfolio(btn.dataset.cat));
+    });
+
+    buildPortfolio();
 
     /* ── Sistema de modales ───────────────────────── */
     function setupModal(btnId, modalId) {
@@ -2054,14 +2179,11 @@
     setupModal('qr-btn',        'qr-modal');
     setupModal('qr-badge-btn',  'qr-modal');
     setupModal('install-btn',   'install-modal');
-    setupModal('video-btn',     'video-modal');      // modal video (por si se usa en otro lado)
-    setupModal('video-thumb-btn','video-modal');     // thumbnail visible
+    setupModal('video-thumb-btn','video-modal');
     setupModal('compare-btn',   'compare-modal');
     setupModal('faq-btn',       'faq-modal');
 
-    /* ════════════════════════════════════════════════════
-       ANALYTICS ENGINE
-    ════════════════════════════════════════════════════ */
+    /* ── Analytics ─────────────────────────────────── */
     const ANALYTICS_KEY = 'kz_analytics';
 
     function trackEvent(label) {
@@ -2073,10 +2195,8 @@
         } catch(e) {}
     }
 
-    // Registrar primera visita
     trackEvent('👁 Vista de tarjeta');
 
-    // Trackear todos los botones de acción
     const trackMap = {
         'agenda-btn':       '📅 Agenda',
         'services-btn':     '📋 Servicios',
@@ -2088,26 +2208,24 @@
         'compare-btn':      '📊 Comparar planes',
         'faq-btn':          '❓ Preguntas',
         'video-thumb-btn':  '▶️ Video',
-        'video-btn':        '▶️ Video (btn)',
     };
     Object.entries(trackMap).forEach(([id, label]) => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('click', () => trackEvent(label), { passive: true });
     });
 
-    // Trackear links (llamar, email, whatsapp, redes)
     document.querySelector('a[href^="tel:"]')
         ?.addEventListener('click', () => trackEvent('📞 Llamar'), { passive: true });
     document.querySelector('a[href^="mailto:"]')
         ?.addEventListener('click', () => trackEvent('✉️ Correo'), { passive: true });
     document.querySelector('.whatsapp-fixed')
         ?.addEventListener('click', () => trackEvent('💬 WhatsApp flotante'), { passive: true });
-    document.querySelector('.btn-gold')
+    document.querySelector('.btn-konfio')
         ?.addEventListener('click', () => trackEvent('⚡ CTA principal'), { passive: true });
     document.querySelector('.recommend-btn')
         ?.addEventListener('click', () => trackEvent('🤝 Recomiéndame'), { passive: true });
 
-    // Panel de analytics: triple-tap en el footer
+    // Triple-tap footer
     (function(){
         let taps = 0, timer;
         const footer = document.getElementById('footer-tap');
@@ -2126,7 +2244,6 @@
             }
         });
 
-        // Cerrar modal analytics
         const modal = document.getElementById('analytics-modal');
         const closeBtn = modal?.querySelector('.modal-close');
         if (closeBtn) closeBtn.addEventListener('click', () => {
@@ -2142,7 +2259,6 @@
             }
         });
 
-        // Limpiar stats
         document.getElementById('analytics-clear')?.addEventListener('click', () => {
             localStorage.removeItem(ANALYTICS_KEY);
             renderAnalytics();
@@ -2204,153 +2320,13 @@
     }
 
     /* ── Guardar contacto (vCard) ─────────────────── */
-    document.getElementById('save-btn').addEventListener('click', () => {
+    document.getElementById('save-btn')?.addEventListener('click', () => {
         const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:Darwin Montalvo\nORG:KONFÍO ZINC\nTITLE:Creador de Tarjetas Digitales\nTEL;TYPE=CELL:+57 320 641 1340\nEMAIL:konfiozinc@gmail.com\nURL:${window.location.href}\nEND:VCARD`;
         const a = document.createElement('a');
         a.href = URL.createObjectURL(new Blob([vCard], { type: 'text/vcard;charset=utf-8' }));
         a.download = 'Darwin_Montalvo_KONFIO_ZINC.vcf';
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
     });
-
-    /* ── Portafolio con filtros por categoría ────────── */
-    const portfolioData = [
-        // ══ PROYECTOS REALIZADOS ══
-        {
-            title: 'Tarjeta PRE',
-            sub: 'Tarjeta Digital · KONFÍO ZINC',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/tarjetapre/',
-            color: '240,180,41',
-            url: 'https://konfiozinc.github.io/tarjetapre/',
-            tag: 'Tarjeta Digital'
-        },
-        {
-            title: 'Abogados DTA',
-            sub: 'Sitio Web · Bufete Legal',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/abogados-dta/',
-            color: '0,229,255',
-            url: 'https://konfiozinc.github.io/abogados-dta/',
-            tag: 'Sitio Web Legal'
-        },
-        {
-            title: 'Quiromasajes GAP',
-            sub: 'Tarjeta Digital · Bienestar',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/quiromasajes-gap/',
-            color: '74,222,128',
-            url: 'https://konfiozinc.github.io/quiromasajes-gap/',
-            tag: 'Tarjeta Digital'
-        },
-        {
-            title: 'EL TITI',
-            sub: 'Catálogo Digital · Comida Rápida',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/eltiti/',
-            color: '249,115,22',
-            url: 'https://konfiozinc.github.io/eltiti/',
-            tag: 'Menú Digital'
-        },
-        {
-            title: 'KONFÍO Sports',
-            sub: 'Hub Deportivo · Resultados en vivo',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/konfio-sports/',
-            color: '0,229,255',
-            url: 'https://konfiozinc.github.io/konfio-sports/',
-            tag: 'Plataforma Web'
-        },
-        {
-            title: 'Alí Binary Options',
-            sub: 'Plataforma · Trading Digital',
-            cat: 'proyectos', type: 'project',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/ali-binary-opcion/sala.html',
-            color: '168,85,247',
-            url: 'https://konfiozinc.github.io/ali-binary-opcion/sala.html',
-            tag: 'Plataforma Trading'
-        },
-        // ══ CLIENTES POR SECTOR ══
-        { src: 'https://i.postimg.cc/BvWnVsXt/Whats-App-Image-2026-05-24-at-07-24-13-(1).jpg', title: 'Dra. Isabela Rojas',   sub: 'Odontóloga · Estética Dental',    cat: 'salud',       type: 'client' },
-        { src: 'https://i.postimg.cc/7LgZvc2g/Whats-App-Image-2026-05-24-at-07-23-19.jpg',     title: 'Dra. Sofía Rodríguez', sub: 'Nutricionista Profesional',       cat: 'salud',       type: 'client' },
-        { src: 'https://i.postimg.cc/VNykV1dJ/Whats-App-Image-2026-05-24-at-07-24-13-(3).jpg', title: 'Dra. Ana Pérez',       sub: 'Nutricionista Funcional',         cat: 'salud',       type: 'client' },
-        { src: 'https://i.postimg.cc/Pqm5GcwZ/Whats-App-Image-2026-05-24-at-07-23-19-(2).jpg', title: 'Dra. Amanda Méndez',  sub: 'Odontopediatría · Ortodoncia',    cat: 'salud',       type: 'client' },
-        { src: 'https://i.postimg.cc/0NgyBxbD/Whats-App-Image-2026-05-24-at-07-24-13-(7).jpg', title: 'Dulce Delicia',        sub: 'Pastelería Artesanal',            cat: 'gastronomia', type: 'client' },
-        { src: 'https://i.postimg.cc/xdr14Ycb/Whats-App-Image-2026-05-24-at-07-24-13-(5).jpg', title: 'Regina Pereira',       sub: 'Nails y Academy',                 cat: 'belleza',     type: 'client' },
-        { src: 'https://i.postimg.cc/XvMYz3pZ/Whats-App-Image-2026-05-24-at-07-24-13-(4).jpg', title: 'Carolina Carelli',     sub: 'Decoradora de Fiestas',           cat: 'eventos',     type: 'client' },
-        { src: 'https://i.postimg.cc/bvQwXMtk/Whats-App-Image-2026-05-24-at-07-23-19-(3).jpg', title: 'Juan Pérez',           sub: 'Diseñador Gráfico',               cat: 'diseno',      type: 'client' },
-    ];
-
-    const catLabels = { proyectos:'Proyecto', salud:'Salud', gastronomia:'Gastronomía', belleza:'Belleza', eventos:'Eventos', diseno:'Diseño' };
-
-    function buildPortfolio() {
-        const grid = document.getElementById('pf-grid');
-        if (!grid) return;
-        grid.innerHTML = portfolioData.map((p, i) => {
-            if (p.type === 'project') {
-                return `
-            <div class="pf-card" data-cat="${p.cat}" data-index="${i}" style="cursor:default;">
-                <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(145deg,rgba(${p.color},0.1),#0a0a0a);">
-                    <img src="${p.thumb}"
-                         alt="${p.title}"
-                         loading="lazy"
-                         style="width:100%;height:100%;object-fit:cover;object-position:top;"
-                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                    <!-- Fallback icon si la imagen falla -->
-                    <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(${p.color},0.15),rgba(0,0,0,0.5));">
-                        <i class="fas fa-globe" style="font-size:32px;color:rgb(${p.color});opacity:0.7;"></i>
-                    </div>
-                    <!-- Tag de categoría -->
-                    <span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.75);border:1px solid rgba(${p.color},0.4);color:rgb(${p.color});font-family:'Syne',sans-serif;font-size:8px;font-weight:700;padding:2px 7px;border-radius:6px;letter-spacing:0.06em;backdrop-filter:blur(4px);">${p.tag}</span>
-                </div>
-                <div class="pf-card-info">
-                    <div class="pf-card-name">${p.title}</div>
-                    <div class="pf-card-cat">${p.sub}</div>
-                    <a href="${p.url}" target="_blank" rel="noopener" class="pf-card-link">
-                        <i class="fas fa-arrow-up-right-from-square"></i> Ver Proyecto
-                    </a>
-                </div>
-            </div>`;
-            }
-            // Tarjeta cliente con imagen
-            return `
-            <div class="pf-card" data-cat="${p.cat}" data-index="${i}">
-                <img src="${p.src}" alt="${p.title}"
-                     loading="lazy"
-                     onerror="this.src='https://placehold.co/300x400/111/F0B429?text=Tarjeta'">
-                <div class="pf-card-info">
-                    <div class="pf-card-name">${p.title}</div>
-                    <div class="pf-card-cat">${catLabels[p.cat] || p.cat}</div>
-                </div>
-            </div>`;
-        }).join('');
-
-        // Lightbox solo en tarjetas de clientes
-        grid.querySelectorAll('.pf-card').forEach(card => {
-            const idx = +card.dataset.index;
-            if (portfolioData[idx].type === 'project') return;
-            card.addEventListener('click', () => {
-                const m = document.getElementById('full-image-modal');
-                document.getElementById('full-image').src = portfolioData[idx].src;
-                m.style.display = 'flex';
-                setTimeout(() => m.classList.add('active'), 10);
-            });
-        });
-    }
-
-    function filterPortfolio(cat) {
-        document.querySelectorAll('.pf-btn').forEach(b =>
-            b.classList.toggle('active', b.dataset.cat === cat));
-        document.querySelectorAll('.pf-card').forEach(card => {
-            const match = cat === 'todos' || card.dataset.cat === cat;
-            card.classList.toggle('pf-hidden', !match);
-        });
-    }
-
-    document.getElementById('pf-filters')?.querySelectorAll('.pf-btn').forEach(btn => {
-        btn.addEventListener('click', () => filterPortfolio(btn.dataset.cat));
-    });
-
-    buildPortfolio();
 
     /* ── Native Share ─────────────────────────────── */
     const shareBtn = document.getElementById('native-share-btn');
@@ -2492,9 +2468,8 @@
     }
 
     resetAgenda();
-    window.resetAgenda = resetAgenda;
 
-    /* ── Contador de visitas (Mejora 1) ───────────── */
+    /* ── Contador de visitas ───────────────────────── */
     (function(){
         const KEY  = 'kz_visits';
         const BASE = 512;
@@ -2508,7 +2483,7 @@
         const iv = setInterval(()=>{ c++; el.textContent=c; if(c>=n) clearInterval(iv); }, 55);
     })();
 
-    /* ── Dots de testimonios (Mejora 4) ───────────── */
+    /* ── Dots de testimonios ───────────────────────── */
     (function(){
         const scroll = document.getElementById('testimonials-scroll');
         const dots   = document.querySelectorAll('.t-dot');
@@ -2520,9 +2495,7 @@
         dots.forEach((d,i)=>d.addEventListener('click',()=>scroll.scrollTo({left:i*242,behavior:'smooth'})));
     })();
 
-    /* ══════════════════════════════════════════════════
-       MOTOR DE PARTÍCULAS DORADAS (Mejora 7)
-    ══════════════════════════════════════════════════ */
+    /* ── Partículas doradas ────────────────────────── */
     (function(){
         const canvas = document.getElementById('particles-canvas');
         const ctx    = canvas.getContext('2d');
@@ -2536,16 +2509,15 @@
 
         function rand(a,b){ return Math.random()*(b-a)+a; }
 
-        // Paleta: oro dominante, naranja secundario, cian escaso
         const PALETTE = [
-            [240,180, 41],  // gold  ×4
             [240,180, 41],
             [240,180, 41],
             [240,180, 41],
-            [255,217,125],  // gold-light ×2
+            [240,180, 41],
             [255,217,125],
-            [249,115, 22],  // orange ×1
-            [  0,229,255],  // cyan   ×1
+            [255,217,125],
+            [249,115, 22],
+            [  0,229,255],
         ];
 
         const TOTAL = 70;
@@ -2568,28 +2540,21 @@
         function draw(){
             ctx.clearRect(0,0,canvas.width,canvas.height);
             const t = performance.now()*0.001;
-
             for (const p of particles){
                 const a = p.alpha * (0.55 + 0.45*Math.sin(t*0.8 + p.phase));
-
-                // Core
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
                 ctx.fillStyle = `rgba(${p.col},${a})`;
                 ctx.fill();
-
-                // Halo (solo partículas medianas/grandes)
                 if (p.r > 1.4){
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r*2.8, 0, Math.PI*2);
                     ctx.fillStyle = `rgba(${p.col},${a*0.16})`;
                     ctx.fill();
                 }
-
                 p.y    -= p.speed;
                 p.x    += p.drift;
                 p.phase += 0.01;
-
                 if (p.y < -8)               Object.assign(p, mkParticle(false));
                 if (p.x < -8)               p.x = canvas.width + 8;
                 if (p.x > canvas.width + 8) p.x = -8;
@@ -2599,37 +2564,32 @@
         draw();
     })();
 
-    /* ── WhatsApp float: alineado al borde de la tarjeta ─ */
+    /* ── WhatsApp float ───────────────────────────── */
     (function(){
         const card = document.querySelector('.glass-card');
         const btn  = document.querySelector('.whatsapp-fixed');
         const ring = document.querySelector('.wa-fixed-ring');
         if (!card || !btn || !ring) return;
-
         function pos() {
             const r     = card.getBoundingClientRect();
-            // Pegado al borde derecho de la tarjeta + 16px padding
             const right = Math.max(16, window.innerWidth - r.right + 16);
             btn.style.right  = right + 'px';
             ring.style.right = right + 'px';
         }
-
         pos();
         window.addEventListener('resize', pos, { passive: true });
     })();
 
-    /* ── Contador de clientes — count-up animado ──────── */
+    /* ── Count-up ──────────────────────────────────── */
     (function(){
         const els = document.querySelectorAll('.count-up');
         if (!els.length) return;
-
         function animateCount(el) {
             const target = parseInt(el.dataset.target);
             const duration = 1400;
             const start = performance.now();
             function step(now) {
                 const p = Math.min((now - start) / duration, 1);
-                // Ease out cubic
                 const ease = 1 - Math.pow(1 - p, 3);
                 el.textContent = Math.floor(ease * target);
                 if (p < 1) requestAnimationFrame(step);
@@ -2637,8 +2597,6 @@
             }
             requestAnimationFrame(step);
         }
-
-        // Trigger when section enters viewport
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -2647,7 +2605,6 @@
                 }
             });
         }, { threshold: 0.5 });
-
         els.forEach(el => observer.observe(el));
     })();
 
@@ -2666,9 +2623,8 @@
         els.forEach(el => obs.observe(el));
     })();
 
-    /* ── PWA: Manifest inline + beforeinstallprompt ─ */
+    /* ── PWA + Service Worker ─────────────────────── */
     (function(){
-        // Manifest via Blob
         const manifest = {
             name: 'KONFÍO ZINC',
             short_name: 'KONFÍO',
@@ -2691,7 +2647,6 @@
             document.head.appendChild(link);
         } catch(e) {}
 
-        // Capturar prompt de instalación nativa (Android Chrome)
         let installPrompt = null;
         const nativeBtn   = document.getElementById('pwa-install-native');
 
@@ -2713,7 +2668,6 @@
             });
         }
 
-        // Service Worker para caché offline
         if ('serviceWorker' in navigator) {
             const sw = `
                 const C='kz-cache-v1';
@@ -2750,25 +2704,20 @@
         }
     })();
 
-    /* ══════════════════════════════════════════════════
-       WOW 1 · PARALLAX BANNER
-    ══════════════════════════════════════════════════ */
+    /* ── Parallax Banner ───────────────────────────── */
     (function(){
         const img  = document.getElementById('banner-img');
         const card = document.querySelector('.glass-card');
         if (!img || !card) return;
-
         let ticking = false;
         function update() {
             const rect    = card.getBoundingClientRect();
             const viewH   = window.innerHeight;
-            // Progress: 0 = card top at viewport bottom, 1 = card bottom at viewport top
             const progress = 1 - (rect.bottom / (viewH + rect.height));
-            const offset   = progress * 36 - 8; // –8px to +28px range
+            const offset   = progress * 36 - 8;
             img.style.transform = `translateY(${Math.max(-12, Math.min(24, offset))}px) scale(1.06)`;
             ticking = false;
         }
-
         update();
         window.addEventListener('scroll', () => {
             if (!ticking) { requestAnimationFrame(update); ticking = true; }
@@ -2776,9 +2725,7 @@
         window.addEventListener('resize', update, { passive: true });
     })();
 
-    /* ══════════════════════════════════════════════════
-       WOW 2 · SPARKLE TRAIL (rastro dorado al tocar)
-    ══════════════════════════════════════════════════ */
+    /* ── Sparkle Trail ────────────────────────────── */
     (function(){
         const canvas = document.getElementById('sparkle-canvas');
         const card   = document.querySelector('.glass-card');
@@ -2794,7 +2741,6 @@
         window.addEventListener('resize', resize, { passive: true });
 
         function rand(a, b) { return Math.random() * (b - a) + a; }
-
         const COLORS = ['240,180,41', '240,180,41', '255,217,125', '249,115,22', '0,229,255'];
 
         function spawn(x, y, count = 7) {
@@ -2818,7 +2764,6 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = sparks.length - 1; i >= 0; i--) {
                 const s = sparks[i];
-                // Glow halo
                 const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3);
                 g.addColorStop(0, `rgba(${s.col},${s.alpha * 0.6})`);
                 g.addColorStop(1, `rgba(${s.col},0)`);
@@ -2826,19 +2771,16 @@
                 ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
                 ctx.fillStyle = g;
                 ctx.fill();
-                // Core
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${s.col},${s.alpha})`;
                 ctx.fill();
-
                 s.x     += s.vx;
                 s.y     += s.vy;
-                s.vy    += 0.12;   // gravity
-                s.vx    *= 0.97;   // drag
+                s.vy    += 0.12;
+                s.vx    *= 0.97;
                 s.alpha -= s.decay;
                 s.r     *= 0.96;
-
                 if (s.alpha <= 0 || s.r < 0.3) sparks.splice(i, 1);
             }
             if (sparks.length > 0) requestAnimationFrame(loop);
@@ -2850,7 +2792,6 @@
             if (!animating) { animating = true; loop(); }
         }
 
-        // Touch — spawna en cada punto de contacto
         card.addEventListener('touchstart', e => {
             const rect = card.getBoundingClientRect();
             Array.from(e.changedTouches).forEach(t =>
@@ -2858,7 +2799,6 @@
             );
         }, { passive: true });
 
-        // Mouse — rastro continuo, throttled
         let lastMove = 0;
         card.addEventListener('mousemove', e => {
             const now = Date.now();
@@ -2869,17 +2809,13 @@
         }, { passive: true });
     })();
 
-    /* ══════════════════════════════════════════════════
-       WOW 3 · TYPEWRITER (escritura letra a letra)
-    ══════════════════════════════════════════════════ */
+    /* ── Typewriter ────────────────────────────────── */
     (function(){
         const el = document.getElementById('typewriter-text');
         if (!el) return;
-
         const PLAIN = 'Tarjetas digitales interactivas que transforman tu presencia profesional';
         const HL_START = 'Tarjetas digitales interactivas que '.length;
         const HL_END   = HL_START + 'transforman'.length;
-
         let i = 0;
 
         function buildHTML(upTo) {
@@ -2896,12 +2832,9 @@
             if (i > PLAIN.length) return;
             el.innerHTML = buildHTML(i) + (i < PLAIN.length ? '<span class="tw-cursor">|</span>' : '');
             i++;
-            // Ligeras variaciones de velocidad para naturalidad
             const delay = i < 3 ? 120 : i === HL_START || i === HL_END ? 180 : 28 + Math.random() * 22;
             setTimeout(type, delay);
         }
-
-        // Esperar a que termine la animación de entrada (650ms) + pausa dramática
         setTimeout(type, 1100);
     })();
 
