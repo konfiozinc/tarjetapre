@@ -1735,9 +1735,10 @@
                 <button class="pf-btn active" data-cat="todos">Todos</button>
                 <button class="pf-btn" data-cat="tarjetas">🪪 Tarjetas</button>
                 <button class="pf-btn" data-cat="belleza">💅 Belleza</button>
-                <button class="pf-btn" data-cat="plataformas">🚀 Plataformas</button>
                 <button class="pf-btn" data-cat="catalogos">🍽 Catálogos</button>
+                <button class="pf-btn" data-cat="inmobiliaria">🏠 Inmobiliaria</button>
                 <button class="pf-btn" data-cat="landing">🌐 Landing</button>
+                <button class="pf-btn" data-cat="plataformas">🚀 Plataformas</button>
             </div>
             <!-- Grid de tarjetas -->
             <div class="portfolio-grid" id="pf-grid"></div>
@@ -2179,115 +2180,41 @@
 
     /* ── Portafolio con filtros por categoría ────────── */
     const portfolioData = [
-        // ══════════════════════════════════════════
-        // PROYECTOS REALIZADOS — 14 proyectos reales
-        // ══════════════════════════════════════════
-        {
-            title: 'Tarjeta PRE',           sub: 'Tarjeta Digital · KONFÍO ZINC',
-            cat: 'tarjetas',   type: 'project', color: '240,180,41',
-            tag: 'Tarjeta Principal',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/tarjetapre/',
-            url:   'https://konfiozinc.github.io/tarjetapre/'
-        },
-        {
-            title: 'Abogados DTA',          sub: 'Landing Page · Derecho Administrativo',
-            cat: 'landing',    type: 'project', color: '0,229,255',
-            tag: 'Landing Legal',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/abogados-dta/',
-            url:   'https://konfiozinc.github.io/abogados-dta/'
-        },
-        {
-            title: 'Quiromasajes GAP',      sub: 'Tarjeta Digital · Bienestar',
-            cat: 'tarjetas',   type: 'project', color: '74,222,128',
-            tag: 'Tarjeta Digital',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/quiromasajes-gap/',
-            url:   'https://konfiozinc.github.io/quiromasajes-gap/'
-        },
-        {
-            title: 'EL TITI',              sub: 'Menú Digital · Comidas Rápidas',
-            cat: 'catalogos',  type: 'project', color: '249,115,22',
-            tag: 'Menú Digital',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/eltiti/',
-            url:   'https://konfiozinc.github.io/eltiti/'
-        },
-        {
-            title: 'Alí Binary Options',   sub: 'Plataforma · Trading Digital',
-            cat: 'plataformas',type: 'project', color: '168,85,247',
-            tag: 'Trading',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/ali-binary-opcion/',
-            url:   'https://konfiozinc.github.io/ali-binary-opcion/'
-        },
-        {
-            title: 'KONFÍO Sports',        sub: 'Hub Deportivo · Fútbol Mundial',
-            cat: 'plataformas',type: 'project', color: '0,229,255',
-            tag: 'Hub Deportivo',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/konfio-sports/',
-            url:   'https://konfiozinc.github.io/konfio-sports/'
-        },
-        {
-            title: 'Demo KONFÍO',          sub: 'Demo · Tarjeta Digital',
-            cat: 'tarjetas',   type: 'project', color: '240,180,41',
-            tag: 'Demo Card',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/demo/',
-            url:   'https://konfiozinc.github.io/demo/'
-        },
-        {
-            title: 'Mega Express',         sub: 'Tarjeta Digital · Transporte',
-            cat: 'tarjetas',   type: 'project', color: '249,115,22',
-            tag: 'Tarjeta Digital',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/mega-express/',
-            url:   'https://konfiozinc.github.io/mega-express/'
-        },
-        {
-            title: 'NP Style',             sub: 'Tarjeta Digital · Belleza & Estética',
-            cat: 'belleza',    type: 'project', color: '244,114,182',
-            tag: 'Belleza',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/np-style/',
-            url:   'https://konfiozinc.github.io/np-style/'
-        },
-        {
-            title: 'Fumigaciones Monterrey', sub: 'Tarjeta Digital · Servicios del Hogar',
-            cat: 'tarjetas',   type: 'project', color: '74,222,128',
-            tag: 'Tarjeta Digital',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/fumigaciones-monterrey/',
-            url:   'https://konfiozinc.github.io/fumigaciones-monterrey/'
-        },
-        {
-            title: 'The Big Bang Carranga', sub: 'Tarjeta Digital · Música & Entretenimiento',
-            cat: 'tarjetas',   type: 'project', color: '168,85,247',
-            tag: 'Entretenimiento',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/the-big-bang-carranga/',
-            url:   'https://konfiozinc.github.io/the-big-bang-carranga/'
-        },
-        {
-            title: 'Nandy Nails',          sub: 'Tarjeta Digital · Nail Art',
-            cat: 'belleza',    type: 'project', color: '244,114,182',
-            tag: 'Nail Art',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/nandy_nails/',
-            url:   'https://konfiozinc.github.io/nandy_nails/'
-        },
-        {
-            title: 'Visajismo Nico',       sub: 'Tarjeta Digital · Visajismo & Estilo',
-            cat: 'belleza',    type: 'project', color: '0,229,255',
-            tag: 'Estilo',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/konfiozinc.github.io/makeup_artist/',
-            url:   'https://konfiozinc.github.io/makeup_artist/'
-        },
-        {
-            title: 'Ca·Ada Style',         sub: 'Tarjeta Digital · Moda & Estética',
-            cat: 'belleza',    type: 'project', color: '244,114,182',
-            tag: 'Moda',
-            thumb: 'https://image.thum.io/get/width/600/crop/900/https://konfiozinc.github.io/ca-ada_style/',
-            url:   'https://konfiozinc.github.io/ca-ada_style/'
-        },
-    ];
+        // ══════════════════════════════════════════════
+        // PORTAFOLIO OFICIAL KONFÍO ZINC — 23 proyectos
+        // ══════════════════════════════════════════════
+        { title:'Tarjeta PRE',             sub:'Tarjeta Principal · KONFÍO ZINC',         cat:'tarjetas',     color:'240,180,41', tag:'Tarjeta Principal', url:'https://konfiozinc.github.io/tarjetapre/' },
+        { title:'Alí Binary Options',      sub:'Plataforma · Trading Digital',            cat:'plataformas',  color:'168,85,247', tag:'Trading',           url:'https://konfiozinc.github.io/ali-binary-opcion/' },
+        { title:'KONFÍO Sports',           sub:'Hub Deportivo · Fútbol Mundial',          cat:'plataformas',  color:'0,229,255',  tag:'Hub Deportivo',     url:'https://konfiozinc.github.io/konfio-sports/' },
+        { title:'Quiromasajes GAP',        sub:'Tarjeta Digital · Bienestar',             cat:'tarjetas',     color:'74,222,128', tag:'Tarjeta Digital',   url:'https://konfiozinc.github.io/quiromasajes-gap/' },
+        { title:'EL TITI',                 sub:'Menú Digital · Comidas Rápidas',          cat:'catalogos',    color:'249,115,22', tag:'Menú Digital',      url:'https://konfiozinc.github.io/eltiti/' },
+        { title:'Demo General',            sub:'Demo · Tarjeta Digital',                  cat:'tarjetas',     color:'240,180,41', tag:'Demo Card',         url:'https://konfiozinc.github.io/demo/' },
+        { title:'Abogados DTA',            sub:'Landing Page · Derecho Administrativo',   cat:'landing',      color:'0,229,255',  tag:'Landing Legal',     url:'https://konfiozinc.github.io/abogados-dta/' },
+        { title:'Mega Express',            sub:'Tarjeta Digital · Mensajería',            cat:'tarjetas',     color:'249,115,22', tag:'Tarjeta Digital',   url:'https://konfiozinc.github.io/mega-express/' },
+        { title:'NP Style',                sub:'Tarjeta Digital · Peluquería',            cat:'belleza',      color:'244,114,182',tag:'Belleza',           url:'https://konfiozinc.github.io/np-style/' },
+        { title:'Fumigaciones Monterrey',  sub:'Tarjeta Digital · Servicios del Hogar',  cat:'tarjetas',     color:'74,222,128', tag:'Tarjeta Digital',   url:'https://konfiozinc.github.io/fumigaciones-monterrey/' },
+        { title:'The Big Bang Carranga',   sub:'Tarjeta Digital · Música',               cat:'tarjetas',     color:'168,85,247', tag:'Entretenimiento',   url:'https://konfiozinc.github.io/the-big-bang-carranga/' },
+        { title:'Nandy Nails',             sub:'Tarjeta Digital · Nail Art',             cat:'belleza',      color:'244,114,182',tag:'Nail Art',          url:'https://konfiozinc.github.io/nandy_nails/' },
+        { title:'Makeup Artist',           sub:'Tarjeta Digital · Maquillaje Artístico', cat:'belleza',      color:'244,114,182',tag:'Makeup',            url:'https://konfiozinc.github.io/makeup_artist/' },
+        { title:'Barbería La Cañada',      sub:'Tarjeta Digital · Barbería & Estilo',    cat:'belleza',      color:'0,229,255',  tag:'Barbería',          url:'https://konfiozinc.github.io/ca-ada_style/' },
+        { title:'Carnicería La Milagrosa', sub:'Catálogo Digital · Carnicería',          cat:'catalogos',    color:'249,115,22', tag:'Catálogo',          url:'https://konfiozinc.github.io/carniceria_la_milagrosa/' },
+        { title:'Fumig Master',            sub:'Tarjeta Digital · Fumigaciones',         cat:'tarjetas',     color:'74,222,128', tag:'Tarjeta Digital',   url:'https://konfiozinc.github.io/fumig_master/' },
+        { title:'DG Ventas Avalúos',       sub:'Landing Page · Avalúos & Bienes Raíces', cat:'inmobiliaria', color:'240,180,41', tag:'Avalúos',           url:'https://konfiozinc.github.io/dg_ventas_avaluos/' },
+        { title:'Century 21 Radial',       sub:'Landing Page · Inmobiliaria',            cat:'inmobiliaria', color:'240,180,41', tag:'Inmobiliaria',      url:'https://konfiozinc.github.io/century_21_radial/' },
+        { title:'GP Inmobiliaria',         sub:'Landing Page · Lotes, Terrenos y Fincas',cat:'inmobiliaria', color:'240,180,41', tag:'Finca Raíz',        url:'https://konfiozinc.github.io/gp/' },
+        { title:'Calixto Acordeón Mágico', sub:'Tarjeta Digital · Música Vallenata',    cat:'tarjetas',     color:'168,85,247', tag:'Entretenimiento',   url:'https://konfiozinc.github.io/calixto_acordeon_magico/' },
+        { title:'Deicy Buitrago',          sub:'Tarjeta Digital · Artista & Creadora',  cat:'belleza',      color:'244,114,182',tag:'Artista',           url:'https://konfiozinc.github.io/deicy-buitrago/' },
+        { title:'Proyecto DTA',            sub:'Landing Page · Proyecto Legal',          cat:'landing',      color:'0,229,255',  tag:'Landing Legal',     url:'https://konfiozinc.github.io/proyecto-dta/' },
+        { title:'NutriDrink',              sub:'Catálogo Digital · Nutrición & Bebidas', cat:'catalogos',    color:'74,222,128', tag:'Catálogo',          url:'https://konfiozinc.github.io/nutridrink/' },
+    ].map(p => ({ ...p, type: 'project', thumb: `https://image.thum.io/get/width/600/crop/900/${p.url}` }));
 
     const catLabels = {
-        tarjetas:    'Tarjeta Digital',
-        belleza:     'Belleza',
-        plataformas: 'Plataforma',
-        catalogos:   'Catálogo',
-        landing:     'Landing Page',
+        tarjetas:     'Tarjeta Digital',
+        belleza:      'Belleza',
+        plataformas:  'Plataforma',
+        catalogos:    'Catálogo',
+        landing:      'Landing Page',
+        inmobiliaria: 'Inmobiliaria',
     };
 
     function buildPortfolio() {
