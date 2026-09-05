@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+
+    <!-- ═══ SEO & DESCRIPCIÓN ══════════════════════════ -->
+    <title>KONFÍO ZINC | Tarjeta Digital Elite</title>
+    <meta name="description" content="Tarjetas digitales interactivas personalizadas para profesionales y negocios. Comparte tu contacto con un link o QR. Diseñadas en 24–48 horas. — KONFÍO ZINC">
+    <meta name="author" content="Darwin Montalvo — KONFÍO ZINC">
+    <link rel="canonical" href="https://konfiozinc.github.io/tarjetapre/">
+
+    <!-- ═══ OPEN GRAPH (WhatsApp · Facebook · LinkedIn) ═ -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://konfiozinc.github.io/tarjetapre/">
+    <meta property="og:title"       content="KONFÍO ZINC · Tarjeta Digital Elite">
+    <meta property="og:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
+    <meta property="og:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="es_CO">
+    <meta property="og:site_name"   content="KONFÍO ZINC">
+
+    <!-- ═══ TWITTER / X CARD ══════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="KONFÍO ZINC · Tarjeta Digital Elite">
+    <meta name="twitter:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
+    <meta name="twitter:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div class="glass-card">
+    <canvas id="sparkle-canvas"></canvas>
+
+    <div class="profile-banner">
+        <img id="banner-img"
+             src="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg"
+             alt="Banner KONFÍO ZINC"
+             onerror="this.onerror=null;this.src='https://placehold.co/400x210/000000/F0B429?text=KONF%C3%8DO+ZINC';">
+    </div>
+
+    <button class="qr-badge" id="qr-badge-btn" aria-label="Ver código QR">
+        <i class="fas fa-qrcode"></i>
+        <div class="qr-badge-text">
+            <span>ESCANEAR</span>
+            <span>Ver mi QR</span>
+        </div>
+    </button>
+
+    <div class="profile-avatar-wrap">
+        <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg"
+             alt="Darwin Montalvo"
+             class="profile-avatar"
+             onerror="this.onerror=null;this.src='https://placehold.co/100x100/111111/F0B429?text=DM';">
+    </div>
+
+    <div class="profile-info">
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            <span style="font-size:10px;color:var(--cyan);font-family:'Syne',sans-serif;letter-spacing:0.1em;text-transform:uppercase;">Disponible ahora</span>
+        </div>
+
+        <h1 class="profile-name">Darwin Montalvo</h1>
+        <span class="profile-brand">KONFÍO ZINC</span>
+        <p id="typewriter-text"></p>
+
+        <div class="visitor-counter">
+            <span class="vc-dot"></span>
+            <span><strong id="visitor-num">—</strong> personas vieron esta tarjeta</span>
+        </div>
+
+        <div class="delivery-badge">
+            <i class="fas fa-bolt"></i>
+            <span>Entrega en 24–48 h hábiles</span>
+        </div>
+
+        <div class="solicita-btn-wrapper">
+            <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
+               target="_blank" class="btn-gold">
+                <i class="fas fa-bolt"></i>
+                Solicita tu tarjeta
+            </a>
+        </div>
+    </div>
+
+    <div class="social-section">
+        <div class="social-row">
+            <a href="https://www.facebook.com/profile.php?id=61589654555930" target="_blank"
+               class="social-icon" style="background:#1877F2;box-shadow:0 4px 14px rgba(24,119,242,0.35);">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/konfiozinc" target="_blank"
+               class="social-icon"
+               style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:0 4px 14px rgba(220,39,67,0.35);">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@konfiozinc?_r=1&_t=ZS-96N3Vmh92tJ" target="_blank"
+               class="social-icon"
+               style="background:#0a0a0a;border:1.5px solid rgba(0,229,255,0.3);box-shadow:0 4px 14px rgba(0,229,255,0.12);">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="video-thumb-section reveal">
+        <button id="video-thumb-btn" class="video-thumb" style="width:100%;background:none;border:1px solid rgba(239,68,68,0.25);padding:0;">
+            <img src="https://img.youtube.com/vi/ndRhGLFUlLA/hqdefault.jpg"
+                 alt="Video KONFÍO ZINC"
+                 onerror="this.src='https://placehold.co/480x270/111/f87171?text=Ver+Video'">
+            <div class="video-thumb-overlay">
+                <div class="video-play-btn">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="video-thumb-caption">
+                <div class="video-thumb-title">¿Cómo es una tarjeta KONFÍO ZINC?</div>
+                <div class="video-thumb-sub">
+                    <span class="yt-badge">YT</span>
+                    Mira el video completo
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <div class="divider-gold"></div>
+
+    <div class="how-section reveal">
+        <p class="section-label">¿Cómo funciona?</p>
+        <div class="how-steps">
+            <div class="how-step">
+                <div class="how-num n1">1</div>
+                <div class="how-body">
+                    <div class="how-title">Escoge tu plan</div>
+                    <div class="how-desc">Revisa las opciones y elige la que se adapta a tu negocio. <span>Sin tecnicismos</span>, yo te asesoro.</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="how-num n2">2</div>
+                <div class="how-body">
+                    <div class="how-title">Envíame tu información</div>
+                    <div class="how-desc">Foto, nombre, teléfono y redes. En <span>24–48 horas</span> tienes tu tarjeta lista y revisada.</div>
+                </div>
+            </div>
+            <div class="how-step">
+                <div class="how-num n3">3</div>
+                <div class="how-body">
+                    <div class="how-title">Comparte y convierte</div>
+                    <div class="how-desc">Un link, un QR. Tus clientes te contactan con <span>un solo toque</span> desde cualquier celular.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider-gold"></div>
+
+    <div class="action-section reveal">
+        <p class="action-label">Interactúa · Conecta · Agenda</p>
+        <div class="action-grid">
+            <a href="tel:+573206411340" class="icon-box call-glow" style="text-decoration:none;">
+                <i class="fas fa-phone-alt" style="color:#4ade80;"></i>
+                <span class="icon-label">Llamar</span>
+            </a>
+            <button id="agenda-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-calendar-alt" style="color:var(--gold);"></i>
+                <span class="icon-label">Agenda</span>
+            </button>
+            <a href="mailto:konfiozinc@gmail.com" class="icon-box" style="text-decoration:none;">
+                <i class="fas fa-envelope" style="color:var(--orange);"></i>
+                <span class="icon-label">Correo</span>
+            </a>
+            <button id="services-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-list-check" style="color:var(--cyan);"></i>
+                <span class="icon-label">Servicios</span>
+            </button>
+            <button id="portfolio-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-images" style="color:#a855f7;"></i>
+                <span class="icon-label">Portafolio</span>
+            </button>
+            <button id="qr-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-qrcode" style="color:var(--cyan);"></i>
+                <span class="icon-label">QR</span>
+            </button>
+            <button id="save-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-address-card" style="color:#f472b6;"></i>
+                <span class="icon-label">Guardar</span>
+            </button>
+            <button id="install-btn" class="icon-box" style="border:1px solid rgba(255,255,255,0.08);">
+                <i class="fas fa-mobile-screen-button" style="color:#818cf8;"></i>
+                <span class="icon-label">Instalar</span>
+            </button>
+        </div>
+
+        <div style="text-align:center;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;">
+            <button id="compare-btn" class="video-btn" style="margin-top:0;border-color:rgba(240,180,41,0.3);color:var(--gold);background:rgba(240,180,41,0.07);">
+                <i class="fas fa-table-columns"></i>
+                Comparar planes
+            </button>
+            <button id="faq-btn" class="video-btn" style="margin-top:0;border-color:rgba(0,229,255,0.28);color:var(--cyan);background:rgba(0,229,255,0.06);">
+                <i class="fas fa-circle-question"></i>
+                Preguntas
+            </button>
+        </div>
+    </div>
+
+    <div class="divider-gold"></div>
+    <div class="testimonials-section reveal">
+        <p class="section-label">Lo que dicen mis clientes</p>
+        <div class="testimonials-scroll" id="testimonials-scroll">
+            <div class="testimonial-card">
+                <div class="t-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="t-text">"Mis pacientes me escriben directo desde la tarjeta. Es profesional, elegante y me ahorra explicar cómo contactarme."</p>
+                <div class="t-author">
+                    <div class="t-avatar">IR</div>
+                    <div>
+                        <div class="t-name">Dra. Isabela Rojas</div>
+                        <div class="t-role">Odontóloga · Estética Dental</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="t-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="t-text">"La entrega fue rapidísima y el resultado superó mis expectativas. Ya tengo agenda llena gracias al botón de citas."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,var(--cyan),#007799);">RP</div>
+                    <div>
+                        <div class="t-name">Regina Pereira</div>
+                        <div class="t-role">Nails &amp; Academy</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="t-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="t-text">"Compartir mi menú por WhatsApp cambió todo. Los clientes ven los precios sin pedirlos y llegan listos para comprar."</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background:linear-gradient(135deg,var(--orange),#b45309);">DD</div>
+                    <div>
+                        <div class="t-name">Dulce Delicia</div>
+                        <div class="t-role">Pastelería Artesanal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="t-dots" id="t-dots">
+            <div class="t-dot active"></div>
+            <div class="t-dot"></div>
+            <div class="t-dot"></div>
+        </div>
+    </div>
+
+    <div class="divider-gold"></div>
+    <div class="clients-section reveal">
+        <p class="section-label">Profesionales que ya confían en KONFÍO ZINC</p>
+        <div class="clients-grid">
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="58">0</span>+
+                </div>
+                <div class="client-stat-label">Clientes<br>atendidos</div>
+            </div>
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="6">0</span>
+                </div>
+                <div class="client-stat-label">Ciudades<br>en Colombia</div>
+            </div>
+            <div class="client-stat">
+                <div class="client-stat-num">
+                    <span class="count-up" data-target="8">0</span>
+                </div>
+                <div class="client-stat-label">Sectores<br>diferentes</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="guarantee-section reveal">
+        <div class="guarantee-icon">
+            <i class="fas fa-shield-halved" style="color:var(--gold);"></i>
+        </div>
+        <h3 class="guarantee-title">Garantía de Satisfacción</h3>
+        <p class="guarantee-text">
+            Si en <span>3 días hábiles</span> no quedas satisfecho con tu tarjeta,
+            la <span>rediseño sin costo adicional</span> hasta que quedes feliz con el resultado.
+        </p>
+        <span class="guarantee-badge">
+            <i class="fas fa-circle-check"></i>
+            Sin riesgo · Sin letra pequeña
+        </span>
+    </div>
+
+    <div class="card-footer">
+        <a href="https://wa.me/573206411340?text=Oye%2C%20te%20recomiendo%20la%20tarjeta%20digital%20de%20Darwin%20Montalvo%20%E2%80%94%20KONF%C3%8DO%20ZINC.%20M%C3%ADrala%20aqu%C3%AD%3A%20https%3A%2F%2Fkonfiozinc.github.io%2Ftarjetapre%2F"
+           target="_blank" class="recommend-btn">
+            <i class="fas fa-share-nodes"></i>
+            Recomiéndame a un amigo
+        </a>
+        <p id="footer-tap" class="footer-tap-hint" title="Triple toque para estadísticas">© 2026 KONFÍO ZINC · Transformamos contactos en experiencias</p>
+    </div>
+
+</div>
+
+<a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20quiero%20mi%20tarjeta%20digital%20personalizada"
+   target="_blank" class="whatsapp-fixed" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<div class="wa-fixed-ring"></div>
+
+<!-- MODALES -->
+<div id="qr-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.88);">
+    <div class="modal-content glass-modal rounded-2xl p-6 text-center max-w-xs w-full relative">
+        <button class="modal-close absolute top-3 right-3 modal-close-btn">&times;</button>
+        <p style="font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:0.14em;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;">KONFÍO ZINC</p>
+        <h3 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:16px;">Escanea y comparte</h3>
+        <div class="qr-wrapper mx-auto mb-4">
+            <div id="qrcode-container" class="flex justify-center"></div>
+            <img src="https://i.postimg.cc/L8Ns16L1/Whats-App-Image-2026-05-10-at-14-52-22.jpg" alt="Logo" class="qr-center-logo" onerror="this.style.display='none'">
+        </div>
+        <p style="font-size:12px;color:#999;margin-bottom:8px;">Apunta la cámara de tu móvil a este código</p>
+        <button id="native-share-btn" class="hidden" style="margin-top:10px;width:100%;padding:10px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;border:none;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;">
+            <i class="fas fa-share-alt mr-2"></i>Compartir ahora
+        </button>
+    </div>
+</div>
+
+<div id="agenda-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.88);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[95vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-gold">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-calendar-alt" style="color:var(--gold);"></i>
+                <span>Agenda tu Cita</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div id="agenda-content" class="p-4 overflow-y-auto flex-grow"></div>
+    </div>
+</div>
+
+<div id="services-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.88);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <div class="modal-hdr modal-hdr-cyan" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-list-check" style="color:var(--cyan);"></i>
+                <span>Servicios</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4">
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(0,229,255,0.1);">
+                    <i class="fas fa-id-card" style="color:var(--cyan);"></i>
+                </div>
+                <div>
+                    <div class="service-name">Tarjetas Digitales Profesionales</div>
+                    <div class="service-desc">Tu presentación interactiva: contacto, redes, QR, galería y agenda en un solo link.</div>
+                    <span class="price-tag">Entrega 24–48 h</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20una%20Tarjeta%20Digital%20Profesional%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(240,180,41,0.1);">
+                    <i class="fas fa-rocket" style="color:var(--gold);"></i>
+                </div>
+                <div>
+                    <div class="service-name">Landing Pages de Conversión</div>
+                    <div class="service-desc">Páginas con scroll completo, secciones de venta, video y testimonios para convertir visitantes en clientes.</div>
+                    <span class="price-tag">A medida</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20una%20Landing%20Page%20de%20Conversi%C3%B3n%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(74,222,128,0.1);">
+                    <i class="fas fa-table-cells-large" style="color:#4ade80;"></i>
+                </div>
+                <div>
+                    <div class="service-name">Catálogos Digitales para WhatsApp</div>
+                    <div class="service-desc">Carta o catálogo interactivo con fotos, precios y pedido directo por WhatsApp.</div>
+                    <span class="price-tag">Ideal para negocios</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20me%20interesa%20un%20Cat%C3%A1logo%20Digital%20para%20WhatsApp%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(168,85,247,0.1);">
+                    <i class="fas fa-wand-magic-sparkles" style="color:#a855f7;"></i>
+                </div>
+                <div>
+                    <div class="service-name">Soluciones Digitales Personalizadas</div>
+                    <div class="service-desc">¿Tienes una idea distinta? Desarrollo a la medida según las necesidades de tu negocio.</div>
+                    <span class="price-tag">Cotización personalizada</span>
+                    <br>
+                    <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20tengo%20un%20proyecto%20personalizado%20que%20quiero%20cotizar%20%F0%9F%91%8B" target="_blank" class="service-wa-btn"><i class="fab fa-whatsapp"></i> Cotizar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="portfolio-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.88);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-lg max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-purple">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-images" style="color:#a855f7;"></i>
+                <span>Portafolio</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <p class="section-label" style="margin-bottom:8px;color:var(--gold);letter-spacing:0.1em;">
+                ★ PROYECTOS REALIZADOS
+            </p>
+            <div class="portfolio-filters" id="pf-filters">
+                <button class="pf-btn active" data-cat="todos">Todos</button>
+                <button class="pf-btn" data-cat="tarjetas">🪪 Tarjetas</button>
+                <button class="pf-btn" data-cat="belleza">💅 Belleza</button>
+                <button class="pf-btn" data-cat="catalogos">🍽 Catálogos</button>
+                <button class="pf-btn" data-cat="inmobiliaria">🏠 Inmobiliaria</button>
+                <button class="pf-btn" data-cat="landing">🌐 Landing</button>
+                <button class="pf-btn" data-cat="plataformas">🚀 Plataformas</button>
+            </div>
+            
+            <div class="portfolio-grid" id="pf-grid"></div>
+
+            <div class="upcoming-section">
+                <p class="section-label" style="margin-bottom:8px;color:var(--cyan);letter-spacing:0.1em;">⏳ FUTUROS PROYECTOS</p>
+                <div class="upcoming-wrap">
+                    <div class="upcoming-chip">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="upcoming-chip-name">Profitron</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="upcoming-chip">
+                        <i class="fas fa-scale-balanced"></i>
+                        <div class="upcoming-chip-name">LEX360</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="upcoming-chip">
+                        <i class="fas fa-plus"></i>
+                        <div class="upcoming-chip-name">Tu proyecto aquí</div>
+                        <span class="upcoming-badge">PRÓXIMAMENTE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="full-image-modal" class="modal-overlay fixed inset-0 flex items-center justify-center z-[60] opacity-0 invisible" onclick="this.classList.remove('active')" style="display:none;background:rgba(0,0,0,0.96);">
+    <img id="full-image" src="" class="max-w-full max-h-full rounded-lg" style="box-shadow:0 0 40px rgba(240,180,41,0.18);" alt="Vista ampliada">
+</div>
+
+<div id="install-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.88);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <div class="modal-hdr modal-hdr-indigo" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-download" style="color:#818cf8;"></i>
+                <span>Instalar en tu móvil</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4" style="display:flex;flex-direction:column;gap:12px;">
+            <button id="pwa-install-native">
+                <i class="fas fa-download"></i>
+                Instalar KONFÍO ZINC en este dispositivo
+            </button>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;">
+                <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--cyan);margin-bottom:8px;">
+                    <i class="fab fa-apple mr-2"></i>iOS (Safari)
+                </h4>
+                <ol style="list-style:decimal;margin-left:18px;font-size:13px;color:#aaa;line-height:1.9;">
+                    <li>Toca <strong style="color:#ccc;">Compartir</strong> <i class="fas fa-share-square" style="color:#818cf8;"></i></li>
+                    <li>Selecciona <strong style="color:#ccc;">"Añadir a pantalla de inicio"</strong></li>
+                    <li>Confirma con <strong style="color:#ccc;">"Añadir"</strong></li>
+                </ol>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px;">
+                <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--gold);margin-bottom:8px;">
+                    <i class="fab fa-android mr-2"></i>Android (Chrome)
+                </h4>
+                <ol style="list-style:decimal;margin-left:18px;font-size:13px;color:#aaa;line-height:1.9;">
+                    <li>Toca los <strong style="color:#ccc;">tres puntos</strong> <i class="fas fa-ellipsis-v" style="color:var(--gold);"></i></li>
+                    <li>Selecciona <strong style="color:#ccc;">"Instalar aplicación"</strong></li>
+                    <li>Confirma la instalación</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="video-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.92);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-2xl overflow-hidden">
+        <div class="modal-hdr modal-hdr-red">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-play" style="color:#f87171;"></i>
+                <span>Video Promocional</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div style="position:relative;aspect-ratio:16/9;background:#000;">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ndRhGLFUlLA" title="Video KONFÍO ZINC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
+        </div>
+    </div>
+</div>
+
+<div id="compare-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.9);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-gold" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-table-columns" style="color:var(--gold);"></i>
+                <span>Comparar Planes</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <p style="font-size:11px;color:#999;text-align:center;margin-bottom:14px;font-family:'Syne',sans-serif;letter-spacing:0.04em;">¿Cuál es el ideal para ti?</p>
+            <div class="compare-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th class="col-feature">Característica</th>
+                            <th class="col-basic">Básica<br><span style="font-weight:400;font-size:10px;color:#999;">$70K</span></th>
+                            <th class="col-pro">⭐ Pro<br><span style="font-weight:400;font-size:10px;color:#aaa;">$120K</span></th>
+                            <th class="col-premium">Premium<br><span style="font-weight:400;font-size:10px;color:#aaa;">$170K</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feat-name">Datos de contacto</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Redes sociales</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Botón WhatsApp</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Código QR</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Galería de fotos</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Ubicación / Maps</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Guardar contacto</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Video promocional</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Agendamiento</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr><td class="feat-name">Animaciones premium</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td></tr>
+                        <tr class="price-row">
+                            <td class="feat-name" style="color:#888;font-size:11px;">Precio desde</td>
+                            <td class="col-basic">$70K</td>
+                            <td class="col-pro">$120K</td>
+                            <td class="col-premium">$170K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20vi%20la%20comparativa%20y%20quiero%20la%20Tarjeta%20Profesional%20%F0%9F%91%8B" target="_blank" style="display:block;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;text-decoration:none;">
+                    <i class="fas fa-bolt mr-2"></i>Quiero la Profesional — la más popular
+                </a>
+                <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20tengo%20dudas%20sobre%20los%20planes%20%F0%9F%91%8B" target="_blank" style="display:block;padding:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#aaa;border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;text-decoration:none;">
+                    Tengo dudas, quiero asesoría
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="faq-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.9);">
+    <div class="modal-content glass-modal rounded-2xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-cyan" style="position:sticky;top:0;z-index:10;">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-circle-question" style="color:var(--cyan);"></i>
+                <span>Preguntas Frecuentes</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Necesito instalar alguna app?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">No. Tu tarjeta se abre directamente desde el navegador del celular — <span>sin descargas</span>. Funciona en Android, iPhone y cualquier dispositivo con internet.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cuánto tarda en estar lista?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Entre <span>24 y 48 horas hábiles</span> desde que confirmas el pago y me envías tu información. Revisión incluida antes de la entrega final.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Puedo actualizar el contenido después?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Sí. Puedes solicitar cambios (foto, número, servicios, precios). Las actualizaciones tienen un <span>costo mínimo adicional</span> según la complejidad.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cómo la comparto con mis clientes?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Por <span>link directo</span> (WhatsApp, Instagram, email), por <span>código QR</span> impreso en tu empaque o local, o agregándola a tu bio de redes.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Funciona sin internet?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Necesita conexión para abrirse la primera vez. En el plan Premium puede instalarse como app en el celular y cargar más rápido en usos posteriores.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Qué necesito para empezar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Solo tu <span>foto, nombre, ocupación, teléfono y redes sociales</span>. Yo me encargo del diseño y la publicación. No necesitas saber de tecnología.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q"><span class="faq-q-text">¿Cómo realizo el pago?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                <div class="faq-a">Acepto <span>Nequi, Daviplata, transferencia bancaria</span> y efectivo. El pago es anticipado para comenzar el diseño.</div>
+            </div>
+            <a href="https://wa.me/573206411340?text=Hola%20Darwin%2C%20le%C3%AD%20las%20preguntas%20frecuentes%20y%20a%C3%BAn%20tengo%20una%20duda%20%F0%9F%91%8B" target="_blank" style="display:block;margin-top:16px;padding:11px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);color:var(--cyan);border-radius:12px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;text-decoration:none;">
+                <i class="fab fa-whatsapp mr-2"></i>Tengo otra pregunta
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="analytics-modal" class="modal-overlay fixed inset-0 flex items-center justify-center p-4 z-50 opacity-0 invisible" style="display:none;background:rgba(0,0,0,0.92);">
+    <div class="modal-content analytics-modal-inner rounded-2xl w-full max-w-sm max-h-[88vh] overflow-hidden flex flex-col">
+        <div class="modal-hdr modal-hdr-gold">
+            <div style="display:flex;align-items:center;gap:9px;">
+                <i class="fas fa-chart-bar" style="color:var(--gold);"></i>
+                <span>Estadísticas de uso</span>
+            </div>
+            <button class="modal-close modal-close-btn">&times;</button>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow">
+            <p style="font-size:11px;color:#555;font-family:'Syne',sans-serif;margin-bottom:14px;letter-spacing:0.04em;">Interacciones registradas en este dispositivo</p>
+            <div id="analytics-content">
+                <div class="stat-empty">Aún no hay datos registrados</div>
+            </div>
+            <button id="analytics-clear" style="width:100%;margin-top:16px;padding:9px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);color:#f87171;border-radius:10px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;">
+                <i class="fas fa-trash-alt mr-2"></i>Limpiar estadísticas
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script src="scripts.js"></script>
+
+</body>
+</html>
