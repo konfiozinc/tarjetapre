@@ -1,0 +1,305 @@
+/* ══════════════════════════════════════════════════════════
+   KONFÍO ZINC · Tarjeta digital ejecutiva premium
+   Paleta: negro #0A0A0A · dorado #C9A961 · blanco · gris acero
+══════════════════════════════════════════════════════════ */
+:root {
+  --bg: #0A0A0A;
+  --bg-soft: #141414;
+  --gold: #C9A961;
+  --gold-soft: #E0C58A;
+  --white: #FFFFFF;
+  --steel: #E5E5E5;
+  --gray: #9C9C9C;
+  --line: rgba(201,169,97,0.22);
+  --radius: 18px;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--gold); color: #000; padding: 10px 16px;
+  border-radius: 0 0 10px 0; z-index: 100; text-decoration: none; font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+
+/* ══════════ TARJETA CONTENEDOR ══════════ */
+.card {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 32px 20px 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ══════════ HERO ══════════ */
+.hero {
+  text-align: center;
+  padding-top: 18px;
+  animation: fadeUp .7s ease both;
+}
+.logo-mark {
+  width: 64px; height: 64px;
+  margin: 0 auto 14px;
+  display: grid; place-items: center;
+  font-family: var(--font-serif);
+  font-size: 24px; font-weight: 800;
+  color: var(--gold);
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #17140c, #0f0e0a);
+  letter-spacing: 0.02em;
+}
+.brand {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.brand .gold { color: var(--gold); }
+.tagline {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--steel);
+}
+.hero-sub {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--gray);
+}
+.hero-cta {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ══════════ BOTONES ══════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 15px; font-weight: 700;
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #a8863f);
+  color: #000;
+  box-shadow: 0 8px 22px rgba(201,169,97,0.28);
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.04);
+  color: var(--steel);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.btn-wa-large {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  font-size: 16px; font-weight: 800;
+  text-decoration: none;
+  background: #25D366; color: #062b16;
+  box-shadow: 0 8px 24px rgba(37,211,102,0.28);
+  transition: transform .18s ease;
+}
+.btn-wa-large:active { transform: scale(.98); }
+
+/* ══════════ BARRA DE CONFIANZA ══════════ */
+.trust-bar {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-size: 12.5px; font-weight: 600; color: var(--gold-soft);
+  animation: fadeUp .7s .08s ease both;
+}
+.trust-bar .dot { color: var(--gray); }
+
+/* ══════════ SECCIONES ══════════ */
+.section { display: flex; flex-direction: column; gap: 14px; }
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 800;
+  color: var(--white);
+}
+.section-title::after {
+  content: "";
+  display: block; width: 36px; height: 3px;
+  margin-top: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ══════════ SERVICIOS (grid 2×3) ══════════ */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.service {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 16px 14px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  transition: transform .2s ease, border-color .2s ease;
+}
+.service:hover { border-color: var(--line); transform: translateY(-3px); }
+.service-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  font-size: 18px; color: var(--gold);
+  background: rgba(201,169,97,0.10);
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+.service-name { font-size: 14px; font-weight: 700; line-height: 1.25; }
+.service-desc { font-size: 12px; line-height: 1.45; color: var(--gray); }
+.service-price { font-size: 13px; font-weight: 700; color: var(--gold-soft); }
+.service-link {
+  margin-top: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 700;
+  color: #25D366;
+  text-decoration: none;
+}
+.service-link:hover { text-decoration: underline; }
+
+/* ══════════ TESTIMONIOS ══════════ */
+.testimonials { display: flex; flex-direction: column; gap: 12px; }
+.testimonial {
+  padding: 16px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+}
+.stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 8px; }
+.testimonial blockquote {
+  font-size: 13.5px; line-height: 1.55; color: var(--steel);
+  quotes: "“" "”";
+}
+.testimonial figcaption {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 12px;
+  font-size: 12px; color: var(--gray); line-height: 1.4;
+}
+.testimonial figcaption strong { color: var(--white); font-size: 13px; }
+.t-avatar {
+  width: 36px; height: 36px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #7a5f28);
+  color: #000; font-weight: 800; font-size: 13px;
+}
+
+/* ══════════ CONTACTO ══════════ */
+.socials { display: flex; justify-content: center; gap: 12px; }
+.social {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: 19px; color: #fff; text-decoration: none;
+  transition: transform .18s ease;
+}
+.social:active { transform: scale(.94); }
+.social.fb { background: #1877F2; }
+.social.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social.tk { background: #0a0a0a; border: 1.5px solid rgba(255,255,255,0.25); }
+.contact-meta {
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 13px; color: var(--gray);
+}
+.meta-line { display: flex; align-items: center; gap: 8px; }
+.meta-line i { color: var(--gold); width: 16px; text-align: center; }
+
+/* ══════════ FOOTER ══════════ */
+.footer {
+  text-align: center;
+  font-size: 12px; color: var(--gray);
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-links {
+  margin-top: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.footer-links a, .share-btn {
+  color: var(--gold-soft);
+  text-decoration: none;
+  font-size: 12px; font-weight: 600;
+  background: none; border: none; cursor: pointer;
+  padding: 0; font-family: inherit;
+}
+.footer-links a:hover, .share-btn:hover { text-decoration: underline; }
+
+/* ══════════ WHATSAPP FLOTANTE ══════════ */
+.wa-float {
+  position: fixed;
+  right: 18px; bottom: 18px;
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #25D366; color: #fff;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+  z-index: 50;
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); }
+  70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* ══════════ ANIMACIONES ══════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ══════════ ESCRITORIO (tarjeta centrada) ══════════ */
+@media (min-width: 520px) {
+  body { padding: 24px; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    min-height: 0;
+    background: linear-gradient(180deg, #0d0c0a, #0A0A0A);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+}

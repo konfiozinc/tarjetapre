@@ -1,8 +1,10 @@
-/* Service worker — KONFÍO ZINC · Tarjeta Elite */
-const CACHE = 'tarjetapre-v1';
+/* Service worker — KONFÍO ZINC · Tarjeta digital */
+const CACHE = 'tarjetapre-v2';
 const PRECACHE = [
   './',
   './index.html',
+  './styles.css',
+  './scripts.js',
   './manifest.json',
   './og-image.jpg',
   './icons/favicon-64.png',
