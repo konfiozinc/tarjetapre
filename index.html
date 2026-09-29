@@ -2242,6 +2242,7 @@
             if (typeof gtag === 'function') {
               gtag('event', 'generate_lead', { event_category: 'venta_potencial', event_label: motivo, transport_type: 'beacon' });
             }
+            if (typeof window.kzTrack === 'function') { window.kzTrack('generate_lead', motivo); }
             const dateStr2 = selDate.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
             const txt = `✅ *NUEVA CITA*%0A%0A📅 *Fecha:* ${dateStr2}%0A🕐 *Hora:* ${selTime}%0A👤 *Nombre:* ${nombre}%0A📧 *Email:* ${email}%0A🎯 *Motivo:* ${motivo}%0A💬 *Mensaje:* ${mensaje||'No especificado'}`;
             document.getElementById('agenda-content').innerHTML = `
