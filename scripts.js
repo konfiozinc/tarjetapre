@@ -54,6 +54,8 @@
 
       var dots = [];
       var current = 0;
+      var autoTimer = null;
+      var AUTOPLAY_MS = 4000;
 
       function goTo(i) {
         var n = slides.length;
@@ -66,6 +68,14 @@
         dots.forEach(function (d, idx) { d.classList.toggle('active', idx === current); });
       }
 
+      function startAutoplay() {
+        stopAutoplay();
+        autoTimer = setInterval(function () { goTo(current + 1); }, AUTOPLAY_MS);
+      }
+      function stopAutoplay() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+
       // construir dots
       if (dotsWrap) {
         dotsWrap.innerHTML = '';
@@ -74,14 +84,32 @@
           b.type = 'button';
           b.className = 'dot' + (idx === 0 ? ' active' : '');
           b.setAttribute('aria-label', 'Ir a la diapositiva ' + (idx + 1));
-          b.addEventListener('click', function () { goTo(idx); });
+          b.addEventListener('click', function () { goTo(idx); startAutoplay(); });
           dotsWrap.appendChild(b);
           dots.push(b);
         });
       }
 
-      if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
-      if (next) next.addEventListener('click', function () { goTo(current + 1); });
+      if (prev) prev.addEventListener('click', function () { goTo(current - 1); startAutoplay(); });
+      if (next) next.addEventListener('click', function () { goTo(current + 1); startAutoplay(); });
+
+      // pausar autoplay al interactuar (hover/touch) y reanudar al salir
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', startAutoplay);
+      root.addEventListener('touchstart', stopAutoplay, { passive: true });
+      root.addEventListener('touchend', startAutoplay, { passive: true });
+
+      // pausar cuando el carrusel no está visible
+      if ('IntersectionObserver' in window) {
+        var visIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { startAutoplay(); } else { stopAutoplay(); }
+          });
+        }, { threshold: 0.3 });
+        visIO.observe(root);
+      } else {
+        startAutoplay();
+      }
 
       // sincronizar dot activo al hacer scroll manual (swipe)
       var syncTicking = false;
