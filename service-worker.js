@@ -1,5 +1,5 @@
 /* Service worker — KONFÍO ZINC · Tarjeta digital */
-const CACHE = 'tarjetapre-v2';
+const CACHE = 'tarjetapre-v3';
 const PRECACHE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const PRECACHE = [
   './scripts.js',
   './manifest.json',
   './og-image.jpg',
+  './assets/logo.jpeg',
   './icons/favicon-64.png',
   './icons/icon-192.png',
   './icons/icon-512.png',

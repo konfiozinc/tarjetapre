@@ -32,7 +32,7 @@
 
 <!-- ═══ PWA ═══════════════════════════════════════════ -->
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="icon" type="image/jpeg" href="assets/logo.jpeg">
 <link rel="apple-touch-icon" href="icons/apple-touch-180.png">
 
 <!-- ═══ GA4 ═══════════════════════════════════════════ -->
@@ -54,6 +54,7 @@
   "description": "Agencia de soluciones digitales: tarjetas digitales, catálogos digitales, menús digitales, landing pages, códigos QR y agentes IA para negocios en Colombia.",
   "url": "https://konfiozinc.github.io/tarjetapre/",
   "image": "https://konfiozinc.github.io/tarjetapre/og-image.jpg",
+  "logo": "https://konfiozinc.github.io/tarjetapre/assets/logo.jpeg",
   "email": "konfiozinc@gmail.com",
   "telephone": "+573206411340",
   "priceRange": "$$",
@@ -98,118 +99,122 @@
 <main id="contenido" class="card">
   <!-- ═══ HERO ═══ -->
   <header class="hero">
-    <div class="logo-mark" aria-hidden="true">KZ</div>
+    <img class="logo-img" src="assets/logo.jpeg" alt="Logotipo de KONFÍO ZINC" width="84" height="84">
     <h1 class="brand">KONFÍO <span class="gold">ZINC</span></h1>
     <p class="tagline">Soluciones digitales que generan resultados</p>
-    <p class="hero-sub">Creamos las herramientas digitales que tu negocio necesita para conseguir más clientes: tarjetas, catálogos, menús con QR, landing pages y agentes IA.</p>
 
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://wa.me/573206411340?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20para%20mi%20negocio" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp" aria-hidden="true"></i> Cotiza tu proyecto gratis
-      </a>
-      <a class="btn btn-ghost" href="#servicios">
-        <i class="fas fa-layer-group" aria-hidden="true"></i> Ver servicios
       </a>
     </div>
   </header>
 
   <!-- ═══ BARRA DE CONFIANZA ═══ -->
   <div class="trust-bar" aria-label="Trayectoria de KONFÍO ZINC">
-    <span>⭐ 5+ años</span>
-    <span class="dot">·</span>
-    <span>58+ proyectos</span>
-    <span class="dot">·</span>
-    <span>45+ clientes</span>
-    <span class="dot">·</span>
-    <span>10+ sectores</span>
+    <span>⭐ 5+ años</span><span class="dot">·</span><span>58+ proyectos</span><span class="dot">·</span><span>45+ clientes</span><span class="dot">·</span><span>10+ sectores</span>
   </div>
 
-  <!-- ═══ SERVICIOS ═══ -->
-  <section id="servicios" class="section" aria-labelledby="titulo-servicios">
+  <!-- ═══ SERVICIOS (carrusel) ═══ -->
+  <section class="section" aria-labelledby="titulo-servicios">
     <h2 id="titulo-servicios" class="section-title">Servicios</h2>
 
-    <div class="services-grid">
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-id-card"></i></div>
-        <h3 class="service-name">Tarjetas Digitales</h3>
-        <p class="service-desc">Tu presentación completa: contacto, redes, ubicación y QR.</p>
-        <span class="service-price">Desde $49.900</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20una%20Tarjeta%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+    <div class="carousel" data-carousel data-loop="true">
+      <div class="carousel-track" data-track>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-id-card"></i></div>
+          <h3 class="service-name">Tarjetas Digitales</h3>
+          <p class="service-desc">Tu presentación completa: contacto, redes, ubicación y QR.</p>
+          <span class="service-price">Desde $49.900</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20una%20Tarjeta%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
 
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-book-open"></i></div>
-        <h3 class="service-name">Catálogos Digitales</h3>
-        <p class="service-desc">Productos con fotos y precios actualizables.</p>
-        <span class="service-price">Desde $120.000</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Cat%C3%A1logo%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-book-open"></i></div>
+          <h3 class="service-name">Catálogos Digitales</h3>
+          <p class="service-desc">Productos con fotos y precios actualizables.</p>
+          <span class="service-price">Desde $120.000</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Cat%C3%A1logo%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
 
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-utensils"></i></div>
-        <h3 class="service-name">Menús Digitales</h3>
-        <p class="service-desc">Menús con QR y pedido directo por WhatsApp.</p>
-        <span class="service-price">Desde $150.000</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Men%C3%BA%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-utensils"></i></div>
+          <h3 class="service-name">Menús Digitales</h3>
+          <p class="service-desc">Menús con QR y pedido directo por WhatsApp.</p>
+          <span class="service-price">Desde $150.000</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Men%C3%BA%20Digital" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
 
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-rocket"></i></div>
-        <h3 class="service-name">Landing Pages</h3>
-        <p class="service-desc">Páginas enfocadas en convertir visitantes en clientes.</p>
-        <span class="service-price">Desde $699.000</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20una%20Landing%20Page" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-rocket"></i></div>
+          <h3 class="service-name">Landing Pages</h3>
+          <p class="service-desc">Páginas enfocadas en convertir visitantes en clientes.</p>
+          <span class="service-price">Desde $699.000</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20una%20Landing%20Page" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
 
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-qrcode"></i></div>
-        <h3 class="service-name">Códigos QR</h3>
-        <p class="service-desc">QR con tu logo para mesas, vitrinas o empaques.</p>
-        <span class="service-price">Desde $50.000</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20C%C3%B3digo%20QR" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-qrcode"></i></div>
+          <h3 class="service-name">Códigos QR</h3>
+          <p class="service-desc">QR con tu logo para mesas, vitrinas o empaques.</p>
+          <span class="service-price">Desde $50.000</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20C%C3%B3digo%20QR" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
 
-      <article class="service">
-        <div class="service-icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
-        <h3 class="service-name">Agentes IA</h3>
-        <p class="service-desc">Asistente que responde y agenda citas 24/7.</p>
-        <span class="service-price">Desde $250.000</span>
-        <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Agente%20IA" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
-      </article>
+        <article class="service" data-slide>
+          <div class="service-icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
+          <h3 class="service-name">Agentes IA</h3>
+          <p class="service-desc">Asistente que responde y agenda citas 24/7.</p>
+          <span class="service-price">Desde $250.000</span>
+          <a class="service-link" href="https://wa.me/573206411340?text=Hola%2C%20me%20interesa%20un%20Agente%20IA" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Consultar</a>
+        </article>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow prev" data-prev aria-label="Servicio anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+        <div class="carousel-dots" data-dots></div>
+        <button class="carousel-arrow next" data-next aria-label="Servicio siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ TESTIMONIOS ═══ -->
+  <!-- ═══ TESTIMONIOS (carrusel) ═══ -->
   <section class="section" aria-labelledby="titulo-testimonios">
     <h2 id="titulo-testimonios" class="section-title">Lo que dicen</h2>
 
-    <div class="testimonials">
-      <figure class="testimonial">
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <blockquote>"Mi tarjeta digital cambió todo: mis pacientes me escriben directo desde el celular. En tres meses las citas subieron 250%."</blockquote>
-        <figcaption>
-          <span class="t-avatar" aria-hidden="true">IR</span>
-          <span><strong>Dra. Isabela Rojas</strong><br>Odontóloga · Estética Dental</span>
-        </figcaption>
-      </figure>
+    <div class="carousel" data-carousel data-loop="true">
+      <div class="carousel-track" data-track>
+        <figure class="testimonial" data-slide>
+          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote>"Mi tarjeta digital cambió todo: mis pacientes me escriben directo desde el celular. En tres meses las citas subieron 250%."</blockquote>
+          <figcaption>
+            <span class="t-avatar" aria-hidden="true">IR</span>
+            <span><strong>Dra. Isabela Rojas</strong><br>Odontóloga · Estética Dental</span>
+          </figcaption>
+        </figure>
 
-      <figure class="testimonial">
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <blockquote>"El menú digital con QR triplicó mis pedidos por WhatsApp. Los clientes ven los platos y precios sin preguntar."</blockquote>
-        <figcaption>
-          <span class="t-avatar" aria-hidden="true">ET</span>
-          <span><strong>EL TITI</strong><br>Restaurante · Bello, Antioquia</span>
-        </figcaption>
-      </figure>
+        <figure class="testimonial" data-slide>
+          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote>"El menú digital con QR triplicó mis pedidos por WhatsApp. Los clientes ven los platos y precios sin preguntar."</blockquote>
+          <figcaption>
+            <span class="t-avatar" aria-hidden="true">ET</span>
+            <span><strong>EL TITI</strong><br>Restaurante · Bello, Antioquia</span>
+          </figcaption>
+        </figure>
 
-      <figure class="testimonial">
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <blockquote>"Desde que rediseñaron nuestra presencia digital, los clientes llegan sabiendo qué hacemos. Las consultas crecieron 150%."</blockquote>
-        <figcaption>
-          <span class="t-avatar" aria-hidden="true">AD</span>
-          <span><strong>Alí Montalvo</strong><br>Socio director · Abogados DTA</span>
-        </figcaption>
-      </figure>
+        <figure class="testimonial" data-slide>
+          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote>"Desde que rediseñaron nuestra presencia digital, los clientes llegan sabiendo qué hacemos. Las consultas crecieron 150%."</blockquote>
+          <figcaption>
+            <span class="t-avatar" aria-hidden="true">AD</span>
+            <span><strong>Alí Montalvo</strong><br>Socio director · Abogados DTA</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow prev" data-prev aria-label="Testimonio anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+        <div class="carousel-dots" data-dots></div>
+        <button class="carousel-arrow next" data-next aria-label="Testimonio siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+      </div>
     </div>
   </section>
 
@@ -244,7 +249,7 @@
   </footer>
 </main>
 
-<!-- ═══ WHATSAPP FLOTANTE ═══ -->
+<!-- ═══ WHATSAPP FLOTANTE (anclado al contenedor) ═══ -->
 <a href="https://wa.me/573206411340?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20gratis%20para%20mi%20negocio" target="_blank" rel="noopener" class="wa-float" aria-label="Escribir por WhatsApp">
   <i class="fab fa-whatsapp" aria-hidden="true"></i>
 </a>

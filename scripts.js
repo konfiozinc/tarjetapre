@@ -40,9 +40,73 @@
   }, true);
   window.kzTrack = kz;
 
+  /* ── Carrusel (servicios y testimonios) ── */
+  function initCarousels() {
+    document.querySelectorAll('[data-carousel]').forEach(function (root) {
+      var track = root.querySelector('[data-track]');
+      var dotsWrap = root.querySelector('[data-dots]');
+      var prev = root.querySelector('[data-prev]');
+      var next = root.querySelector('[data-next]');
+      if (!track) return;
+
+      var slides = Array.prototype.slice.call(track.querySelectorAll('[data-slide]'));
+      if (!slides.length) return;
+
+      var dots = [];
+      var current = 0;
+
+      function goTo(i) {
+        var n = slides.length;
+        current = ((i % n) + n) % n;
+        var slide = slides[current];
+        if (slide && track.scrollTo) {
+          var left = slide.offsetLeft - track.offsetLeft;
+          track.scrollTo({ left: left, behavior: 'smooth' });
+        }
+        dots.forEach(function (d, idx) { d.classList.toggle('active', idx === current); });
+      }
+
+      // construir dots
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        slides.forEach(function (_, idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'dot' + (idx === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Ir a la diapositiva ' + (idx + 1));
+          b.addEventListener('click', function () { goTo(idx); });
+          dotsWrap.appendChild(b);
+          dots.push(b);
+        });
+      }
+
+      if (prev) prev.addEventListener('click', function () { goTo(current - 1); });
+      if (next) next.addEventListener('click', function () { goTo(current + 1); });
+
+      // sincronizar dot activo al hacer scroll manual (swipe)
+      var syncTicking = false;
+      track.addEventListener('scroll', function () {
+        if (syncTicking) return;
+        syncTicking = true;
+        requestAnimationFrame(function () {
+          var mid = track.scrollLeft + track.clientWidth / 2;
+          var best = 0, bestDist = Infinity;
+          slides.forEach(function (s, idx) {
+            var center = s.offsetLeft - track.offsetLeft + s.clientWidth / 2;
+            var d = Math.abs(center - mid);
+            if (d < bestDist) { bestDist = d; best = idx; }
+          });
+          current = best;
+          dots.forEach(function (d, idx) { d.classList.toggle('active', idx === best); });
+          syncTicking = false;
+        });
+      }, { passive: true });
+    });
+  }
+
   /* ── Animaciones de aparición al hacer scroll ── */
   function initReveal() {
-    var els = document.querySelectorAll('.section, .service, .testimonial, .trust-bar');
+    var els = document.querySelectorAll('.section');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('visible'); });
       return;
@@ -54,7 +118,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     els.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
   }
 
@@ -107,6 +171,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    initCarousels();
     initReveal();
     initShare();
     initSW();
