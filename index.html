@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
 
     <!-- ═══ SEO & DESCRIPCIÓN ══════════════════════════ -->
@@ -16,7 +16,7 @@
     <meta property="og:url"         content="https://konfiozinc.github.io/tarjetapre/">
     <meta property="og:title"       content="KONFÍO ZINC · Tarjeta Digital Elite">
     <meta property="og:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
-    <meta property="og:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
+    <meta property="og:image"       content="https://konfiozinc.github.io/tarjetapre/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale"      content="es_CO">
@@ -26,7 +26,40 @@
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="KONFÍO ZINC · Tarjeta Digital Elite">
     <meta name="twitter:description" content="Tu tarjeta de presentación inteligente. Comparte contacto, servicios y agenda con un solo link. Entrega en 24–48 h.">
-    <meta name="twitter:image"       content="https://i.postimg.cc/tTBypHCZ/Whats-App-Image-2026-05-24-at-07-06-16.jpg">
+    <meta name="twitter:image"       content="https://konfiozinc.github.io/tarjetapre/og-image.jpg">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/favicon-64.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-180.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "KONFÍO ZINC",
+      "description": "Tarjetas digitales interactivas personalizadas para profesionales y negocios. Comparte contacto, servicios y agenda con un link o QR.",
+      "telephone": "+573206411340",
+      "email": "konfiozinc@gmail.com",
+      "url": "https://konfiozinc.github.io/tarjetapre/",
+      "image": "https://konfiozinc.github.io/tarjetapre/og-image.jpg",
+      "founder": { "@type": "Person", "name": "Darwin Montalvo" },
+      "areaServed": { "@type": "Country", "name": "Colombia" }
+    }
+    </script>
+
+    <script>
+    const GA_ID = 'G-XXXXXXXXXX';
+    if (GA_ID && !/^G-XXXX/.test(GA_ID)) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2598,5 +2631,6 @@
 
 })();
 </script>
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js').catch(()=>{});</script>
 </body>
 </html>

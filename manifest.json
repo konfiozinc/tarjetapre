@@ -1,0 +1,16 @@
+{
+  "name": "KONFÍO ZINC — Tarjeta Digital Elite",
+  "short_name": "KZ Elite",
+  "description": "Tarjetas digitales interactivas personalizadas para profesionales y negocios. Comparte tu contacto con un link o QR.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#000000",
+  "lang": "es",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/apple-touch-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
